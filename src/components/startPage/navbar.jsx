@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 
  function login(){
-  axios.get("http://localhost:8000/hello").then(res => {
+  axios.get("https://nutrition-app-api.herokuapp.com/hello").then(res => {
         window.open("/login");
         alert(res.data);
         

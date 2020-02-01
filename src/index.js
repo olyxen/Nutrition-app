@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
+// import "mdbreact/dist/css/mdb.css";
 import * as serviceWorker from "./serviceWorker";
 import FrontPage from "./components/startPage/frontPage";
 import Login from "./components/startPage/login";
