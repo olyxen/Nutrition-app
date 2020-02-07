@@ -4,7 +4,7 @@ import './login.css'
 
 function Login(){
     return (
-        <mdb-tabset>
+     
         <div class="text-center h-100 login">
             <form class="form-signin ">
                 <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
@@ -17,7 +17,7 @@ function Login(){
                 <p class="mt-5 mb-3 text-muted">© 2020</p>
             </form>
         </div>
-        </mdb-tabset>
+        
     )
 }
 export default Login;
