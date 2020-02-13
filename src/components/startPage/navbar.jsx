@@ -2,8 +2,9 @@ import React, { Component, useState} from 'react';
 // import axios from "axios";
 import Modal from 'react-responsive-modal';
 import './login.css';
+import './frontPage.css';
 
-// import Button from 'react-bootstrap/Button'
+
 
 // function login(){
 //   axios.get("https://nutrition-app-api.herokuapp.com/hello").then(res => {
@@ -15,7 +16,7 @@ import './login.css';
 // }
 
 class Navbar extends Component {
-
+  
     constructor(props){
       super(props)
 
@@ -47,11 +48,11 @@ class Navbar extends Component {
       return (
         <>
 
-            <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <nav class="navbar navbar-expand fixed-top in" >
               <div class="collapse navbar-collapse" id="navbarsExample02">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                  <a class="navbar-brand" href="/">Always expand</a>
+                  <a id="nav" class="navbar-brand" href="/">Always expand</a>
                   </li>
                 </ul>
                 <button id="loginBtn" class="btn my-2 my-sm-0" onClick={this.onOpenModalLogin}>Login</button>
