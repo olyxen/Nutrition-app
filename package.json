@@ -22,7 +22,7 @@
     "react-modal-login": "^1.4.5",
     "react-responsive-modal": "^4.0.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.0",
     "websocket": "^1.0.31"
   },
   "scripts": {
