@@ -4,7 +4,7 @@ import React from "react";
 function MainBody() {
     return (
       <div>
-        <div id="bannerphoto" class="text-center container">
+        <div id="bannerphoto" class="text-center">
         
               <p class="content">
                 A food diary is a log of what you consume each day. It can help you make changes to your diet and lose weight.<br/>

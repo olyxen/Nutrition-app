@@ -49,14 +49,8 @@
     width: 50%;
     height: 50%;
  }
-
- .back1 {
-   position: relative;
-   max-width: 800px; /* Maximum width */
-   margin: 0 auto; /* Center it */
- }
  
- .back1 .content {
+.content {
    position: absolute; /* Position the background text */
    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
