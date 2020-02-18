@@ -1,5 +1,5 @@
 .footer {
-    background-color: rgb(245, 245, 245);
+    background-color: rgba(0, 0, 0, 0.8);
   }
 
  .navbar {
@@ -50,17 +50,17 @@
     height: 50%;
  }
 
- .container {
+ .back1 {
    position: relative;
    max-width: 800px; /* Maximum width */
    margin: 0 auto; /* Center it */
  }
  
- .container .content {
+ .back1 .content {
    position: absolute; /* Position the background text */
    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
    color: #f1f1f1; /* Grey text */
-   width: 98%; /* Full width */
+   width: 100%; /* Full width */
    padding: 20px; /* Some padding */
  }
