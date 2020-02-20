@@ -80,7 +80,7 @@ class Navbar extends Component {
       return (
         <>
 
-            <nav class="navbar navbar-expand fixed-top in" >
+            <nav class="navbar navbar-expand" >
               <div class="collapse navbar-collapse" id="navbarsExample02">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
@@ -89,7 +89,8 @@ class Navbar extends Component {
                 </ul>
                 <button id="loginBtn" class="btn my-2 my-sm-0" onClick={this.onOpenModalLogin}>Login</button>
                 <button id="signup" class="btn btn-success my-2 my-sm-0" onClick={this.onOpenModal}>Sign up</button>
-              </div>
+              </div>              
+            </nav>
 {/* Login modal */}
 
               <Modal open={login} onClose={this.onCloseModalclose}>
@@ -126,19 +127,19 @@ class Navbar extends Component {
                     <div className="modal-body">
                     <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModal}><img  id="closebutton" src="/x.png"></img></button>
                         <div class="text-center h-100 singup">
-                        <form class="form-signin " onSubmit={(e) => { e.preventDefault(); }}>
+                        <form class="form-signin " onSubmit={(e) => {this.onOpenModalFinal(); this.onCloseModal(); e.preventDefault(); }}>
                         <h2 >Get Started Absolutely<span> Free!</span></h2>
                             <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
                             <h1 class="h3 mb-3 font-weight-normal">Create an account.</h1>
                             <label for="inputEmail" class="sr-only">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus=""></input>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus=""></input>
                             <label for="inlineFormInputGroup" class="sr-only" >Username</label>
-                            <input type="text" id="inlineFormInputGroup" class="form-control" placeholder="Username"></input>
+                            <input type="text" id="inlineFormInputGroup" class="form-control" placeholder="Username" required></input>
                             <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required=""></input>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit" onClick={() => {
-                                                      this.onOpenModalFinal();
-                                                      this.onCloseModal(); }}>Sign up</button>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></input>
+                            <label for="inputPassword2" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword2" class="form-control" placeholder="Password" required></input>
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign up"></input>
                             <p class="mt-5 mb-3 text-muted">© 2020</p>
                             <div >
                             Already a member? <a href="#"onClick={() => {
@@ -199,7 +200,6 @@ class Navbar extends Component {
 
                     </div>
                 </Modal>
-            </nav>
             </>
           );
       }
