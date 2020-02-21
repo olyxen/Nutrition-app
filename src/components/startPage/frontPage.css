@@ -9,6 +9,12 @@
    z-index: 1;
 }
 
+#logo{
+   width: 40%;
+   height: 5%;
+   top: 0%;
+}
+
 #firstText{
    position: relative;
    z-index: 1;

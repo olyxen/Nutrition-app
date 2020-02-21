@@ -84,7 +84,7 @@ class Navbar extends Component {
               <div class="collapse navbar-collapse" id="navbarsExample02">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a id="home" class="navbar-brand" href="/">Nutri App</a>
+                    <a id="home" class="navbar-brand" href="/"><img id="logo" src="/logo2.png"></img></a>
                   </li>
                 </ul>
                 <button id="loginBtn" class="btn my-2 my-sm-0" onClick={this.onOpenModalLogin}>Login</button>
@@ -132,13 +132,13 @@ class Navbar extends Component {
                             <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
                             <h1 class="h3 mb-3 font-weight-normal">Create an account.</h1>
                             <label for="inputEmail" class="sr-only">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus=""></input>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus></input>
                             <label for="inlineFormInputGroup" class="sr-only" >Username</label>
                             <input type="text" id="inlineFormInputGroup" class="form-control" placeholder="Username" required></input>
                             <label for="inputPassword" class="sr-only">Password</label>
                             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></input>
-                            <label for="inputPassword2" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword2" class="form-control" placeholder="Password" required></input>
+                            {/* <label for="inputPassword2" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword2" class="form-control" placeholder="Password" required></input> */}
                             <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign up"></input>
                             <p class="mt-5 mb-3 text-muted">© 2020</p>
                             <div >
