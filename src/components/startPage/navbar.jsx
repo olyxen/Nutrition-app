@@ -3,6 +3,7 @@ import React, { Component} from 'react';
 import Modal from 'react-responsive-modal';
 import './login.css';
 import './frontPage.css';
+import Login from './login'
 
 
 
@@ -19,13 +20,11 @@ class Navbar extends Component {
  //for modals 
     constructor(props){
       super(props)
-
-      this.state = {
-        sign: false,
-        login: false,
-        final: false,
-
-      }
+    }
+    state = {
+      sign: false,
+      login: false,
+      final: false,
     }
 
     onOpenModal = () => {
@@ -99,16 +98,7 @@ class Navbar extends Component {
                   <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModalclose}><img  id="closebutton" src="/x.png"></img></button>
                     <div class="text-center h-100 login">
                           <form class="form-signin " onSubmit={(e) => { e.preventDefault(); }}>
-                          <h2>Login and Get <span>Started</span></h2>
-                    
-                              <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
-                              <h1 class="h3 mb-3 font-weight-normal">Welcome to Nutri App</h1>
-                              <label for="inlineFormInputGroup" class="sr-only" >Username</label>
-                              <input type="text" id="inlineFormInputGroup" class="form-control" placeholder="Username"></input> 
-                              <label for="inputPassword" class="sr-only">Password</label>
-                              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required=""></input>
-                              <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                              <p class="mt-5 mb-3 text-muted">© 2020</p>
+                              <Login/>
                               <div >
                                 You don't have an account? <a href="#"onClick={() => {
                                                       this.onOpenModal();
@@ -118,6 +108,7 @@ class Navbar extends Component {
                             </div>
                           </form>
                         </div>
+                        
                 </div>
               </Modal>
 
