@@ -1,9 +1,43 @@
 import React, {Component } from 'react';
 import './login.css';
+import axios from "axios";
 
 class Final extends Component{
 
+    constructor(props){
+        super(props);
+    }
+    state={
+        email: null,
+        username: null,
+        password: null,
+        weight: null,
+        height: null,
+        age: null,
+        gender: null,
+    };
 
+
+    signup(){
+
+        axios.post("http://localhost:8080/api/user/register/",{
+            email: this.state.email,
+            username: this.state.username,
+            password: this.state.password,
+            weight: this.state.weight,
+            height: this.state.height,
+            // age: this.state.age,
+            // gender: this.state.gender
+        })
+        .then(res => {
+            if (res.data==='User has successfully created'){
+                window.open("/DashBoard", "_self"); //to open new page
+            }
+            else{
+                alert(res.data);
+            }
+        })
+    }
 
 
 render(){

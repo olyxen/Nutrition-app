@@ -130,7 +130,7 @@ class Navbar extends Component {
                 <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModalFinal}><img  id="closebutton" src="/x.png"></img></button>
                     <div className="modal-body">
                       <div class="final">
-                        <form  class="form-signin " name="form" onSubmit={(e) => {this.singup(); e.preventDefault(); }}>
+                        <form  class="form-signin " >
                          <Final/>
                         </form>
                       </div>
