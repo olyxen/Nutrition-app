@@ -1,20 +1,12 @@
 import React, { Component} from 'react';
-// import axios from "axios";
 import Modal from 'react-responsive-modal';
 import './login.css';
 import './frontPage.css';
 import Login from './login'
+import Singup from './singup';
+import Final from './finalModal';
 
 
-
-// function login(){
-//   axios.get("https://nutrition-app-api.herokuapp.com/hello").then(res => {
-//         window.open("/login");
-//         alert(res.data);
-        
-//       }
-//   );
-// }
 
 class Navbar extends Component {
  //for modals 
@@ -119,19 +111,7 @@ class Navbar extends Component {
                     <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModal}><img  id="closebutton" src="/x.png"></img></button>
                         <div class="text-center h-100 singup">
                         <form class="form-signin " onSubmit={(e) => {this.onOpenModalFinal(); this.onCloseModal(); e.preventDefault(); }}>
-                        <h2 >Get Started Absolutely<span> Free!</span></h2>
-                            <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
-                            <h1 class="h3 mb-3 font-weight-normal">Create an account.</h1>
-                            <label for="inputEmail" class="sr-only">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus></input>
-                            <label for="inlineFormInputGroup" class="sr-only" >Username</label>
-                            <input type="text" id="inlineFormInputGroup" class="form-control" placeholder="Username" required></input>
-                            <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></input>
-                            {/* <label for="inputPassword2" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword2" class="form-control" placeholder="Password" required></input> */}
-                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign up"></input>
-                            <p class="mt-5 mb-3 text-muted">© 2020</p>
+                           <Singup/>
                             <div >
                             Already a member? <a href="#"onClick={() => {
                                                       this.onOpenModalLogin();
@@ -150,42 +130,8 @@ class Navbar extends Component {
                 <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModalFinal}><img  id="closebutton" src="/x.png"></img></button>
                     <div className="modal-body">
                       <div class="final">
-                        <form  class="form-signin ">
-                          <h2 >Last Step for Sign up!</h2>
-                          <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
-                          <h1 class="h3 mb-3 font-weight-normal">Please complete</h1>
-                          <hr/>
-                          <fieldset class="form-group">
-                            <div class="row">
-                              <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
-                              <div class="col-sm-10">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" ></input>
-                                  <label class="form-check-label" for="gridRadios1">
-                                    Female
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"></input>
-                                  <label class="form-check-label" for="gridRadios2">
-                                      Male  
-                                  </label>
-                                </div>
-                                
-                              </div>
-                            </div>
-                          </fieldset>
-
-                          <label for="inputAge" class="sr-only">Age</label>
-                          <input type="age" id="inputAge" class="form-control" placeholder="Age" required=""></input>
-                          
-                          <label for="inputWeight" class="sr-only">Weight</label>
-                          <input type="weight" id="inputWeight" class="form-control" placeholder="Weight //eg 60 kg" required=""></input>
-                          <label for="inputHeight" class="sr-only">Height</label>
-                          <input type="height" id="inputHeight" class="form-control" placeholder="Height //eg 170 cm" required=""></input>
-                          <br/>
-                          <br/>
-                          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                        <form  class="form-signin " name="form" onSubmit={(e) => {this.singup(); e.preventDefault(); }}>
+                         <Final/>
                         </form>
                       </div>
 
