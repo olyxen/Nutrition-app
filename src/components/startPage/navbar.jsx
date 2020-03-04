@@ -4,7 +4,6 @@ import './login.css';
 import './frontPage.css';
 import Login from './login'
 import Singup from './singup';
-import Final from './finalModal';
 
 
 
@@ -14,6 +13,7 @@ class Navbar extends Component {
       super(props)
     }
     state = {
+      flag: false,
       sign: false,
       login: false,
       final: false,
@@ -27,10 +27,6 @@ class Navbar extends Component {
       this.setState({ login: true});
     };
 
-    onOpenModalFinal = () => {
-      this.setState({ final: true});
-    }
-
     onCloseModal = () => {
       this.setState({ sign: false});
     };
@@ -39,9 +35,6 @@ class Navbar extends Component {
       this.setState({ login: false});
     };
 
-    onCloseModalFinal = () => {
-      this.setState({ final: false});
-    }
 
 //change css for navbar on scroll
     documentStyle = document.documentElement.style;
@@ -65,9 +58,12 @@ class Navbar extends Component {
       window.removeEventListener('scroll', this.handleScroll);
   }
 
+  becomeTrue(){
+    this.setState({flag: true});    
+}
 
     render(){
-      const { login, sign, final } = this.state;
+      const { login, sign } = this.state;
       return (
         <>
 
@@ -90,7 +86,7 @@ class Navbar extends Component {
                   <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModalclose}><img  id="closebutton" src="/x.png"></img></button>
                     <div class="text-center h-100 login">
                           <form class="form-signin " onSubmit={(e) => { e.preventDefault(); }}>
-                              <Login/>
+                              <Login/>                            
                               <div >
                                 You don't have an account? <a href="#"onClick={() => {
                                                       this.onOpenModal();
@@ -110,8 +106,9 @@ class Navbar extends Component {
                     <div className="modal-body">
                     <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModal}><img  id="closebutton" src="/x.png"></img></button>
                         <div class="text-center h-100 singup">
-                        <form class="form-signin " onSubmit={(e) => {this.onOpenModalFinal(); this.onCloseModal(); e.preventDefault(); }}>
+                        <form class="form-signin " onSubmit={(e) => {this.becomeTrue();e.preventDefault(); }}>
                            <Singup/>
+                           { !this.state.flag?
                             <div >
                             Already a member? <a href="#"onClick={() => {
                                                       this.onOpenModalLogin();
@@ -119,24 +116,18 @@ class Navbar extends Component {
                                                       >Login
                                                   </a>
                             </div>
+                            :
+                            <div>
+                              <br/>
+                            </div>
+                            }
                         </form>
             
                          </div>
                         
                     </div>
                 </Modal>
-{/*Final modal */}
-                <Modal open={ final} onClose={this.onCloseModalFinal} class="final">
-                <button  id="btn" class="btn my-2 my-sm-0" onClick={this.onCloseModalFinal}><img  id="closebutton" src="/x.png"></img></button>
-                    <div className="modal-body">
-                      <div class="final">
-                        <form  class="form-signin " >
-                         <Final/>
-                        </form>
-                      </div>
 
-                    </div>
-                </Modal>
             </>
           );
       }
