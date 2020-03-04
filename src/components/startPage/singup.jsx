@@ -25,7 +25,7 @@ class Singup extends Component{
     }
     signup(){
 
-        axios.post("http://localhost:8080/api/user/register1/",{
+        axios.post("http://localhost:8080/api/user/register/",{
             email: this.state.email,
             username: this.state.username,
             password: this.state.password,
@@ -88,13 +88,13 @@ render(){
                               <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
                               <div class="col-sm-10">
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="true" onChange={(event)=>{this.setState({gender:event.target.value})}} ></input>
+                                  <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="female" onChange={(event)=>{this.setState({gender:event.target.value})}} ></input>
                                   <label class="form-check-label" for="gridRadios1">
                                     Female
                                   </label>
                                 </div>
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="false" onChange={(event)=>{this.setState({gender:event.target.value})}}></input>
+                                  <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="male" onChange={(event)=>{this.setState({gender:event.target.value})}}></input>
                                   <label class="form-check-label" for="gridRadios2">
                                       Male  
                                   </label>
