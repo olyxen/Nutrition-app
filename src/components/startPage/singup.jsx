@@ -36,35 +36,13 @@ class Singup extends Component{
         })
         .then(res => {
             if (res.data==='User has successfully created'){
-                
-                alert(res.data);
-
-                
-               // window.open("/DashBoard", "_self"); //to open new page
-                
+                alert(res.data); 
+               // window.open("/DashBoard", "_self"); //to open new page 
             }
             else{
                 alert(res.data);
             }
         })
-
-
-        // axios.post("http://localhost:8080/api/user/bmr/",{
-
-        //     weight: this.state.weight,
-        //     height: this.state.height,
-        //     age: this.state.age,
-        //     gender: this.state.gender
-        // })
-        // .then(res => {
-           
-                
-                
-        //         window.open("/DashBoard", "_self"); //to open new page
-                
-           
-        // })
-
     }
 
 render(){
