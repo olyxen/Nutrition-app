@@ -4,3 +4,17 @@
     width: 575px;
     box-shadow: rgba(0,0,0);
 }
+
+.path{
+    /* stroke-dasharray: 20;
+    animation: dash 5s linear; 761.486 */
+    stroke: url(#gg1);
+    stroke-dasharray: 190.371 761.486;
+    stroke-dashoffset: 192;
+    animation: dash 5s linear forwards;
+}
+@keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  } 
