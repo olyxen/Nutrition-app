@@ -3,6 +3,7 @@ import './dashboard.css'
 
 
 
+
 class Menu extends Component {
 
     
@@ -10,25 +11,13 @@ class Menu extends Component {
 render() { 
 
     return (
-         <main class="page-content pt-2">
-         <div id="overlay" class="overlay"></div>
-         <div class="container-fluid p-5">
-             <div class="row">
-                 <div class="form-group col-md-12">
-                     <h2>Pro Sidebar</h2>
-                     <p>This is a responsive sidebar template with dropdown menu based on bootstrap framework.</p>
-
-                 </div>
-
-                 <div class="form-group col-md-12">
-                     <a id="toggle-sidebar" class="btn btn-secondary rounded-0" href="#">
-                         <span>Toggle Sidebar</span>
-                     </a>
-                 </div>
-             </div>
-             <hr/>
-             <div  id="box1">
-             <svg height="400" width="400"  >
+        <>
+            <button type="button" id="sidebarCollapse" class="btn btn-info toogleButton">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+            <div  id="box1">
+             <svg height="400">
              {/* #e54343 */}
                 <path  stroke-width="17.666666666666668" stroke="#EEEEEE" fill="none" stroke-linecap="round" 
                 d=" M 132.5 70.96700000000001 C 322.6375 -5.735701074999994 257.71250000000003 331.7563677416667 135.59166666666667 265.79213225833337 
@@ -56,9 +45,27 @@ render() {
 
             </svg>
 
-             </div>
-         </div>
-     </main>
+             </div>    
+
+            <h2>Collapsible Sidebar</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div class="line"></div>
+
+            <h2>Lorem Ipsum Dolor</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div class="line"></div>
+
+            <h2>Lorem Ipsum Dolor</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div class="line"></div>
+
+            <h3>Lorem Ipsum Dolor</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </>  
     )
 }
 }
