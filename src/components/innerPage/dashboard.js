@@ -12,7 +12,7 @@ function Dash1() {
             <noscript>You need to enable JavaScript to run this app.</noscript>
             <div class="wrapper">
               <nav id="sidebar" ><Sidebar /></nav>
-              <div role="main" id="content" class="flex-shrink-0"><Menu /></div>
+              <div role="main"  class="flex-shrink-0"><Menu /></div>
               <div class="overlay"></div>
 
             </div>

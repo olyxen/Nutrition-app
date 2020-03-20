@@ -1,7 +1,21 @@
-#box1{
+/* #box1{
     padding: 20px;
     margin-top: 20px;
     box-shadow: rgba(0,0,0);
+    box-shadow: 1px 1px 10px;
+    
+} */
+#box1{
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: rgba(0,0,0);
+  box-shadow: 1px 1px 10px;
+  margin-left: 20px;
+  text-align: center;
+}
+
+.react-calendar__navigation{
+  background-color: #31B04B;
 }
 
 .path{
