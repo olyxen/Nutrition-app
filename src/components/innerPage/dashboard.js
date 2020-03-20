@@ -1,6 +1,8 @@
 import React from 'react';
+import { Route, Switch } from "react-router-dom";
 import Menu from './menu';
 import Sidebar from './sidebar';
+import Recipes from './recipes';
 import './css/innerpage.css'
 import jQuery from 'jquery'
 
@@ -12,7 +14,12 @@ function Dash1() {
             <noscript>You need to enable JavaScript to run this app.</noscript>
             <div class="wrapper">
               <nav id="sidebar" ><Sidebar /></nav>
-              <div role="main"  class="flex-shrink-0"><Menu /></div>
+              <div role="main"  class="flex-shrink-0">
+                <Switch>
+                  <Route exact path="/dashboard" component={Menu} />
+                  <Route exact path="/dashboard/recipes" component={Recipes} />
+                </Switch>
+              </div>
               <div class="overlay"></div>
 
             </div>

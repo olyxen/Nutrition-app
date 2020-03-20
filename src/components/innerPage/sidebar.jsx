@@ -12,7 +12,7 @@ render() {
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">
+                    <a href="/dashboard">
                         <i class="fa fa-tachometer-alt"></i>
                         <span class="menu-text"> Dashboard</span>
                     </a>
@@ -29,7 +29,7 @@ render() {
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/dashboard/recipes">
                         <i class="fas fa-book-open"></i>
                         <span class="menu-text"> Recipes</span>
                     </a>                </li>
