@@ -7,13 +7,17 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
 import FrontPage from "./components/startPage/frontPage";
 import DashBoard from "./components/innerPage/dashboard";
+import AuthenticatedComponent from "./components/authenticated";
 
 
 const routing = (
   <Router>
     <Switch>
       <Route exact path="/" component={FrontPage} />
-      <Route exact path="/dashboard" component={DashBoard} />
+      <AuthenticatedComponent>
+        <Route exact path="/dashboard" component={DashBoard} />
+        <Route exact path="/dashboard/recipes" component={DashBoard} />
+      </AuthenticatedComponent>
       {/* <Route exact path="/FAQ" component={FAQ} />
       <Route exact path="/houses/:id" component={DetailView} /> */}
     </Switch>
