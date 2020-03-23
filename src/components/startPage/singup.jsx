@@ -6,9 +6,7 @@ import './navbar.jsx';
 
 
 class Singup extends Component{
-    constructor(props){
-        super(props);
-    }
+    
     state={
         flag: false,
         email: null,
@@ -52,77 +50,71 @@ render(){
        
             <div>
                 <h2 >Get Started Absolutely<span> Free!</span></h2>
-
-
-                <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
                 <form name="form" onSubmit={(e) => {this.becomeTrue(); e.preventDefault(); }}>
                 
-                <h1 class="h3 mb-3 font-weight-normal">Create an account.</h1>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" onChange={(event)=>{this.setState({email:event.target.value})}} required autofocus></input>
-                <label for="inlineFormInputGroup" class="sr-only" >Username</label>
-                <input type="text" id="inlineFormInputGroup" class="form-control" name="username" placeholder="Username" onChange={(event)=>{this.setState({username:event.target.value})}} required></input>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" onChange={(event)=>{this.setState({password:event.target.value})}} required></input>
-                {/* <label for="inputPassword2" class="sr-only">Password</label>
-                <input type="password" id="inputPassword2" class="form-control" placeholder="Rewrite Password" required></input> */}
-                <br/>
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign up"></input>
+                    <h3 className="mt-4 mb-4 font-weight-normal">Create an account</h3>
+                    <label htmlFor="inputEmail" className="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" className="form-control" name="email" placeholder="Email address" onChange={(event)=>{this.setState({email:event.target.value})}} required autoFocus></input>
+                    <label htmlFor="inlineFormInputGroup" className="sr-only" >Username</label>
+                    <input type="text" id="inlineFormInputGroup" className="form-control" name="username" placeholder="Username" onChange={(event)=>{this.setState({username:event.target.value})}} required></input>
+                    <label htmlFor="inputPassword" className="sr-only">Password</label>
+                    <input type="password" id="inputPassword" className="form-control" name="password" placeholder="Password" onChange={(event)=>{this.setState({password:event.target.value})}} required></input>
+                    {/* <label for="inputPassword2" className="sr-only">Password</label>
+                    <input type="password" id="inputPassword2" className="form-control" placeholder="Rewrite Password" required></input> */}
+                    <br/>
+                    <input className="btn btn-lg btn-primary btn-block" type="submit" value="Sign up"></input>
 
                 </form>
 
-                <p class="mt-5 mb-3 text-muted">© 2020</p>
+                <p className="mt-4 mb-3 text-muted">© 2020</p>
             </div>
             :
                 <div>
                 <h2 >Last Step for Sign up!</h2>
-                <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
+                <img className="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></img>
                 <form name="form" onSubmit={(e) => {this.signup(); e.preventDefault(); }}>
-                <h1 class="h3 mb-3 font-weight-normal">Please complete</h1>
-                <hr/>
-                <fieldset >
-                            <div class="text-left row">
-                              <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
-                              <div class="col-sm-10">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="female" onChange={(event)=>{this.setState({gender:event.target.value})}} ></input>
-                                  <label class="form-check-label" for="gridRadios1">
-                                    Female
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="male" onChange={(event)=>{this.setState({gender:event.target.value})}}></input>
-                                  <label class="form-check-label" for="gridRadios2">
-                                      Male  
-                                  </label>
-                                </div>
-                                
-                              </div>
+                    <h1 className="h3 mb-3 font-weight-normal">Please complete</h1>
+                    <hr/>
+                    <fieldset>
+                        <div className="text-left row">
+                            <legend className="col-form-label col-sm-2 pt-0">Gender</legend>
+                            <div className="col-sm-10">
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="gender" id="gridRadios1" value="female" onChange={(event)=>{this.setState({gender:event.target.value})}} ></input>
+                                <label className="form-check-label" htmlFor="gridRadios1">
+                                Female
+                                </label>
                             </div>
-                </fieldset>
-                <br/>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="gender" id="gridRadios2" value="male" onChange={(event)=>{this.setState({gender:event.target.value})}}></input>
+                                <label className="form-check-label" htmlFor="gridRadios2">
+                                    Male  
+                                </label>
+                            </div>
+                            
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br/>
 
-                 <label for="inputAge" class="sr-only">Age</label>
-                          <input type="age" id="inputAge" class="form-control" name="age" placeholder="Age" onChange={(event)=>{this.setState({age:event.target.value})}} required=""></input>
+                    <label htmlFor="inputAge" className="sr-only">Age</label>
+                    <input type="age" id="inputAge" className="form-control" name="age" placeholder="Age" onChange={(event)=>{this.setState({age:event.target.value})}} required=""></input>
+                    <label htmlFor="inputWeight" className="sr-only">Weight</label>
+                    <input type="weight" id="inputWeight" className="form-control" name="weight" placeholder="Weight //eg 60 kg" onChange={(event)=>{this.setState({weight:event.target.value})}} required=""></input>
+                    <label htmlFor="inputHeight" className="sr-only">Height</label>
+                    <input type="height" id="inputHeight" className="form-control" name="height" placeholder="Height //eg 170 cm" onChange={(event)=>{this.setState({height:event.target.value})}} required=""></input>
+                    <br/>
+                    <br/>
+                    
 
-                <label for="inputWeight" class="sr-only">Weight</label>
-                <input type="weight" id="inputWeight" class="form-control" name="weight" placeholder="Weight //eg 60 kg" onChange={(event)=>{this.setState({weight:event.target.value})}} required=""></input>
-                <label for="inputHeight" class="sr-only">Height</label>
-                <input type="height" id="inputHeight" class="form-control" name="height" placeholder="Height //eg 170 cm" onChange={(event)=>{this.setState({height:event.target.value})}} required=""></input>
-                <br/>
-                <br/>
-                
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
                 </form>
-                </div>
+            </div>
             }
-
         </>
     )
+}}
 
-}
-}
 export default Singup;
 
 

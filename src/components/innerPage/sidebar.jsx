@@ -6,39 +6,47 @@ class Sidebar extends Component {
 render() { 
     return (
         <>
-            <div class="sidebar-header">
+            <div className="sidebar-header">
                 <h3>Your Nutrition Diary</h3>
             </div>
 
-            <ul class="list-unstyled components">
+            <ul className="list-unstyled components">
                 <li>
-                    <a href="/dashboard">
-                        <i class="fa fa-tachometer-alt"></i>
-                        <span class="menu-text"> Dashboard</span>
+                    <a href="http://localhost:3000/dashboard">
+                        <i className="fa fa-tachometer-alt"></i>
+                        <span className="menu-text"> Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fas fa-seedling"></i>
-                        <span class="menu-text"> Food</span>
+                    <a href="/#" style={{pointerEvents: "none", cursor: "default"}}>
+                        <i className="fas fa-seedling"></i>
+                        <span className="menu-text"> Food</span>
                     </a>                </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-chart-line"></i>
-                        <span class="menu-text"> Charts</span>
+                    <a href="/#" style={{pointerEvents: "none", cursor: "default"}}>
+                        <i className="fa fa-chart-line"></i>
+                        <span className="menu-text"> Charts</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/dashboard/recipes">
-                        <i class="fas fa-book-open"></i>
-                        <span class="menu-text"> Recipes</span>
-                    </a>                </li>
+                    <a href="http://localhost:3000/dashboard/recipes">
+                        <i className="fas fa-book-open"></i>
+                        <span className="menu-text"> Recipes</span>
+                    </a>                
+                </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-question-circle"></i>
-                        <span class="menu-text"> FAQ</span>
-                    </a>                </li>
+                    <a href="/#" style={{pointerEvents: "none", cursor: "default"}}>
+                        <i className="fa fa-question-circle"></i>
+                        <span className="menu-text"> FAQ</span>
+                    </a>                
+                </li>
             </ul>
+
+            <section>
+                <a href="/signout" className="signout-link" title="Sign out">
+                    <i className="fas fa-sign-out-alt"></i><span> Sign out</span>
+                </a>
+            </section>
         </>
     )
 }

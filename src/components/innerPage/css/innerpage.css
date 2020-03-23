@@ -1,5 +1,5 @@
 
-a,
+.components > li> a,
 a:hover,
 a:focus {
     color: inherit;
@@ -99,7 +99,20 @@ a:focus {
     top: 0;
     right: 0;
 }
-
+.signout-link{
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.428571429;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    background-color: transparent;
+    text-decoration: none;
+    color: #043104;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #239b4c;
+}
 
 /* MEDIAQUERIES */
 

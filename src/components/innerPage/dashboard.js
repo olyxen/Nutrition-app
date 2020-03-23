@@ -10,20 +10,19 @@ import jQuery from 'jquery'
 function Dash1() {
   return (
     <React.Fragment>
-        <body class="d-flex flex-column h-100">
+        <div className="d-flex flex-column h-100">
             <noscript>You need to enable JavaScript to run this app.</noscript>
-            <div class="wrapper">
+            <div className="wrapper">
               <nav id="sidebar" ><Sidebar /></nav>
-              <div role="main"  class="flex-shrink-0">
+              <div role="main"  className="flex-shrink-0">
                 <Switch>
                   <Route exact path="/dashboard" component={Menu} />
                   <Route exact path="/dashboard/recipes" component={Recipes} />
                 </Switch>
               </div>
-              <div class="overlay"></div>
-
+              <div className="overlay"></div>
             </div>
-        </body>
+        </div>
     </React.Fragment>
   );
 }

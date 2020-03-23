@@ -15,21 +15,21 @@ render() {
     return (
         <>
         <div id="content">
-                <button type="button" id="sidebarCollapse" class="btn btn-info toogleButton">
-                    <i class="fas fa-align-left"></i>
+                <button type="button" id="sidebarCollapse" className="btn btn-info toogleButton">
+                    <i className="fas fa-align-left"></i>
                     <span>Toggle Sidebar</span>
                 </button>
-                <div class="container"> 
-                    <div class="row">
-                        <div  id="box1" class="col" >
+                <div className="container"> 
+                    <div className="row">
+                        <div  id="box1" className="col" >
                         <svg height="400">
                         {/* #e54343 */}
-                            <path  stroke-width="17.666666666666668" stroke="#EEEEEE" fill="none" stroke-linecap="round" 
+                            <path  strokeWidth="17.666666666666668" stroke="#EEEEEE" fill="none" strokeLinecap="round" 
                             d=" M 132.5 70.96700000000001 C 322.6375 -5.735701074999994 257.71250000000003 331.7563677416667 135.59166666666667 265.79213225833337 
                             C 7.2875000000000005 331.7563677416667 -57.637499999999996 -5.735701074999994 132.5 70.96700000000001 Z" />
 
                             {/* to parakatw path prepei n xrhsimopoieitai otan bazei 8ermides o xrhsths */}
-                            <path class="path" stroke-width="17.666666666666668"  fill="none" stroke-linecap="round" 
+                            <path className="path" strokeWidth="17.666666666666668"  fill="none" strokeLinecap="round" 
                             d=" M 132.5 70.96700000000001 C 322.6375 -5.735701074999994 257.71250000000003 331.7563677416667 135.59166666666667 265.79213225833337 
                             C 7.2875000000000005 331.7563677416667 -57.637499999999996 -5.735701074999994 132.5 70.96700000000001 Z" />
                             <g>
@@ -51,7 +51,7 @@ render() {
 
                         </svg>
                         </div> 
-                        <div  id="box1" class="col">
+                        <div  id="box1" className="col">
                             <Calendar />
                         </div>
                     </div>   
@@ -61,17 +61,17 @@ render() {
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                <div class="line"></div>
+                <div className="line"></div>
 
                 <h2>Lorem Ipsum Dolor</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                <div class="line"></div>
+                <div className="line"></div>
 
                 <h2>Lorem Ipsum Dolor</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                <div class="line"></div>
+                <div className="line"></div>
 
                 <h3>Lorem Ipsum Dolor</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

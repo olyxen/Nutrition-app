@@ -9,7 +9,7 @@
     background-color: rgb(255, 255, 255, 0.9);
   }
 
-  .login, .singup {
+  .login {
     display: -ms-flexbox;
     display: flex;
     
@@ -18,7 +18,7 @@
     background-image: url('/modalphoto1.jpg');
     
   }
-  .final{
+  .singup{
     padding-top: 40px;
     padding-bottom: 40px;
     background-image: url('/modalphoto.jpg');
@@ -40,3 +40,14 @@
   bottom: 0%;
   margin-left: 700px;
  }
+
+ .form , input{
+   margin-bottom: 2px;
+ }
+
+ .changeModal{
+   font-weight: 600;
+ }
+ /* .changeModal:hover{
+  background-color: yellow;
+ } */
