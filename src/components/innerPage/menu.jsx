@@ -2,13 +2,13 @@ import React, { Component} from 'react';
 import './dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
+// import axios from "axios";
 
 
 
 class Menu extends Component {
 
-    
+   
 
 render() { 
 
@@ -19,7 +19,6 @@ render() {
                     <i className="fas fa-align-left"></i>
                     <span>Toggle Sidebar</span>
                 </button>
-                <div className="container"> 
                     <div className="row">
                         <div  id="box1" className="col" >
                         <svg height="400">
@@ -54,7 +53,7 @@ render() {
                         <div  id="box1" className="col">
                             <Calendar />
                         </div>
-                    </div>   
+                      
                 </div>
 
                 <h2>Collapsible Sidebar</h2>

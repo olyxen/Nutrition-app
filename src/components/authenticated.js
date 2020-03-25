@@ -26,7 +26,14 @@ class AuthenticatedComponent extends Component {
             localStorage.removeItem('login');
             this.props.history.push('/');
         })
+
+        axios.get("http://localhost:8080/api/chart",{   
+        })
+        .then(res => {
+            alert(res.data);
+        }) 
     }
+
 
     getJwt(){
         return localStorage.getItem('login');
