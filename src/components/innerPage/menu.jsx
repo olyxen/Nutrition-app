@@ -2,13 +2,60 @@ import React, { Component} from 'react';
 import './dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-// import axios from "axios";
+import axios from "axios";
+import Chart from './chart'
 
 
 
 class Menu extends Component {
+constructor(props){
+    super(props);
+    this.state ={
+        chartData:props.chartData
+    }
+}
 
-   
+componentWillMount(){
+    this.getChartData();
+
+}
+
+getChartData(){
+    // Ajax calls here
+    axios.get("http://localhost:8080/api/chart",{   
+    })
+    .then(res => {
+        alert(res.data);
+    })
+    this.setState({
+        chartData:{
+            labels:['Protein', 'Calcium', 'Cholesterol','Carbohydrate','Sodium', 'Fat'],
+            datasets:[
+                {
+                    label:'% value',
+                    data:[
+                        10,
+                        3,
+                        29,
+                        11,
+                        17,
+                        15
+                    ],
+                    backgroundColor:[
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+
+                    ]
+                }
+            ]
+        }
+    })
+}
 
 render() { 
 
@@ -20,7 +67,8 @@ render() {
                     <span>Toggle Sidebar</span>
                 </button>
                     <div className="row">
-                        <div  id="box1" className="col" >
+                        <div  id="box3" className="col" >
+                        <div id="box1">
                         <svg height="400">
                         {/* #e54343 */}
                             <path  strokeWidth="17.666666666666668" stroke="#EEEEEE" fill="none" strokeLinecap="round" 
@@ -49,14 +97,24 @@ render() {
                             
 
                         </svg>
-                        </div> 
-                        <div  id="box1" className="col">
-                            <Calendar />
                         </div>
-                      
-                </div>
+                        
+                        <div id="box1" >
+                            <Chart chartData={this.state.chartData}/>
+                        </div> 
+                        </div> 
+                        <div  id="box3" className="col">
+                            <div id="box2" >
+                                <Calendar/>
+                            </div>
 
-                <h2>Collapsible Sidebar</h2>
+                    
+                </div>
+               
+                </div>
+                
+                <br/>
+                {/* <h2>Collapsible Sidebar</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
@@ -73,7 +131,7 @@ render() {
                 <div className="line"></div>
 
                 <h3>Lorem Ipsum Dolor</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
             </div>
         </>  
     )

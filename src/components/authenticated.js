@@ -27,11 +27,7 @@ class AuthenticatedComponent extends Component {
             this.props.history.push('/');
         })
 
-        axios.get("http://localhost:8080/api/chart",{   
-        })
-        .then(res => {
-            alert(res.data);
-        }) 
+ 
     }
 
 

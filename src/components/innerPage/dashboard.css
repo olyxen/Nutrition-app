@@ -1,17 +1,32 @@
-/* #box1{
+#box2{
     padding: 20px;
     margin-top: 20px;
     box-shadow: rgba(0,0,0);
     box-shadow: 1px 1px 10px;
+    padding-left: 25%;
+    padding-top: 6.5%;
+    padding-bottom: 6.5%;
+    background-color: white;
     
-} */
+}
 #box1{
   padding: 20px;
   margin-top: 20px;
   box-shadow: rgba(0,0,0);
   box-shadow: 1px 1px 10px;
   margin-left: 20px;
-  text-align: center;
+  text-align: center !important;
+  background-color: white;
+}
+#box3{
+  padding: 20px;
+  margin-top: 3px;
+  box-shadow: rgba(0,0,0);
+  box-shadow: 1px 1px 10px;
+  margin-left: 20px;
+  text-align: center !important;
+  background-color: rgba(162, 231, 177, 0.6);
+
 }
 
 .react-calendar__navigation{
