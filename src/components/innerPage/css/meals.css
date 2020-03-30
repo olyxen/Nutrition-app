@@ -1,0 +1,12 @@
+.lunchbox{
+    background-color: white;
+    min-height: 100px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 3px;
+
+}
+
+.mealform{
+    padding: 10px;
+}

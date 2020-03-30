@@ -18,9 +18,9 @@ render() {
                     </a>
                 </li>
                 <li>
-                    <a href="/#" style={{pointerEvents: "none", cursor: "default"}}>
+                    <a href="http://localhost:3000/dashboard/meals">
                         <i className="fas fa-seedling"></i>
-                        <span className="menu-text"> Food</span>
+                        <span className="menu-text"> Meals</span>
                     </a>                </li>
                 <li>
                     <a href="/#" style={{pointerEvents: "none", cursor: "default"}}>

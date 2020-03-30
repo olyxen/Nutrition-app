@@ -5,6 +5,7 @@ import Sidebar from './sidebar';
 import Recipes from './recipes';
 import './css/innerpage.css'
 import jQuery from 'jquery'
+import Meals from './meals';
 
 
 function Dash1() {
@@ -18,6 +19,7 @@ function Dash1() {
                 <Switch>
                   <Route exact path="/dashboard" component={Menu} />
                   <Route exact path="/dashboard/recipes" component={Recipes} />
+                  <Route exact path="/dashboard/meals" component={Meals} />
                 </Switch>
               </div>
               <div className="overlay"></div>

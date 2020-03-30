@@ -18,6 +18,7 @@ const routing = (
       <AuthenticatedComponent>
         <Route exact path="/dashboard" component={DashBoard} />
         <Route exact path="/dashboard/recipes" component={DashBoard} />
+        <Route exact path="/dashboard/meals" component={DashBoard} />
       </AuthenticatedComponent>
       {/* <Route exact path="/FAQ" component={FAQ} />
       <Route exact path="/houses/:id" component={DetailView} /> */}
