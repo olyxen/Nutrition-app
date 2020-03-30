@@ -10,10 +10,10 @@ a:focus {
 
 /* SIDEBAR */
 
-.wrapper {
+/* .wrapper {
     display: flex;
     width: 100%;
-}
+} */
 
 #sidebar {
     width: 250px;
@@ -95,6 +95,7 @@ a:focus {
     padding: 40px;
     min-height: 100vh;
     transition: all 0.3s;
+    background-color: #F1F1F1;
     position: absolute;
     top: 0;
     right: 0;
