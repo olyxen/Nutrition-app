@@ -19,7 +19,20 @@ class Singup extends Component{
     };
 
     becomeTrue(){
+        axios.post("http://localhost:8080/api/user/validateSignup",{
+            email: this.state.email,
+            username: this.state.username,
+            password: this.state.password
+        }).then(res => {
+            if (res.data==="It's ok"){
+                this.setState({flag: true});    
         this.setState({flag: true});    
+                this.setState({flag: true});    
+            }
+            else{
+                alert(res.data);
+            }
+        })
     }
     signup(){
 
@@ -34,8 +47,8 @@ class Singup extends Component{
         })
         .then(res => {
             if (res.data==='User has successfully created'){
-                alert(res.data); 
-               // window.open("/DashBoard", "_self"); //to open new page 
+                alert(res.data + '\nTry to Login'); 
+                window.open("/", "_self");
             }
             else{
                 alert(res.data);
@@ -80,13 +93,13 @@ render(){
                             <legend className="col-form-label col-sm-2 pt-0">Gender</legend>
                             <div className="col-sm-10">
                             <div className="form-check">
-                                <input className="form-check-input" type="radio" name="gender" id="gridRadios1" value="female" onChange={(event)=>{this.setState({gender:event.target.value})}} ></input>
+                                <input className="form-check-input" type="radio" name="gender" id="gridRadios1" value="female" onChange={(event)=>{this.setState({gender:event.target.value})}} required></input>
                                 <label className="form-check-label" htmlFor="gridRadios1">
                                 Female
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="radio" name="gender" id="gridRadios2" value="male" onChange={(event)=>{this.setState({gender:event.target.value})}}></input>
+                                <input className="form-check-input" type="radio" name="gender" id="gridRadios2" value="male" onChange={(event)=>{this.setState({gender:event.target.value})}} required></input>
                                 <label className="form-check-label" htmlFor="gridRadios2">
                                     Male  
                                 </label>
@@ -98,11 +111,11 @@ render(){
                     <br/>
 
                     <label htmlFor="inputAge" className="sr-only">Age</label>
-                    <input type="age" id="inputAge" className="form-control" name="age" placeholder="Age" onChange={(event)=>{this.setState({age:event.target.value})}} required=""></input>
+                    <input type="age" id="inputAge" className="form-control" name="age" placeholder="Age" onChange={(event)=>{this.setState({age:event.target.value})}} required></input>
                     <label htmlFor="inputWeight" className="sr-only">Weight</label>
-                    <input type="weight" id="inputWeight" className="form-control" name="weight" placeholder="Weight //eg 60 kg" onChange={(event)=>{this.setState({weight:event.target.value})}} required=""></input>
+                    <input type="weight" id="inputWeight" className="form-control" name="weight" placeholder="Weight //eg 60 kg" onChange={(event)=>{this.setState({weight:event.target.value})}} required></input>
                     <label htmlFor="inputHeight" className="sr-only">Height</label>
-                    <input type="height" id="inputHeight" className="form-control" name="height" placeholder="Height //eg 170 cm" onChange={(event)=>{this.setState({height:event.target.value})}} required=""></input>
+                    <input type="height" id="inputHeight" className="form-control" name="height" placeholder="Height //eg 170 cm" onChange={(event)=>{this.setState({height:event.target.value})}} required></input>
                     <br/>
                     <br/>
                     

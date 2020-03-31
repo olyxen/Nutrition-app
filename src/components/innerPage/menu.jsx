@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import './dashboard.css';
+import './css/dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from "axios";

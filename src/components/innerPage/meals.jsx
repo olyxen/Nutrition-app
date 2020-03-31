@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import './css/meals.css'
-import './dashboard.css';
+import './css/dashboard.css';
 
 
 class Meals extends Component {
