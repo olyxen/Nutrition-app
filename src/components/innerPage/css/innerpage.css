@@ -117,7 +117,7 @@ a:focus {
 
 /* MEDIAQUERIES */
 
-@media (max-width: 768px) {
+@media (max-width: 842px) {
     #sidebar {
         margin-left: -250px;
     }

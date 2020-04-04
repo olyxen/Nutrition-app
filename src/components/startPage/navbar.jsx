@@ -87,7 +87,7 @@ class Navbar extends Component {
                   <Login/>                            
                   <div >
                     You don't have an account? 
-                    <a class="changeModal" href="/#" onClick={() => {this.onOpenModal(); this.onCloseModalclose();}} > Create one.</a>
+                    <a className="changeModal" href="/#" onClick={() => {this.onOpenModal(); this.onCloseModalclose();}} > Create one.</a>
                   </div>
                 </div>
               </div> 
@@ -103,7 +103,7 @@ class Navbar extends Component {
                 { !this.state.flag?
                 <div >
                   Already a member?
-                  <a class="changeModal" href="/#"onClick={() => { this.onOpenModalLogin(); this.onCloseModal(); }} > Login</a>
+                  <a className="changeModal" href="/#"onClick={() => { this.onOpenModalLogin(); this.onCloseModal(); }} > Login</a>
                 </div>
                 :
                 <div>
