@@ -2,60 +2,12 @@ import React, { Component} from 'react';
 import './css/dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import axios from "axios";
 import Chart from './chart'
 
 
 
 class Menu extends Component {
-constructor(props){
-    super(props);
-    this.state ={
-        chartData:props.chartData
-    }
-}
 
-componentWillMount(){
-    this.getChartData();
-
-}
-
-getChartData(){
-    // Ajax calls here
-    axios.get("http://localhost:8080/api/chart",{   
-    })
-    .then(res => {
-        alert(res.data);
-    })
-    this.setState({
-        chartData:{
-            labels:['Protein', 'Calcium', 'Cholesterol','Carbohydrate','Sodium', 'Fat'],
-            datasets:[
-                {
-                    label:'% value',
-                    data:[
-                        10,
-                        3,
-                        29,
-                        11,
-                        17,
-                        15
-                    ],
-                    backgroundColor:[
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 102, 255, 0.6)',
-                        'rgba(255, 159, 64, 0.6)',
-                        'rgba(255, 99, 132, 0.6)'
-
-                    ]
-                }
-            ]
-        }
-    })
-}
 
 render() { 
 
@@ -98,7 +50,7 @@ render() {
                     </div>
                     
                     <div className="box1" >
-                        <Chart chartData={this.state.chartData}/>
+                        <Chart/>
                     </div> 
                 </div> 
                 <div className="box3 col-md-12 col-xl-5">
