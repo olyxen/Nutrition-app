@@ -1,0 +1,9 @@
+
+.CircularProgressbar{
+    width: 20% !important;
+}
+
+.CircularProgressbar .CircularProgressbar-path{
+    stroke: url(#gg1);
+    stroke-linecap: butt;
+}

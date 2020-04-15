@@ -2,11 +2,44 @@ import React, { Component} from 'react';
 import './css/dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import Chart from './chart'
+import Chart from './chart';
+import DatePicker from './calendar';
 
+import 'react-circular-progressbar/dist/styles.css';
+import {
+    CircularProgressbar
+  } from "react-circular-progressbar";
+import './css/animateCircle.css';
+import { Button } from 'react-bootstrap';
 
+//8ermides pou katanalwnei o xrhsths apo ta faghta
+const value = 520;
+//hmerhsies 8ermides pou 8a prepei na katanalwnei
+const maxValue = 2200;
 
 class Menu extends Component {
+    state = {
+        calendarVal: 7
+    };
+
+    componentDidMount() {
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
+    }
+    
+    resize() {
+        if(window.innerWidth > 590){
+            this.setState({calendarVal:7})        
+        }else if(window.innerWidth <= 474){
+            this.setState({calendarVal:3})        
+        }else{
+            this.setState({calendarVal:5})        
+        }
+    }
+selectedDay = (val) =>{
+    console.log(val)
+}; 
+
 
 
 render() { 
@@ -18,46 +51,61 @@ render() {
                 <i className="fas fa-align-left"></i>
                 <span>Toggle Sidebar</span>
             </button>
-            <div className="row">
-                <div className="box3 col-md-12 col-xl-6" >
-                    <div className="box1">
-                        <svg height="310">
-                        {/* #e54343 */}
-                            <path  strokeWidth="17.666666666666668" stroke="#EEEEEE" fill="none" strokeLinecap="round" 
-                            d=" M 132.5 70.96700000000001 C 322.6375 -5.735701074999994 257.71250000000003 331.7563677416667 135.59166666666667 265.79213225833337 
-                            C 7.2875000000000005 331.7563677416667 -57.637499999999996 -5.735701074999994 132.5 70.96700000000001 Z" />
+            <div className="calendar">
+                <DatePicker 
+                    getSelectedDay={this.selectedDay}
+                    maxValue={this.state.calendarVal}
 
-                            {/* to parakatw path prepei n xrhsimopoieitai otan bazei 8ermides o xrhsths */}
-                            <path className="path" strokeWidth="17.666666666666668"  fill="none" strokeLinecap="round" 
-                            d=" M 132.5 70.96700000000001 C 322.6375 -5.735701074999994 257.71250000000003 331.7563677416667 135.59166666666667 265.79213225833337 
-                            C 7.2875000000000005 331.7563677416667 -57.637499999999996 -5.735701074999994 132.5 70.96700000000001 Z" />
-                            <g>
-                                <defs>
-                                    <linearGradient id="gg1" x1="0" y1="0" x2="1" y2="0" >
-                                        <stop offset="0%" style={{stopColor: "rgb(255,255,255)"}} ></stop>
-                                        <stop offset="50%" style={{stopColor: "rgb(148,227,38)"}} ></stop>
-                                        <stop offset="100%" style={{stopColor: "rgb(125,218,31)"}} ></stop>
-                                        {/* <stop offset="100%" stopColor="#EEEEEE"></stop> */}
-                                        
-                                    </linearGradient>
-                                </defs>
-                            </g>
-                            <path fill="#37d67a" d=" M 132.5 53.300333333333334 C 118.4844362 40.293236308333334 126.72888724 2.95035188333334 139.92000000000002 12.225333333333339 
-                            C 158.05777448 24.150350558333336 133.32444362 25.223599233333335 132.5 53.300333333333334 Z"/>
-                            <path fill="#EEEEEE" d=" M 132.5 61.427 L 132.5 79.80033333333333 L 130.73333333333332 79.80033333333333 L 121.89999999999999 76.70866666666666 
-                            L 121.89999999999999 58.600333333333325 Z"></path>                            
-                        </svg>
+                />            
+            </div>
+            <hr/>
+            <div className="row">
+                <div className="col-md-12 col-xl-2" ></div>
+                <div className="col-md-12 col-xl-8" >
+                    <div className="box1">
+                        <div className="row">
+                            <div className="col-md-12 col-xl-4" >
+                                <button className="mealbtn" id="brbtn">Breakfast</button>
+                                <button className="mealbtn" id="lnchbtn">Lunch</button>
+                            </div>
+                            <div className="col-md-12 col-xl-4" >
+                                <svg height="310">
+                                    <CircularProgressbar
+                                        value={value}
+                                        maxValue={maxValue}
+                                        text={`${value}cal`}
+                                        strokeWidth={5}
+                                    />
+                                
+                                    <g>
+                                        <defs>
+                                            <linearGradient id="gg1" x1="0" y1="0" x2="1" y2="0" >
+                                                <stop offset="1%" style={{stopColor: "rgb(31, 82, 34)"}} ></stop>
+                                                <stop offset="50%" style={{stopColor: "rgb(148,227,38)"}} ></stop>
+                                                <stop offset="100%" style={{stopColor: "rgb(125,218,31)"}} ></stop>
+                                                {/* <stop offset="100%" stopColor="#EEEEEE"></stop> */}
+                                                
+                                            </linearGradient>
+                                        </defs>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div className="col-md-12 col-xl-4" >
+                                <button className="mealbtn" id="snckbtn">Snack</button>
+                                <button className="mealbtn"id="dnnrbtn">Dinner</button>
+                            </div>
+                        </div>    
                     </div>
                     
-                    <div className="box1" >
+                    <div className="" >
                         <Chart/>
                     </div> 
                 </div> 
-                <div className="box3 col-md-12 col-xl-5">
+                {/* <div className="box3 col-md-12 col-xl-5">
                     <div className="box2 d-flex justify-content-center align-items-center" >
                         <Calendar/>
                     </div>                
-                </div>            
+                </div>             */}
             </div>
         </div>
         </>  

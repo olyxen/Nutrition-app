@@ -8,7 +8,42 @@
   margin-bottom: 20px;
   box-shadow: 1px 1px 10px;
   background-color: white;
+  text-align: center !important;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
+
+.mealbtn {
+  font-size: 27px;
+  border: 2px solid rgb(0, 0, 0);
+  width: 120px;
+  height: 70px;
+  }
+  
+  #brbtn {
+  background: url("/2-egg-breakfast.jpg");
+  background-repeat: no-repeat;
+  background-size: 120px 70px;
+  /* opacity: 50%; */
+  }
+  #lnchbtn{
+    background: url("/lunch.jpg");
+    background-repeat: no-repeat;
+    background-size: 120px 70px;
+    margin-left: 25px;
+    }
+    #snckbtn{
+      background: url("/snacks.jpg");
+      background-repeat: no-repeat;
+      background-size: 120px 70px;
+      }
+    #dnnrbtn{
+      background: url("/dinner.jpg");
+      background-repeat: no-repeat;
+      background-size: 120px 70px;
+      margin-left: 25px;
+      }
+
 .box3{
   padding: 20px;
   margin-top: 3px;
@@ -17,7 +52,8 @@
   background-color: rgba(162, 231, 177, 0.6);
 }
 
-.react-calendar__navigation{
+
+/* .react-calendar__navigation{
   background-color: #31B04B;
 }
 .react-calendar__month-view__days__day--weekend {
@@ -28,7 +64,7 @@
 }
 .react-calendar__tile--now {
   background: rgba(255, 0, 0, 0.363) !important;
-} 
+}  */
 
 
 .path{
