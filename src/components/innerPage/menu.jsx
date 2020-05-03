@@ -1,7 +1,5 @@
 import React, { Component} from 'react';
 import './css/dashboard.css';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import Chart from './chart';
 import DatePicker from './calendar';
 
@@ -10,7 +8,6 @@ import {
     CircularProgressbar
   } from "react-circular-progressbar";
 import './css/animateCircle.css';
-import { Button } from 'react-bootstrap';
 
 //8ermides pou katanalwnei o xrhsths apo ta faghta
 const value = 520;

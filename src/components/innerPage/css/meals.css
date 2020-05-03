@@ -10,3 +10,7 @@
 .mealform{
     padding: 10px;
 }
+
+.table td{
+    text-align: center;
+}
