@@ -15,33 +15,33 @@
 
 .mealbtn {
   font-size: 27px;
-  border: 2px solid rgb(0, 0, 0);
-  width: 120px;
-  height: 70px;
+  border: 2px round rgb(0, 0, 0);
+  width: 240px;
+  height: 140px;
   }
   
   #brbtn {
   background: url("/2-egg-breakfast.jpg");
   background-repeat: no-repeat;
-  background-size: 120px 70px;
+  background-size: 240px 135px;
   /* opacity: 50%; */
   }
   #lnchbtn{
     background: url("/lunch.jpg");
     background-repeat: no-repeat;
-    background-size: 120px 70px;
-    margin-left: 25px;
+    background-size: 240px 135px;
+    /* margin-left: 25px; */
     }
     #snckbtn{
       background: url("/snacks.jpg");
       background-repeat: no-repeat;
-      background-size: 120px 70px;
+      background-size: 240px 135px;
       }
     #dnnrbtn{
       background: url("/dinner.jpg");
       background-repeat: no-repeat;
-      background-size: 120px 70px;
-      margin-left: 25px;
+      background-size: 240px 135px;
+      /* margin-left: 25px; */
       }
 
 .box3{

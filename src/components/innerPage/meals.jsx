@@ -4,6 +4,7 @@ import './css/dashboard.css';
 import DatePicker from './calendar'
 import axios from "axios";
 
+
 class Meals extends Component {
     constructor(props) {
         super(props);
@@ -184,7 +185,7 @@ render() {
             <hr/>
                 <div className="row">
                     <div className="col-xs-12 col-lg-8 col-lg-pull-4">
-                        <div className="lunchbox breakfast">
+                        <div className="lunchbox breakfast" id="breakfast">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Breakfast</div>                              
                                 {this.state.breakfastFoods.map((addedFoods, index) => (
@@ -239,7 +240,7 @@ render() {
                                 </div>
                             </div>
                         </div>
-                        <div className="lunchbox lunch">
+                        <div className="lunchbox lunch" id="lunch">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Lunch</div>                              
                                 {this.state.lunchFoods.map((addedFoods, index) => (
@@ -287,7 +288,7 @@ render() {
                                 </div>
                             </div>
                         </div>
-                        <div className="lunchbox dinner">
+                        <div className="lunchbox dinner" id="dinner">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Dinner</div>                              
                                 {this.state.dinnerFoods.map((addedFoods, index) => (
@@ -335,7 +336,7 @@ render() {
                                 </div>
                             </div>                            
                         </div>
-                        <div className="lunchbox snack">
+                        <div className="lunchbox snack" id="snack1">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Snack</div>                              
                                 {this.state.snackFoods.map((addedFoods, index) => (

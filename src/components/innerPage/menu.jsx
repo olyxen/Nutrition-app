@@ -62,8 +62,11 @@ render() {
                     <div className="box1">
                         <div className="row">
                             <div className="col-md-12 col-xl-4" >
-                                <button className="mealbtn" id="brbtn">Breakfast</button>
-                                <button className="mealbtn" id="lnchbtn">Lunch</button>
+                                <a href="http://localhost:3000/dashboard/meals#breakfast"><button className="mealbtn" id="brbtn"></button></a>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <a href="http://localhost:3000/dashboard/meals#lunch"><button className="mealbtn" id="lnchbtn"></button></a>
                             </div>
                             <div className="col-md-12 col-xl-4" >
                                 <svg height="310">
@@ -87,9 +90,13 @@ render() {
                                     </g>
                                 </svg>
                             </div>
+                            
                             <div className="col-md-12 col-xl-4" >
-                                <button className="mealbtn" id="snckbtn">Snack</button>
-                                <button className="mealbtn"id="dnnrbtn">Dinner</button>
+                                <a href="http://localhost:3000/dashboard/meals/#snack1"><button className="mealbtn" id="snckbtn"></button></a>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <a href="http://localhost:3000/dashboard/meals#dinner"><button className="mealbtn"id="dnnrbtn"></button></a>
                             </div>
                         </div>    
                     </div>
