@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import Card from './cards/cards';
+import Cards from './cards/cards';
 
 class Recipes extends Component {
 
@@ -16,7 +16,7 @@ render() {
             </button> 
             
             
-            <Card/>
+            <Cards/>
 
             
         </div>

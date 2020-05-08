@@ -30,3 +30,17 @@ body{
     overflow:hidden;
 }
 
+/* gia na erxontai oi kartes sthn mesh otan mikrainei h othoni  */
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+/* kapws den kathotan kala opote eprepe na ginoun overwrite oi diastaseis pou 
+proteinei to bootstrap gia auta ta pixel othonis */
+@media (min-width:1030px) and (max-width: 1335px) {
+    .col-xl-4{
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}
