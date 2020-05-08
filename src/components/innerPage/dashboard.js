@@ -6,7 +6,7 @@ import Recipes from './recipes';
 import './css/innerpage.css'
 import jQuery from 'jquery'
 import Meals from './meals';
-import DetailView from "./cards/detailView";
+import DetailView from "./detailView";
 
 
 function Dash1() {
