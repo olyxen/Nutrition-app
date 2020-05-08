@@ -1,9 +1,9 @@
 import React from 'react';
-import './card.css';
+import '../css/card.css';
 
 
 
-const Card = props=>{
+const Card = props => {
   console.log(props)
   function viewRecipe(){
     localStorage.setItem("recipe", JSON.stringify(props));
