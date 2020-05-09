@@ -1,5 +1,6 @@
 import React from "react";
 
+
 class DetailView extends React.Component {
 
      state = { recipe: {} };
@@ -22,6 +23,7 @@ class DetailView extends React.Component {
                 <div class="col-sm-12">
                 <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
                     <div class="carousel-item-b">
+                    <div><h3>{this.state.recipe.title}</h3></div>
                     <img id="DVimage" src={this.state.recipe.imgsrc} alt=""></img>
                     </div>
                 </div>
@@ -30,7 +32,7 @@ class DetailView extends React.Component {
                         <div class="row">
                             <div class="col-sm-12">
                             <div class="title-box-d">
-                                <h3 class="title-d DVtitles">Property Description</h3>
+                                <h3 class="title-d DVtitles">Method</h3>
                             </div>
                             </div>
                         </div>
@@ -46,32 +48,74 @@ class DetailView extends React.Component {
                         <div class="row">
                         <div class="col-sm-12">
                             <div class="title-box-d section-t4">
-                            <h3 class="title-d DVtitles">Quick Summary</h3>
+                            <h3 class="title-d DVtitles">Ingredients</h3>
                             </div>
                         </div>
                         </div>
                         <div class="summary-list" style={{marginRight:"2%"}}>
+                            
                         <ul class="list" style={{fontSize:"17px"}}>
                             <li class="d-flex justify-content-between">
-                            <strong>Bedrooms:</strong>
-                            <span>systastika</span>
+                                {this.state.recipe.ing1}
                             </li>
                             <li class="d-flex justify-content-between">
-                            <strong>Bathrooms:</strong>
-                            <span>systastika</span>
+                                {this.state.recipe.ing2}
                             </li>
                             <li class="d-flex justify-content-between">
-                            <strong>Garage:</strong>
-                            <span>systastika</span>
+                                {this.state.recipe.ing3}
                             </li>
                             <li class="d-flex justify-content-between">
-                            <strong>Heating:</strong>
-                            <span>systastika</span>
+                                {this.state.recipe.ing4}
                             </li>
                             <li class="d-flex justify-content-between">
-                            <strong>Furnitured:</strong>
-                            <span>systastika</span>
+                                {this.state.recipe.ing5}
                             </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing6}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing7}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing8}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing9}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing10}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing11}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing12}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing13}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing14}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing15}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing16}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing17}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing18}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing19}
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                {this.state.recipe.ing20}
+                            </li>
+                            
                         </ul>
                         </div>
                     </div>
