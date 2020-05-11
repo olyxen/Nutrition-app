@@ -8,6 +8,8 @@ import {
     CircularProgressbar
   } from "react-circular-progressbar";
 import './css/animateCircle.css';
+import SpeedoBmr from './speedometer';
+import ReactSpeedometer from "react-d3-speedometer";
 
 //8ermides pou katanalwnei o xrhsths apo ta faghta
 const value = 520;
@@ -103,7 +105,39 @@ render() {
                     
                     <div className="" >
                         <Chart/>
+                        <ReactSpeedometer
+                            width={500}
+                            needleHeightRatio={0.7}
+                            value={770}
+                            customSegmentStops={[0, 250, 750, 1000]}
+                            segmentColors={["#EDE713", "#4ECD8E", "#F92D2D"]}
+                            currentValueText="What Is Your Body Mass Index?"
+                            customSegmentLabels={[
+                              {
+                                text: "Underweight",
+                                position: "OUTSIDE",
+                                color: "#343736",
+                              },
+                              {
+                                text: "Normal",
+                                position: "OUTSIDE",
+                                color: "#343736",
+                              },
+                              {
+                                text: "Overweight",
+                                position: "OUTSIDE",
+                                color: "#343736",
+                              },
+                            ]}
+                            ringWidth={47}
+                            needleTransitionDuration={3333}
+                            needleTransition="easeElastic"
+                            needleColor={"#a7ff83"}
+                            textColor={"#000000"}
+                       
+                        />
                     </div> 
+                    
                 </div> 
                 {/* <div className="box3 col-md-12 col-xl-5">
                     <div className="box2 d-flex justify-content-center align-items-center" >

@@ -23,6 +23,7 @@
     "react-chartjs-2": "^2.9.0",
     "react-circular-progressbar": "^2.0.3",
     "react-color": "^2.18.0",
+    "react-d3-speedometer": "^0.11.0",
     "react-dom": "^16.12.0",
     "react-modal": "^3.11.1",
     "react-modal-login": "^1.4.5",
