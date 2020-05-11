@@ -115,16 +115,68 @@ Season each piece of pork with salt and pepper. Dredge each piece into the flour
 Remove, place on paper towels, and serve with French fries, coleslaw salad, lemon slices, and thyme." ing1="1 kilo pork, loin" ing2="200 g all-purpose flour" ing3="6 eggs" ing4="2 tablespoon(s) mustard" ing5="1 tablespoon(s) oregano" ing6="200 g breadcrumbs" ing7="salt" ing8="pepper" ing9="300 ml sunflower oil" /> 
                     </div>
                     <div className="col-xl-4 col-lg-6 sm-12 mb-3">
-                        <Card imgsrc='/cardsIMG/re3.jpg' alt="Image" title="Burger" text="Hands on: 15', Cook Time: 25', Portion(s): 2-4, Difficulty: 2"/> 
+                        <Card imgsrc='/cardsIMG/re7.jpg' alt="Image" title="Salmon with avocado and grapefruit" text="Hands on: 30', Cook Time: 15', Portion(s): 4, Difficulty: 1" description="For the dressing:
+
+Juice one of the grapefruits and pour its juice into a bowl. 
+Add the olive oil, the salt, the pepper, and stir with a spoon.
+Peel the second grapefruit and segment it.
+Add the grapefruit segments to the bowl with the juice and set aside.
+Peel the avocados and cut them into slices. 
+Transfer the avocado slices to the bowl with the dressing and set aside until needed.
+For the salmon:
+
+Heat a frying pan over medium heat. 
+Brush the salmon fillets with the olive oil, and season them with salt and pepper.
+Sauté the fillets for 2 minutes on each side, firstly with the skin side down.
+Remove the fillets from the pan.
+To serve:
+
+Serve the salmon fillets with the dressing.
+Sprinkle with the coriander leaves, pepper, and serve with half an avocado cut into slices." ing1="2 grapefruit(s), red" ing2="30 g olive oil" ing3="salt" ing4="pepper" ing5="2 avocado(s), ripe" ing6="800 g salmon, 4 fillets skin-on" ing7="30 g olive oil" ing8="2 tablespoon(s) coriander leaves" ing9="2 avocado(s), cut into slices" /> 
                     </div>
                     <div className="col-xl-4 col-lg-6 sm-12 mb-3">
-                        <Card imgsrc='/cardsIMG/re3.jpg' alt="Image" title="Burger" text="Hands on: 15', Cook Time: 25', Portion(s): 2-4, Difficulty: 2"/> 
+                        <Card imgsrc='/cardsIMG/re8.jpg' alt="Image" title="Four-cheese souffle" text="Hands on: 20', Cook Time: 40', Portion(s): 6-8, Difficulty: 1" description="Preheat the oven to 180ο C (350ο F) set to fan.
+Place a frying pan over high heat and add the olive oil.
+Cut the bacon into pieces and add them to the pan. Sauté for 2-3 minutes until golden brown. Remove and set aside.
+Cut the mushrooms into thin slices and add them to the pan. Add the thyme, salt, pepper, and sauté for 5-8 minutes until the mushrooms decrease in volume.
+In a bowl add the grated cheeses, the oregano, pepper, and mix. Set aside.
+In another bowl add the milk, the heavy cream, the eggs, the nutmeg, salt, pepper, and mix well. Set aside.
+Grease or butter a 25x35 cm ovenproof baking dish and make a layer of sandwich bread slices on its bottom.
+Spread half of the bacon, half of the grated cheeses, and cover with a second layer of sandwich bread. Spread the rest of the bacon and the cheeses.
+Use a ladle to pour over the wet ingredients. Press lightly with your hands so that the whole bread absorbs the moisture. Ideally, you can refrigerate it, covered with plastic wrap, for 2-3 hours.
+Bake for 30-40 minutes and serve.
+" ing1="200 g bacon, whole" ing2="1-2 tablespoon(s) olive oil" ing3="500 g champignon mushrooms" ing4="1 tablespoon(s) thyme" ing5="salt" ing6="pepper" ing7="150 g gouda cheese, grated" ing8="150 g gruyere cheese, grated" ing9="150 g edam cheese, grated" ing10="150 g cheddar, grated" ing11="1 teaspoon(s) oregano" ing12="400 g heavy cream 35%" ing13="600 g milk" ing14="5 eggs, medium" ing15="1 pinch nutmeg" ing16="400 g sandwich bread" /> 
                     </div>
                     <div className="col-xl-4 col-lg-6 sm-12 mb-3">
-                        <Card imgsrc='/cardsIMG/re3.jpg' alt="Image" title="Burger" text="Hands on: 15', Cook Time: 25', Portion(s): 2-4, Difficulty: 2"/> 
+                        <Card imgsrc='/cardsIMG/re9.jpg' alt="Image" title="Chocolate pancakes" text="Hands on: 15', Cook Time: 10', Portion(s): 8-10, Difficulty: 1" description="For the pancakes:
+
+Add the butter in a frying pan and melt it over medium-low heat.
+In a bowl add the buttermilk, the egg, the vanilla, the sugar, the melted butter, and mix well.
+In another bowl add the flour, the baking soda, the cocoa powder, salt, and mix. Transfer the dry ingredients to the bowl with the wet ingredients, and mix with a serving spoon.
+Place a frying pan over medium-low heat and add 1 teaspoon butter.
+Add 2 tablespoons of the mixture into the pan and cook for 1-2 minutes on each side, until cooked through. Cook the pancakes in batches. For every batch, add 1 teaspoon butter.
+Remove and set aside.
+For the ganache:
+
+Place a frying pan over medium heat.
+Add the milk, the butter, and let it come to a boil until the butter melts.
+Break the chocolate into small pieces and add it to a bowl.
+Add the hot mixture from the pan to the bowl with the chocolate, and allow 10 seconds for the chocolate to soften. Then, stir until it is completely melted and the ingredients homogenized.
+Serve the pancakes with the ganache, strawberries, and mint leaves.
+" ing1="180 g buttermilk" ing2="1 egg, medium" ing3="100 g butter" ing4="1 teaspoon(s) vanilla extract" ing5="50 g granulated sugar" ing6="120 g self-rising flour" ing7="1 level teaspoon(s) cocoa powder" ing8="1 teaspoon(s) baking soda" ing9="1 pinch salt" ing10="150 g milk" ing11="200 g chocolate couverture 65%" ing12="100 g strawberries" ing13="mint leaves" /> 
                     </div>
                     <div className="col-xl-4 col-lg-6 sm-12 mb-3">
-                        <Card imgsrc='/cardsIMG/re3.jpg' alt="Image" title="Burger" text="Hands on: 15', Cook Time: 25', Portion(s): 2-4, Difficulty: 2"/> 
+                        <Card imgsrc='/cardsIMG/re10.jpg' alt="Image" title="Greek lemon pork stew" text="Hands on: 20', Cook Time: 120', Portion(s): 4-6, Difficulty: 1" description="Place a pot over high heat and add the seed oil.
+Cut the pork into 2-3 cm pieces and add salt, pepper, and flour. Toss until it is completely coated with the flour.
+Add the pork into the pot and sauté well until golden brown on all sides.
+Drain in order to remove the excess oil and set aside.
+Place the same pot on heat and add the olive oil.
+Coarsely chop the onions, finely chop the garlic, and cut the carrots into cubes. Add the vegetables to the pot and sauté for 5-6 minutes, until caramelized.
+Add the meat, deglaze the pot with the wine, and let it evaporate.
+Add the lemon juice, the water, the mustard, the vegetable stock pot, and mix.
+Cover with the lid and simmer at medium-low heat for 1 ½ - 2 hours.
+Remove from the heat, add the oregano, and mix.
+Serve with the mashed potatoes, oregano, olive oil, pepper, and lemon slices." ing1="1 kilo pork, neck" ing2="salt" ing3="pepper" ing4="30 g all-purpose flour" ing5="3 tablespoon(s) seed oil" ing6="2 onions" ing7="1 clove(s) of garlic" ing8="2 carrots" ing9="2 tablespoon(s) olive oil" ing10="200 g white wine" ing11="lemon juice, of 2 lemons" ing12="600 g water" ing13="2 tablespoon(s) mustard" ing14="1 tablespoon(s) vegetable stock pot" ing15="1 tablespoon(s) oregano" ing16="mashed potatoes" /> 
                     </div>
                 </div> 
             </div>
