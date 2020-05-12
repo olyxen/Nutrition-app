@@ -14,11 +14,7 @@ render() {
                 <i className="fas fa-align-left"></i>
                 <span>Toggle Sidebar</span>
             </button> 
-            
-            
             <Cards/>
-
-            
         </div>
         </>  
     )
