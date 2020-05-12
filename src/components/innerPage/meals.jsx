@@ -4,7 +4,6 @@ import './css/dashboard.css';
 import DatePicker from './calendar'
 import axios from "axios";
 
-
 class Meals extends Component {
     constructor(props) {
         super(props);
@@ -14,16 +13,32 @@ class Meals extends Component {
         // this.addToList = this.addToList.bind(this);
 
         this.state = {
+            flag: false,
             calendarVal: 7,
             listOfFoods: [],
-            breakfastvalue: '',
+            listOfServings: [],
+            breakfastvalue: {},
             lunchvalue: '',
             dinnervalue: '',
             snackvalue: '',
-            breakfastFoods: ["eggs", "orange juice"],
+            breakfastFoods: [
+                {
+                    food: "egg",
+                    quantity: "50",
+                    serving: 'gr',
+                    calories: ''
+                }
+            ],
             lunchFoods: [],
             dinnerFoods: [],
             snackFoods: [],
+            brNutrients:{
+                Energy: '',
+                Fat: '',
+                Carbohydrate: '',
+                Protein: '',
+                Fiber: ''
+            }
           };
     }
     
@@ -52,17 +67,27 @@ class Meals extends Component {
     //apothikeuei autes tis protaseis sto listOfFoods
     onChangeValue = e => {
         var typingFood = e.target.value;
-        var valueType = e.target.name;
-        this.setState({ [valueType]: typingFood });
-        console.log(typingFood);
+        var meal = e.target.name;
+        
+        //katharizo to listOfServings kathe fora pou epilegete allo faghto
+        this.setState({listOfServings: []});
+
+        this.setState({ [meal]: {food: typingFood, quantity: '', serving: '', calories: ''} });
+        console.log(this.state[meal]);
         if(typingFood.length>0){
             axios.get(`http://localhost:8080/api/food/search/${typingFood}`,{})
-                .then(res => {
-                    //elegxos gia na mhn xtupaei to front an den epistrafei kati swsta apo to back
-                    //na to dei3ei an den uparxei error
-                    if(!res.data.error && res.data.suggestions!==null){
-                         this.setState({listOfFoods: res.data.suggestions.suggestion});
-                    }
+            .then(res => {
+                //elegxos gia na mhn xtupaei to front an den epistrafei kati swsta apo to back
+                //na to dei3ei an den uparxei error
+                if(!res.data.error && res.data.suggestions!==null){
+                    var fatSecretSuggestions = res.data.suggestions.suggestion;
+                    //this.setState({listOfFoods: fatSecretSuggestions});
+                    if(Array.isArray(fatSecretSuggestions)){
+                        this.setState({listOfFoods: fatSecretSuggestions});                        
+                    }else {
+                        this.setState({listOfFoods: [fatSecretSuggestions]});
+                    }                        
+                }
             })
         }
     }
@@ -73,26 +98,66 @@ class Meals extends Component {
     onInput = e =>{
         var val = e.target.value;
         var opts = document.getElementById('foods').childNodes;
+        
         for (var i = 0; i < opts.length; i++) {
             if (opts[i].value === val) {
-            // An item was selected from the list!
-            axios.get(`http://localhost:8080/api/food/foodsearch/${val}`,{})
+                // An item was selected from the list!
+                axios.get(`http://localhost:8080/api/food/foodsearchTest/${val}`,{})
                 .then(res => {
                     //elegxos gia na mhn xtupaei to front an den epistrafei kati swsta apo to back
                     //na to dei3ei an den uparxei error
+                    
                     if(!res.data.error){
-                        var foodName = res.data.foods.food.food_name;
-                        var foodId = res.data.foods.food.food_id
-                        console.log(foodId +":" + foodName)
-                        axios.get(`http://localhost:8080/api/food/foodget/${foodId}`,{}).then(res => {
-                            if(!res.data.error) console.log(res.data.food.food_name);
-                        })
+                        var fatSecretServings = res.data.food.servings.serving;
+                        //to if xreiazetai gt sthn periptwsh pou kapoio faghto exei mono ena serving tote to fatSecretServings den einai 
+                        //array alla object kai xtupaei to mapping pio katw otan paei na to diabase
+                        if(Array.isArray(fatSecretServings)){
+                            this.createServList(fatSecretServings);
+                        }else{
+                            this.createServList([fatSecretServings]);
+                        }
                     }
                 })
-            break;
+                break;
             }
         }
     }
+    
+    createServList(fatSecretServings){
+        this.setState({listOfServings: fatSecretServings});
+        this.setState({flag: true})
+    };
+
+    onChangeQuantity = e => {
+        var typingGr = e.target.value;
+        var meal = e.target.name;
+        // var i = this.state[meal].servingId;
+        // console.log( this.state.listOfServings[i].calories);
+
+        this.setState({[meal]: {
+            food: this.state[meal].food,
+            quantity: typingGr,
+            serving: this.state[meal].serving,
+            // calories: this.state[meal].calories * typingGr
+        }});
+        console.log(this.state[meal])
+    };
+    
+    //xreiazetai gt apothikeuei to serving pou diale3e o xrhsths, to apothikeuoume gia na 
+    // dei3oume sto dropdown ti epele3e o xrhsths opws kai gia na apothikeusoyme me setGR tin kataxwrish faghtou
+    onChangeServing = (meal,i) => {
+        var serv = this.state.listOfServings[i].measurement_description;
+        //var cal  = this.state.listOfServings[i].calories;
+
+        this.setState({ [meal]: {
+            food: this.state[meal].food,
+            quantity: this.state[meal].quantity,
+            serving: serv,
+            servingId: i,
+            //calories: cal
+        }});
+        this.setState({flag: !this.state.flag})
+    };
 
     // patwntas to + o xrhsths prosthetei to faghto pou exei epile3ei o xrhsths sthn lista me ta faghta pou exei faei
     onAddBreakfast = (e) => {
@@ -100,7 +165,12 @@ class Meals extends Component {
             const breakfastFoods = state.breakfastFoods.concat(state.breakfastvalue);
             return {
                 breakfastFoods,
-                breakfastvalue: '',
+                breakfastvalue: {
+                    food: '',
+                    quantity: '',
+                    serving: '',
+                    //alories: ''
+                },             
             };
         });
     };
@@ -167,7 +237,6 @@ class Meals extends Component {
     };
 
 
-
 render() { 
 
     return (
@@ -187,36 +256,47 @@ render() {
                     <div className="col-xs-12 col-lg-8 col-lg-pull-4">
                         <div className="lunchbox breakfast" id="breakfast">
                             <div className="mealform">
-                                <div className="d-flex p-2 bd-highlight">Breakfast</div>                              
+                                <div className="d-flex p-2 bd-highlight">Breakfast</div>
+                                {/* EDW EMFANIZONTAI OI KATAXWRISEIS */}
                                 {this.state.breakfastFoods.map((addedFoods, index) => (
-                                    <div key={addedFoods} className="input-group mb-1">
-                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods}>
-                                        </input>
-                                        
+                                    <div key={addedFoods.food} className="input-group mb-1">
+                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food}></input>
+                                        <div className="input-group-append">
+                                            <input  disabled type="text" className="form-control" value={addedFoods.quantity + ' ' + addedFoods.serving}/>
+                                        </div>
                                         <div className="input-group-append">
                                             <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveBreakfast(index)}>×</button>
                                         </div>
                                     </div>
                                 ))}
-                                {/* <ul className="addedFoods">
-                                    {this.state.breakfastFoods.map(addedFoods => (
-                                        <li key={addedFoods} className="addedFood">
-                                            {addedFoods}
-                                        </li>
-                                    ))}
-                                </ul>  */}
-                                                                             
+                                {/* EDW PROSTHETW TROFIMA    */}
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" list = "foods" name="breakfastvalue" placeholder="Add new food" aria-describedby="basic-addon2" value={this.state.breakfastvalue} onChange={this.onChangeValue} onInput={this.onInput}/>
+                                    
+                                    <input type="text" className="form-control food-input" list="foods" id="data1" name="breakfastvalue" placeholder="Add new food"  value={this.state.breakfastvalue.food} onChange={this.onChangeValue} onInput={this.onInput}/>
                                     <datalist id="foods">
                                         {this.state.listOfFoods.map(food => (
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                   <div className="input-group-append">
-                                        <button className="btn btn-primary" id="basic-addon2" onClick={this.onAddBreakfast} disabled={!this.state.breakfastvalue} >+</button>
+                                    <input  type="text" className="form-control quantity-input" list="servings" name="breakfastvalue" value={this.state.breakfastvalue.quantity} onChange={this.onChangeQuantity} disabled={!this.state.breakfastvalue.serving}/>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.breakfastvalue.food}>
+                                        { !this.state.flag? this.state.breakfastvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    </button>
+                                    {this.state.flag && (
+                                        <div className="dropdown"> 
+                                            {this.state.listOfServings.map((serving, index) => (
+                                                <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("breakfastvalue",index)}>
+                                                    {serving.measurement_description + " " + serving.calories +"cal / " + serving.metric_serving_amount + "g"}
+                                                </label>
+                                            ))}
+                                        </div> 
+                                    )}
+                                    <input type="text" className="form-control calories-field" disabled value={this.state.breakfastvalue.calories}></input>
+                                    <div className="input-group-append"> 
+                                        <button className="btn btn-primary addfoodBtn" id="basic-addon2" onClick={this.onAddBreakfast} disabled={!this.state.breakfastvalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
+                                {/* EDW FAINONTAI TA STATISTIKA */}
                                 <div className="table-responsive">
                                     <table className="table">
                                     

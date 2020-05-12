@@ -14,3 +14,16 @@
 .table td{
     text-align: center;
 }
+
+.food-input{
+    max-width: 60%;
+} 
+.quantity-input{
+    max-width: 10%;
+}
+.calories-field{
+    max-width: 20%;
+    background-color: white !important;
+    text-align: center;
+    border: none;
+}
