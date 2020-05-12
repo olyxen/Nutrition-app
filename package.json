@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
@@ -12,6 +13,7 @@
     "chart.js": "^2.9.3",
     "date-fns": "^2.11.1",
     "jquery": "^3.4.1",
+    "jwt-decode": "^2.2.0",
     "material-ui": "^0.20.2",
     "mdbreact": "^4.22.1",
     "modal": "^1.2.0",

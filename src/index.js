@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./index.css"
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "bootstrap-css-only/css/bootstrap.min.css";
+//import "bootstrap-css-only/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
 import FrontPage from "./components/startPage/frontPage";
 import DashBoard from "./components/innerPage/dashboard";
 import AuthenticatedComponent from "./components/authenticated";
 import SignOut from "./components/innerPage/signout";
 
+require("bootstrap");
 
 const routing = (
   <Router>

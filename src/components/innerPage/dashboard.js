@@ -35,7 +35,7 @@ export default Dash1;
 
 jQuery(function ($) {
 
-    $('#dismiss, .overlay').on('click', function () {
+    $('.overlay').on('click', function () {
         $('#sidebar').removeClass('active');
         $('.overlay').removeClass('active');
     });
