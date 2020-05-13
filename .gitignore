@@ -3,6 +3,8 @@
 # dependencies
 /node_modules
 /src/components/innerPage/calendar2.jsx
+/debug.log
+/debug.log.rej
 /.pnp
 .pnp.js
 

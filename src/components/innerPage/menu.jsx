@@ -8,7 +8,6 @@ import {
     CircularProgressbar
   } from "react-circular-progressbar";
 import './css/animateCircle.css';
-import SpeedoBmr from './speedometer';
 import ReactSpeedometer from "react-d3-speedometer";
 
 //8ermides pou katanalwnei o xrhsths apo ta faghta

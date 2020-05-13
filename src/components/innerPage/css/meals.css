@@ -16,14 +16,14 @@
 }
 
 .food-input{
-    max-width: 60%;
+    max-width: 75%;
 } 
 .quantity-input{
-    max-width: 10%;
+    max-width: 15%;
 }
 .calories-field{
-    max-width: 20%;
-    background-color: white !important;
+    min-width: 10%;
+    max-width: 100px;
     text-align: center;
     border: none;
 }
