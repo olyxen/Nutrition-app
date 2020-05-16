@@ -2,6 +2,8 @@ import React, { Component} from 'react';
 import './css/dashboard.css';
 import Chart from './chart';
 import DatePicker from './calendar';
+import jwt from 'jwt-decode' 
+
 
 import 'react-circular-progressbar/dist/styles.css';
 import {
@@ -9,20 +11,31 @@ import {
   } from "react-circular-progressbar";
 import './css/animateCircle.css';
 import ReactSpeedometer from "react-d3-speedometer";
+import axios from "axios";
 
 //8ermides pou katanalwnei o xrhsths apo ta faghta
-const value = 520;
-//hmerhsies 8ermides pou 8a prepei na katanalwnei
-const maxValue = 2200;
+const value = 570;
 
 class Menu extends Component {
     state = {
-        calendarVal: 7
+        calendarVal: 7,
+        bmi: '',
+        bmr:''
     };
+
 
     componentDidMount() {
         window.addEventListener("resize", this.resize.bind(this));
         this.resize();
+        
+        var token = localStorage.getItem("login");
+        var decoded = jwt(token);
+        this.setState({bmi: decoded.bmi});
+        console.log(decoded.bmi);
+        this.setState({bmr: decoded.bmr});
+        
+
+        
     }
     
     resize() {
@@ -40,6 +53,8 @@ selectedDay = (val) =>{
 
 
 
+
+
 render() { 
 
     return (
@@ -49,12 +64,18 @@ render() {
                 <i className="fas fa-align-left"></i>
                 <span>Toggle Sidebar</span>
             </button>
-            <div className="calendar">
+            <div className="row">
+            <div className="calendar col-md-12 col-xl-8">
                 <DatePicker 
                     getSelectedDay={this.selectedDay}
                     maxValue={this.state.calendarVal}
 
                 />            
+            </div>
+            <div className="col-md-12 col-xl-2"></div>
+            <div className="bmibox col-md-12 col-xl-2">
+                <h5>What is Your Body Mass Index ? <a href="http://localhost:3000/dashboard#bmi">Check it.</a></h5>
+            </div>
             </div>
             <hr/>
             <div className="row">
@@ -70,10 +91,11 @@ render() {
                                 <a href="http://localhost:3000/dashboard/meals#lunch"><button className="mealbtn" id="lnchbtn"></button></a>
                             </div>
                             <div className="col-md-12 col-xl-4" >
+                                
                                 <svg height="310">
                                     <CircularProgressbar
                                         value={value}
-                                        maxValue={maxValue}
+                                        maxValue={this.state.bmr}
                                         text={`${value}cal`}
                                         strokeWidth={5}
                                     />
@@ -104,45 +126,49 @@ render() {
                     
                     <div className="" >
                         <Chart/>
-                        <ReactSpeedometer
-                            width={500}
-                            needleHeightRatio={0.7}
-                            value={770}
-                            customSegmentStops={[0, 250, 750, 1000]}
-                            segmentColors={["#EDE713", "#4ECD8E", "#F92D2D"]}
-                            currentValueText="What Is Your Body Mass Index?"
-                            customSegmentLabels={[
-                              {
-                                text: "Underweight",
-                                position: "OUTSIDE",
-                                color: "#343736",
-                              },
-                              {
-                                text: "Normal",
-                                position: "OUTSIDE",
-                                color: "#343736",
-                              },
-                              {
-                                text: "Overweight",
-                                position: "OUTSIDE",
-                                color: "#343736",
-                              },
-                            ]}
-                            ringWidth={47}
-                            needleTransitionDuration={3333}
-                            needleTransition="easeElastic"
-                            needleColor={"#a7ff83"}
-                            textColor={"#000000"}
-                       
-                        />
+                        <div className="row">
+                            <div className="col-md-12 col-xl-8" id="bmi">
+                            <ReactSpeedometer
+                                width={350}
+                                needleHeightRatio={0.75}
+                                value={this.state.bmi *20 }
+                                customSegmentStops={[0, 370, 500, 1000]}
+                                segmentColors={["rgba(255, 206, 86, 0.7)", "rgba(0, 208, 132, 0.7)", "rgba(184, 0, 0, 0.6)"]}
+                                currentValueText="What Is Your Body Mass Index?"
+                                customSegmentLabels={[
+                                {
+                                    fontSize:"13.5px",
+                                    text: "Underweight <18,5",
+                                    position: "OUTSIDE",
+                                    color: "#343736",
+                                },
+                                {
+                                    fontSize:"12.5px",
+                                    text: "Normal <25",
+                                    position: "OUTSIDE",
+                                    color: "#343736",
+                                },
+                                {
+                                    fontSize:"13.5px",
+                                    text: "Overweight >25",
+                                    position: "OUTSIDE",
+                                    color: "#343736",
+                                },
+                                ]}
+                                ringWidth={50}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={"rgba(49, 176, 75, 0.6)"}
+                                textColor={"#000000"}
+                        
+                            />
+                            
+                            </div>
+                            <div className="bmibox col-md-12 col-xl-4">Your Body Mass Index is : <strong>{this.state.bmi}</strong> <br/>Body mass index (BMI) is a value derived from the mass (weight) and height of a person. The BMI is defined as the body mass divided by the square of the body height, and is universally expressed in units of kg/m2, resulting from mass in kilograms and height in metres. </div>
+                        </div>
                     </div> 
                     
                 </div> 
-                {/* <div className="box3 col-md-12 col-xl-5">
-                    <div className="box2 d-flex justify-content-center align-items-center" >
-                        <Calendar/>
-                    </div>                
-                </div>             */}
             </div>
         </div>
         </>  
