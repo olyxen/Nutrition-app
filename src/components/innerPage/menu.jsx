@@ -7,20 +7,21 @@ import jwt from 'jwt-decode'
 
 import 'react-circular-progressbar/dist/styles.css';
 import {
-    CircularProgressbar
+    CircularProgressbar,
+    buildStyles
   } from "react-circular-progressbar";
 import './css/animateCircle.css';
 import ReactSpeedometer from "react-d3-speedometer";
-import axios from "axios";
 
 //8ermides pou katanalwnei o xrhsths apo ta faghta
-const value = 570;
+const value = 520;
 
 class Menu extends Component {
     state = {
         calendarVal: 7,
         bmi: '',
-        bmr:''
+        bmr:'',
+        flag: false
     };
 
 
@@ -51,7 +52,9 @@ selectedDay = (val) =>{
     console.log(val)
 }; 
 
-
+ChangeFlag(){
+    this.setState({flag: !this.state.flag})
+}
 
 
 
@@ -74,7 +77,7 @@ render() {
             </div>
             <div className="col-md-12 col-xl-2"></div>
             <div className="bmibox col-md-12 col-xl-2">
-                <h5>What is Your Body Mass Index ? <a href="http://localhost:3000/dashboard#bmi">Check it.</a></h5>
+                <h5>What is Your Body Mass Index ? <a href="http://localhost:3000/dashboard#bmi"  onClick={(e) => this.ChangeFlag()}>Check it.</a></h5>
             </div>
             </div>
             <hr/>
@@ -96,8 +99,12 @@ render() {
                                     <CircularProgressbar
                                         value={value}
                                         maxValue={this.state.bmr}
-                                        text={`${value}cal`}
+                                        text={`${value} / ${this.state.bmr} cal`}
                                         strokeWidth={5}
+                                        styles={buildStyles({
+                                            textSize:"10px"
+                                          })}
+                                        
                                     />
                                 
                                     <g>
@@ -126,7 +133,8 @@ render() {
                     
                     <div className="" >
                         <Chart/>
-                        <div className="row">
+                        {this.state.flag?
+                        <div className="row" id="bmidiv">
                             <div className="col-md-12 col-xl-8" id="bmi">
                             <ReactSpeedometer
                                 width={350}
@@ -166,8 +174,10 @@ render() {
                             </div>
                             <div className="bmibox col-md-12 col-xl-4">Your Body Mass Index is : <strong>{this.state.bmi}</strong> <br/>Body mass index (BMI) is a value derived from the mass (weight) and height of a person. The BMI is defined as the body mass divided by the square of the body height, and is universally expressed in units of kg/m2, resulting from mass in kilograms and height in metres. </div>
                         </div>
-                    </div> 
-                    
+                        :
+                        <div/>
+                        }
+                    </div>    
                 </div> 
             </div>
         </div>
