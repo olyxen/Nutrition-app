@@ -2,8 +2,8 @@ import React, { Component} from 'react';
 import './css/dashboard.css';
 import Chart from './chart';
 import DatePicker from './calendar';
-import jwt from 'jwt-decode' 
-
+import jwt from 'jwt-decode';
+import axios from "axios";
 
 import 'react-circular-progressbar/dist/styles.css';
 import {
@@ -34,6 +34,13 @@ class Menu extends Component {
         this.setState({bmi: decoded.bmi});
         console.log(decoded.bmi);
         this.setState({bmr: decoded.bmr});
+
+        
+        axios.defaults.headers.common['Authorization'] = `${token}`
+        axios.post(`http://localhost:8080/api/meals/getDailyMeals`, {})
+        .then(res => {
+            console.log(res.data)
+        })
         
 
         
