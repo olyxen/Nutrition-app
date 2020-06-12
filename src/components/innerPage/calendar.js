@@ -57,7 +57,7 @@ export default function DatePicker(props) {
         setCurrentWeek(new Date());
         setSelectedDate(new Date());
         if (props.getSelectedDay) {
-            props.getSelectedDay(Date());
+            props.getSelectedDay(new Date());
         }
     };
     const nextWeek = () => {

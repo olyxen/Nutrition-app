@@ -3,6 +3,7 @@ import './css/meals.css'
 import './css/dashboard.css';
 import DatePicker from './calendar'
 import axios from "axios";
+import jwt from 'jwt-decode';
 
 class Meals extends Component {
     constructor(props) {
@@ -13,6 +14,8 @@ class Meals extends Component {
         // this.addToList = this.addToList.bind(this);
 
         this.state = {
+            user: null,
+            pickedDate: null,
             flag: false,
             calendarVal: 7,
             listOfFoods: [],
@@ -40,6 +43,16 @@ class Meals extends Component {
     componentDidMount() {
         window.addEventListener("resize", this.resize.bind(this));
         this.resize();
+
+        var token = localStorage.getItem("login");
+        var decoded = jwt(token);
+        axios.defaults.headers.common['Authorization'] = `${token}`
+        this.setState({user: decoded._id})
+
+        //xreiazetai gia na arxikopoiei thn imeromhnia sthn shmerinh
+        var date = new Date();
+        var isoDateTime = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
+        this.setState({pickedDate: isoDateTime})
     }
     
     //prosarmozei to hmerologio sto megethos ths othonis
@@ -52,8 +65,10 @@ class Meals extends Component {
             this.setState({calendarVal:5})        
         }
     }
+    //allazei thn timh tou pickedDate me autin pou epele3e o xrhsths apo to hmerologio
     selectedDay = (val) =>{
-        console.log(val)
+        var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
+        this.setState({pickedDate: isoDateTime})
     };  
 
     // pairnei oti grafei o xrhsths to apothikeuei sthn timh value kai kalei apo to back to autocomplete gia na bgalei
@@ -142,7 +157,15 @@ class Meals extends Component {
             fat: this.state.selectedServ.fat * quantity,
             carb: this.state.selectedServ.carbohydrate * quantity,
             protein: this.state.selectedServ.protein * quantity,
-            fiber: this.state.selectedServ.fiber * quantity 
+            fiber: this.state.selectedServ.fiber * quantity,
+            sodium: this.state.selectedServ.sodium * quantity,
+            calcium: this.state.selectedServ.calcium * quantity,
+            iron: this.state.selectedServ.iron * quantity,
+            cholesterol: this.state.selectedServ.cholesterol * quantity,
+            potassium: this.state.selectedServ.potassium * quantity,
+            sugar: this.state.selectedServ.sugar * quantity,
+            vitamin_a: this.state.selectedServ.vitamin_a * quantity,
+            vitamin_c: this.state.selectedServ.vitamin_c * quantity 
         }});
         console.log(this.state[meal])
     };
@@ -157,6 +180,14 @@ class Meals extends Component {
         var carb  = this.state.listOfServings[i].carbohydrate;
         var protein  = this.state.listOfServings[i].protein;
         var fiber  = this.state.listOfServings[i].fiber;
+        var sodium = this.state.listOfServings[i].sodium;
+        var calcium = this.state.listOfServings[i].calcium;
+        var iron = this.state.listOfServings[i].iron;
+        var cholesterol = this.state.listOfServings[i].cholesterol;
+        var potassium = this.state.listOfServings[i].potassium;
+        var sugar = this.state.listOfServings[i].sugar;
+        var vitamin_a = this.state.listOfServings[i].vitamin_a;
+        var vitamin_c = this.state.listOfServings[i].vitamin_c;
 
 
         let quantity;
@@ -173,7 +204,15 @@ class Meals extends Component {
             fat: fat * quantity,
             carb: carb * quantity,
             protein: protein * quantity,
-            fiber: fiber * quantity
+            fiber: fiber * quantity,
+            sodium: sodium * quantity,
+            calcium: calcium * quantity,
+            iron: iron * quantity,
+            cholesterol: cholesterol * quantity,
+            potassium: potassium * quantity,
+            sugar: sugar * quantity,
+            vitamin_a: vitamin_a * quantity,
+            vitamin_c: vitamin_c * quantity
         }});
         this.setState({flag: !this.state.flag})
     };
@@ -205,19 +244,54 @@ class Meals extends Component {
     // patwntas to + o xrhsths prosthetei to faghto pou exei epile3ei o xrhsths sthn lista me ta faghta pou exei faei
     onAddBreakfast = (e) => {
         this.addToNutriList("breakfastvalue","brNutrients");
-        this.setState(state => {
-            const breakfastFoods = state.breakfastFoods.concat(state.breakfastvalue);
-            return {
-                breakfastFoods,
-                breakfastvalue: {
-                    food: '',
-                    quantity: '',
-                    serving: '',
-                    calories: ''
-                },             
-            };
+
+        axios.put(`http://localhost:8080/api/meals/addMeal`, {
+            "mealkind": "breakfast",
+            "date": this.state.pickedDate,
+            "user_id": this.state.user,
+            "ingredients": [
+                {
+                    "food_id": "1641",
+                    "food_name": this.state.breakfastvalue.food,
+                    "serving": this.state.breakfastvalue.serving,
+                    "quantity": this.state.breakfastvalue.quantity,
+                    "nutrients":{
+                        "sodium": this.state.breakfastvalue.sodium,
+                        "calcium": this.state.breakfastvalue.calcium,
+                        "carbohydrate": this.state.breakfastvalue.carb,
+                        "fat": this.state.breakfastvalue.fat,
+                        "fiber": this.state.breakfastvalue.fiber,
+                        "iron": this.state.breakfastvalue.iron,
+                        "protein": this.state.breakfastvalue.protein,
+                        "cholesterol": this.state.breakfastvalue.cholesterol,
+                        "potassium": this.state.breakfastvalue.potassium,
+                        "sugar": this.state.breakfastvalue.sugar,
+                        "vitamin_a": this.state.breakfastvalue.vitamin_a,
+                        "vitamin_c": this.state.breakfastvalue.vitamin_c
+                    },
+                    "calories": this.state.breakfastvalue.calories
+                }
+            ],
+            "calories": Number(this.state.breakfastvalue.calories)
+        })
+        .then(res => {
+            console.log(res.data);
+
+            this.setState(state => {
+                const breakfastFoods = state.breakfastFoods.concat(state.breakfastvalue);
+                return {
+                    breakfastFoods,
+                    breakfastvalue: {
+                        food: '',
+                        quantity: '',
+                        serving: '',
+                        calories: ''
+                    },             
+                };
+            });
         });
     };
+
     onAddLunch = (e) => {
         this.setState(state => {
             const lunchFoods = state.lunchFoods.concat(state.lunchvalue);
