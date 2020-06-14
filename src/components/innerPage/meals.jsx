@@ -81,7 +81,8 @@ class Meals extends Component {
         //katharizo to listOfServings kathe fora pou epilegete allo faghto
         this.setState({listOfServings: []});
 
-        this.setState({ [meal]: {food: typingFood, quantity: '', serving: '', calories: ''} });
+        //an meinei h seira 123 tha fugei, alla an den diorthothei to problhma me to chicken kai chicken breast tha epanaferthei auto kai tha fygei to 123
+        //this.setState({ [meal]: {food: typingFood, quantity: '', serving: '', calories: ''} });
         console.log(this.state[meal]);
         if(typingFood.length>0){
             axios.get(`http://localhost:8080/api/food/search/${typingFood}`,{})
@@ -107,6 +108,7 @@ class Meals extends Component {
     onInput = e =>{
         var val = e.target.value;
         var opts = document.getElementById('foods').childNodes;
+        var meal = e.target.name;
         
         for (var i = 0; i < opts.length; i++) {
             if (opts[i].value === val) {
@@ -117,6 +119,8 @@ class Meals extends Component {
                     //na to dei3ei an den uparxei error
                     
                     if(!res.data.error){
+                        //afou epilexthike to fagito, apothikeuoume arxika to onoma tou kai to id tou
+                        this.setState({ [meal]: {food: res.data.food.food_name, fatSecret_id:res.data.food.food_id} });
                         var fatSecretServings = res.data.food.servings.serving;
                         //to if xreiazetai gt sthn periptwsh pou kapoio faghto exei mono ena serving tote to fatSecretServings den einai 
                         //array alla object kai xtupaei to mapping pio katw otan paei na to diabase
@@ -151,6 +155,7 @@ class Meals extends Component {
 
         this.setState({[meal]: {
             food: this.state[meal].food,
+            fatSecret_id: this.state[meal].fatSecret_id,
             quantity: typingGr,
             serving: this.state[meal].serving,
             calories: this.state.selectedServ.calories * quantity,
@@ -198,6 +203,7 @@ class Meals extends Component {
 
         this.setState({ [meal]: {
             food: this.state[meal].food,
+            fatSecret_id: this.state[meal].fatSecret_id,
             quantity: this.state[meal].quantity,
             serving: serv,
             calories: cal * quantity,
@@ -251,7 +257,7 @@ class Meals extends Component {
             "user_id": this.state.user,
             "ingredients": [
                 {
-                    "food_id": "1641",
+                    "fatSecret_id": this.state.breakfastvalue.fatSecret_id,
                     "food_name": this.state.breakfastvalue.food,
                     "serving": this.state.breakfastvalue.serving,
                     "quantity": this.state.breakfastvalue.quantity,
@@ -283,6 +289,7 @@ class Meals extends Component {
                     breakfastFoods,
                     breakfastvalue: {
                         food: '',
+                        fatSecret_id: '',
                         quantity: '',
                         serving: '',
                         calories: ''
