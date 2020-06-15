@@ -24,10 +24,10 @@ class Meals extends Component {
             lunchvalue: '',
             dinnervalue: '',
             snackvalue: '',
-            breakfastFoods: [],
-            lunchFoods: [],
-            dinnerFoods: [],
-            snackFoods: [],
+            breakfast: [],
+            lunch: [],
+            dinner: [],
+            snack: [],
             brNutrients:{
                 Energy: 0,
                 Fat: 0,
@@ -51,8 +51,7 @@ class Meals extends Component {
 
         //xreiazetai gia na arxikopoiei thn imeromhnia sthn shmerinh
         var date = new Date();
-        var isoDateTime = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
-        this.setState({pickedDate: isoDateTime})
+        this.updateDailyMenu(date)
     }
     
     //prosarmozei to hmerologio sto megethos ths othonis
@@ -66,9 +65,26 @@ class Meals extends Component {
         }
     }
     //allazei thn timh tou pickedDate me autin pou epele3e o xrhsths apo to hmerologio
-    selectedDay = (val) =>{
+    updateDailyMenu = (val) =>{
+        //kathe fore pou epilegetai allh hmeromhnia adeiazw tous pinakes me ta shmerina geumata
+        this.setState({breakfast: []})
+        this.setState({lunch: []})
+        this.setState({dinner: []})
+        this.setState({snack: []})
+
+        //briskei thn akribh wra sthn ellada
         var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
         this.setState({pickedDate: isoDateTime})
+
+        //enhmerwnei thn selida se kathe allagh hmeromhnias
+        axios.get(`http://localhost:8080/api/meals/getMeal/${isoDateTime}`)
+        .then( res => {
+            console.log(res.data)
+            //epistrefei ola ta geumata ekeinhs ths hmeras, ta diabazei me mapping kai ta apothikeuei ston antistoixo pinaka
+            res.data.map((meal, i) => (
+                this.setState({[meal.mealkind]: meal.ingredients})
+            ))
+        })
     };  
 
     // pairnei oti grafei o xrhsths to apothikeuei sthn timh value kai kalei apo to back to autocomplete gia na bgalei
@@ -81,8 +97,8 @@ class Meals extends Component {
         //katharizo to listOfServings kathe fora pou epilegete allo faghto
         this.setState({listOfServings: []});
 
-        //an meinei h seira 123 tha fugei, alla an den diorthothei to problhma me to chicken kai chicken breast tha epanaferthei auto kai tha fygei to 123
-        //this.setState({ [meal]: {food: typingFood, quantity: '', serving: '', calories: ''} });
+        //xreiazetai gt an den uparxei, otan prostheteis ena faghto den se afhnei na psa3eis na prostheseis kapoio allo
+        this.setState({ [meal]: {food_name: typingFood} });
         console.log(this.state[meal]);
         if(typingFood.length>0){
             axios.get(`http://localhost:8080/api/food/search/${typingFood}`,{})
@@ -120,7 +136,8 @@ class Meals extends Component {
                     
                     if(!res.data.error){
                         //afou epilexthike to fagito, apothikeuoume arxika to onoma tou kai to id tou
-                        this.setState({ [meal]: {food: res.data.food.food_name, fatSecret_id:res.data.food.food_id} });
+                        //an den diorthothei to problhma me to chicken kai chicken breast tha htan protimotero na fugei to food_name
+                        this.setState({ [meal]: {food_name: res.data.food.food_name, fatSecret_id:res.data.food.food_id} });
                         var fatSecretServings = res.data.food.servings.serving;
                         //to if xreiazetai gt sthn periptwsh pou kapoio faghto exei mono ena serving tote to fatSecretServings den einai 
                         //array alla object kai xtupaei to mapping pio katw otan paei na to diabase
@@ -154,7 +171,7 @@ class Meals extends Component {
         if(this.state[meal].serving==='g') quantity = quantity/100;
 
         this.setState({[meal]: {
-            food: this.state[meal].food,
+            food_name: this.state[meal].food_name,
             fatSecret_id: this.state[meal].fatSecret_id,
             quantity: typingGr,
             serving: this.state[meal].serving,
@@ -202,7 +219,7 @@ class Meals extends Component {
         if(serv==='g') quantity = quantity/100;
 
         this.setState({ [meal]: {
-            food: this.state[meal].food,
+            food_name: this.state[meal].food_name,
             fatSecret_id: this.state[meal].fatSecret_id,
             quantity: this.state[meal].quantity,
             serving: serv,
@@ -258,7 +275,7 @@ class Meals extends Component {
             "ingredients": [
                 {
                     "fatSecret_id": this.state.breakfastvalue.fatSecret_id,
-                    "food_name": this.state.breakfastvalue.food,
+                    "food_name": this.state.breakfastvalue.food_name,
                     "serving": this.state.breakfastvalue.serving,
                     "quantity": this.state.breakfastvalue.quantity,
                     "nutrients":{
@@ -284,11 +301,11 @@ class Meals extends Component {
             console.log(res.data);
 
             this.setState(state => {
-                const breakfastFoods = state.breakfastFoods.concat(state.breakfastvalue);
+                const breakfast = state.breakfast.concat(state.breakfastvalue);
                 return {
-                    breakfastFoods,
+                    breakfast,
                     breakfastvalue: {
-                        food: '',
+                        food_name: '',
                         fatSecret_id: '',
                         quantity: '',
                         serving: '',
@@ -301,27 +318,27 @@ class Meals extends Component {
 
     onAddLunch = (e) => {
         this.setState(state => {
-            const lunchFoods = state.lunchFoods.concat(state.lunchvalue);
+            const lunch = state.lunch.concat(state.lunchvalue);
             return {
-                lunchFoods,
+                lunch,
                 lunchvalue: '',
             };
         });
     };
     onAddDinner = (e) => {
         this.setState(state => {
-            const dinnerFoods = state.dinnerFoods.concat(state.dinnervalue);
+            const dinner = state.dinner.concat(state.dinnervalue);
             return {
-                dinnerFoods,
+                dinner,
                 dinnervalue: '',
             };
         });
     };
     onAddSnack = (e) => {
         this.setState(state => {
-            const snackFoods = state.snackFoods.concat(state.snackvalue);
+            const snack = state.snack.concat(state.snackvalue);
             return {
-                snackFoods,
+                snack,
                 snackvalue: '',
             };
         });
@@ -329,35 +346,40 @@ class Meals extends Component {
 
     //patwntas to X o xrhsths afairei to proion apo thn lista me to faghta pou exei faei
     onRemoveBreakfast = i => {
-        this.removeFromNutriList("breakfastFoods","brNutrients",i);
+        this.removeFromNutriList("breakfast","brNutrients",i);
+        // axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${'5735'}`)
+        // .then((res => {
+        //     console.log(res.data)
+        // }))
+
         this.setState(state => {
-          const breakfastFoods = state.breakfastFoods.filter((item, j) => i !== j);
+          const breakfast = state.breakfast.filter((item, j) => i !== j);
           return {
-            breakfastFoods,
+            breakfast,
           };
         });
     };
     onRemoveLunch = i => {
         this.setState(state => {
-          const lunchFoods = state.lunchFoods.filter((item, j) => i !== j);
+          const lunch = state.lunch.filter((item, j) => i !== j);
           return {
-            lunchFoods,
+            lunch,
           };
         });
     };
     onRemoveDinner = i => {
         this.setState(state => {
-          const dinnerFoods = state.dinnerFoods.filter((item, j) => i !== j);
+          const dinner = state.dinner.filter((item, j) => i !== j);
           return {
-            dinnerFoods,
+            dinner,
           };
         });
     };
     onRemoveSnack = i => {
         this.setState(state => {
-          const snackFoods = state.snackFoods.filter((item, j) => i !== j);
+          const snack = state.snack.filter((item, j) => i !== j);
           return {
-            snackFoods,
+            snack,
           };
         });
     };
@@ -373,7 +395,7 @@ render() {
             </button>
             <div className="calendar">
                 <DatePicker 
-                    getSelectedDay={this.selectedDay}
+                    getSelectedDay={this.updateDailyMenu}
                     maxValue={this.state.calendarVal}
                 />            
             </div>
@@ -384,9 +406,9 @@ render() {
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Breakfast</div>
                                 {/* EDW EMFANIZONTAI OI KATAXWRISEIS */}
-                                {this.state.breakfastFoods.map((addedFoods, index) => (
-                                    <div key={addedFoods.food} className="input-group mb-1">
-                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food}></input>
+                                {this.state.breakfast.map((addedFoods, index) => (
+                                    <div key={addedFoods.fatSecret_id} className="input-group mb-1">
+                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food_name}></input>
                                         <div className="input-group-append">
                                             <input  disabled type="text" className="form-control" value={addedFoods.quantity + ' ' + addedFoods.serving}/>
                                         </div>
@@ -398,13 +420,13 @@ render() {
                                 ))}
                                 {/* EDW PROSTHETW TROFIMA    */}
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control food-input" list="foods" id="data1" name="breakfastvalue" placeholder="Add new food"  value={this.state.breakfastvalue.food} onChange={this.onChangeValue} onInput={this.onInput}/>
+                                    <input type="text" className="form-control food-input" list="foods" id="data1" name="breakfastvalue" placeholder="Add new food"  value={this.state.breakfastvalue.food_name} onChange={this.onChangeValue} onInput={this.onInput}/>
                                     <datalist id="foods">
                                         {this.state.listOfFoods.map(food => (
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.breakfastvalue.food}>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.breakfastvalue.food_name}>
                                         { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.breakfastvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
                                     </button>
                                     {this.state.flag && (
@@ -449,7 +471,7 @@ render() {
                         <div className="lunchbox lunch" id="lunch">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Lunch</div>                              
-                                {this.state.lunchFoods.map((addedFoods, index) => (
+                                {this.state.lunch.map((addedFoods, index) => (
                                     <div key={addedFoods} className="input-group mb-1">
                                         <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods}>
                                         </input>
@@ -497,7 +519,7 @@ render() {
                         <div className="lunchbox dinner" id="dinner">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Dinner</div>                              
-                                {this.state.dinnerFoods.map((addedFoods, index) => (
+                                {this.state.dinner.map((addedFoods, index) => (
                                     <div key={addedFoods} className="input-group mb-1">
                                         <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods}>
                                         </input>
@@ -545,7 +567,7 @@ render() {
                         <div className="lunchbox snack" id="snack1">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Snack</div>                              
-                                {this.state.snackFoods.map((addedFoods, index) => (
+                                {this.state.snack.map((addedFoods, index) => (
                                     <div key={addedFoods} className="input-group mb-1">
                                         <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods}>
                                         </input>
