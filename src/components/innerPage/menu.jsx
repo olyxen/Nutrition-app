@@ -51,9 +51,9 @@ class Menu extends Component {
     
         .then( res => 
             this.setState({ 
-            calories: res.data
+            calories: res.data 
         }) )
-            //console.log(this.state.calories);
+            console.log(this.state.calories);
         }
     
     resize() {
@@ -126,7 +126,7 @@ render() {
                                     />
                                 
                                     <g>
-                                    {this.state.calories < this.state.bmr? 
+                                    {Number(this.state.calories) < this.state.bmr? 
                                         <defs>
                                             <linearGradient id="gg1" x1="0" y1="0" x2="1" y2="0" >
                                                 <stop offset="1%" style={{stopColor: "rgb(31, 82, 34)"}} ></stop>
