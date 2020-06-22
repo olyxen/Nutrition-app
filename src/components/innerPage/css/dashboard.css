@@ -53,35 +53,10 @@
 }
 
 
-/* .react-calendar__navigation{
-  background-color: #31B04B;
-}
-.react-calendar__month-view__days__day--weekend {
-  color: black !important;
-}
-.react-calendar__month-view__days__day--neighboringMonth {
-  color: #757575 !important;
-}
-.react-calendar__tile--now {
-  background: rgba(255, 0, 0, 0.363) !important;
-}  */
-
 .chart{
   margin-bottom: 100px;
 }
-.path{
-    /* stroke-dasharray: 20;
-    animation: dash 5s linear; 761.486 */
-    stroke: url(#gg1);
-    stroke-dasharray: 190.371 761.486;
-    stroke-dashoffset: 192;
-    animation: dash 5s linear forwards;
-}
-@keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
-  } 
+
 
   @media (min-width: 1200px)  {
     .box3{
