@@ -9,18 +9,19 @@ class Chart extends Component {
     }
 
     componentDidMount(){
-        this.getChartData();
+        this.getChartData();       
     }
 
     getChartData(){
         // Ajax calls here
-        axios.get("http://localhost:8080/api/chart",{   
-        })
+        var token = localStorage.getItem("login");
+        axios.get("http://localhost:8080/api/meals/getDailyMeals", { headers: { Authorization: `${token}`}}) 
+    
         .then(res => {
             var nutrients = res.data;                    
             this.setState({
                 chartData: {
-                    labels: ['Protein', 'Calcium', 'Cholesterol', 'Carbohydrate', 'Sodium', 'Fat'],
+                    labels: ['Protein', 'Calcium', 'Cholesterol', 'Carbohydrate', 'Iron', 'Fat'],
                     datasets: [
                         {
                             label: '% value',
