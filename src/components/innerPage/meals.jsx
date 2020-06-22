@@ -347,10 +347,10 @@ class Meals extends Component {
     //patwntas to X o xrhsths afairei to proion apo thn lista me to faghta pou exei faei
     onRemoveBreakfast = i => {
         this.removeFromNutriList("breakfast","brNutrients",i);
-        // axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${'5735'}`)
-        // .then((res => {
-        //     console.log(res.data)
-        // }))
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${this.state.breakfast[i].fatSecret_id}`)
+        .then((res => {
+            console.log(res.data)
+        }))
 
         this.setState(state => {
           const breakfast = state.breakfast.filter((item, j) => i !== j);
