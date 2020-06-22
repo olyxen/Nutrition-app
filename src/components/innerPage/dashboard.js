@@ -7,6 +7,7 @@ import './css/innerpage.css'
 import jQuery from 'jquery'
 import Meals from './meals';
 import DetailView from "./detailView";
+import Charts from './charts';
 
 
 function Dash1() {
@@ -21,6 +22,7 @@ function Dash1() {
                   <Route exact path="/dashboard" component={Menu} />
                   <Route exact path="/dashboard/recipes" component={Recipes} />
                   <Route exact path="/dashboard/meals" component={Meals} />
+                  <Route exact path ="dashboard/charts" component={Charts} />
                   <Route exact path="/dashboard/recipes/:title" component={DetailView} />
                 </Switch>
               </div>

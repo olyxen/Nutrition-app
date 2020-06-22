@@ -44,7 +44,7 @@ render() {
                         <span className="menu-text"> Meals</span>
                     </a>                </li>
                 <li>
-                    <a href="/#" style={{pointerEvents: "none", cursor: "default"}}>
+                <a href="http://localhost:3000/dashboard/charts">
                         <i className="fa fa-chart-line"></i>
                         <span className="menu-text"> Charts</span>
                     </a>
