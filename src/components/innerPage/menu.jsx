@@ -13,14 +13,14 @@ import {
 import './css/animateCircle.css';
 import ReactSpeedometer from "react-d3-speedometer";
 
-//8ermides pou katanalwnei o xrhsths apo ta faghta
-const value = 520;
+
 
 class Menu extends Component {
     state = {
         calendarVal: 7,
         bmi: '',
         bmr:'',
+        calories:'',
         flag: false
     };
 
@@ -34,17 +34,27 @@ class Menu extends Component {
         this.setState({bmi: decoded.bmi});
         console.log(decoded.bmi);
         this.setState({bmr: decoded.bmr});
+        this.setState({cal: decoded.cal});
+        console.log(decoded.cal);
 
-        
+         
         axios.defaults.headers.common['Authorization'] = `${token}`
-        axios.post(`http://localhost:8080/api/meals/getDailyMeals`, {})
-        .then(res => {
-            console.log(res.data)
-        })
-        
-
+        //this.getDailyStats()
+        this.getCalories();
         
     }
+
+    getCalories(){
+        // Ajax calls here
+        var token = localStorage.getItem("login");
+        axios.get("http://localhost:8080/api/meals/getDailyCalories", { headers: { Authorization: `${token}`}}) 
+    
+        .then( res => 
+            this.setState({ 
+            calories: res.data
+        }) )
+            //console.log(this.state.calories);
+        }
     
     resize() {
         if(window.innerWidth > 590){
@@ -104,17 +114,19 @@ render() {
                                 
                                 <svg height="310">
                                     <CircularProgressbar
-                                        value={value}
+                                        value={[this.state.calories]}
                                         maxValue={this.state.bmr}
-                                        text={`${value} / ${this.state.bmr} cal`}
+                                        text={`${[this.state.calories]} / ${this.state.bmr} cal`}
                                         strokeWidth={5}
                                         styles={buildStyles({
-                                            textSize:"10px"
+                                            textSize:"10px",
+                                            
                                           })}
-                                        
+                                          
                                     />
                                 
                                     <g>
+                                    {this.state.calories < this.state.bmr? 
                                         <defs>
                                             <linearGradient id="gg1" x1="0" y1="0" x2="1" y2="0" >
                                                 <stop offset="1%" style={{stopColor: "rgb(31, 82, 34)"}} ></stop>
@@ -123,7 +135,19 @@ render() {
                                                 {/* <stop offset="100%" stopColor="#EEEEEE"></stop> */}
                                                 
                                             </linearGradient>
+                                           
                                         </defs>
+                                    :
+                                        <defs>
+                                        <linearGradient id="gg1" x1="0" y1="0" x2="1" y2="0" >
+                                                <stop offset="1%" style={{stopColor: "rgb(194, 48, 39)"}} ></stop>
+                                                <stop offset="50%" style={{stopColor: "rgb(219,99,99)"}} ></stop>
+                                                <stop offset="100%" style={{stopColor: "rgb(244,115,115)"}} ></stop>
+                                                {/* <stop offset="100%" stopColor="#EEEEEE"></stop> */}
+                                                
+                                            </linearGradient>
+                                        </defs>
+                                    }   
                                     </g>
                                 </svg>
                             </div>
@@ -179,7 +203,7 @@ render() {
                             />
                             
                             </div>
-                            <div className="bmibox col-md-12 col-xl-4">Your Body Mass Index is : <strong>{this.state.bmi}</strong> <br/>Body mass index (BMI) is a value derived from the mass (weight) and height of a person. The BMI is defined as the body mass divided by the square of the body height, and is universally expressed in units of kg/m2, resulting from mass in kilograms and height in metres. </div>
+                            <div className="bmibox col-md-12 col-xl-4">Your Body Mass Index is : <strong>{(Math.floor((this.state.bmi)*100)/100)}</strong> <br/>Body mass index (BMI) is a value derived from the mass (weight) and height of a person. The BMI is defined as the body mass divided by the square of the body height, and is universally expressed in units of kg/m2, resulting from mass in kilograms and height in metres. </div>
                         </div>
                         :
                         <div/>
