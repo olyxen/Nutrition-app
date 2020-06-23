@@ -1,38 +1,34 @@
 import React, { Component} from 'react';
 import axios from "axios";
-import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
-class Chart extends Component {
-    
+
+class ChartSP extends Component {
+ 
     state ={
-        chartData:{},
+        chartDataSP:{},
     }
 
     componentDidMount(){
-        this.getChartData();       
+        this.getSP();       
     }
 
-    getChartData(){
+    getSP(){
         // Ajax calls here
         var token = localStorage.getItem("login");
-        axios.get("http://localhost:8080/api/meals/getDailyStats", { headers: { Authorization: `${token}`}}) 
+        axios.get("http://localhost:8080/api/meals/getDailyStatsSP", { headers: { Authorization: `${token}`}}) 
     
         .then(res => {
             var nutrients = res.data;                    
             this.setState({
-                chartData: {
-                    labels: ['Protein', 'Calcium', 'Cholesterol', 'Carbohydrate', 'Iron', 'Fat'],
+                chartDataSP: {
+                    labels: ['Sodium', 'Potassium'],
                     datasets: [
                         {
-                            label: 'g',
+                            label: '% value',
                             data: nutrients,
                             backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
                                 'rgba(255, 206, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(153, 102, 255, 0.6)',
-                                'rgba(255, 159, 64, 0.6)',
                                 'rgba(255, 99, 132, 0.6)'
                             ]
                         }
@@ -42,11 +38,15 @@ class Chart extends Component {
         })
     }
 
-    render(){
-        return(
-            <div className="chart">
-                <Bar
-                    data={this.state.chartData}
+
+render() { 
+
+    return (
+        <>
+        
+        <div className="chart">
+                <Pie
+                    data={this.state.chartDataSP}
                     options={{
                        title:{
                            display:true,
@@ -60,15 +60,13 @@ class Chart extends Component {
                                fontColor:'#000'
                            }
                        },
-
                     }}
                 />
             </div>
-        )
-
-    }
-
-
-
+        </>  
+    )
+        
 }
-export default Chart;
+}
+
+export default ChartSP;

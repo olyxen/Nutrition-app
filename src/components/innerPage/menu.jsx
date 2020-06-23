@@ -24,6 +24,17 @@ class Menu extends Component {
         flag: false
     };
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: null,
+            pickedDate: null,
+            flag: false,
+            calendarVal: 7,
+          };
+    }
+
 
     componentDidMount() {
         window.addEventListener("resize", this.resize.bind(this));
@@ -39,23 +50,38 @@ class Menu extends Component {
 
          
         axios.defaults.headers.common['Authorization'] = `${token}`
-        //this.getDailyStats()
-        this.getCalories();
+        this.setState({user: decoded._id})
+
+
+        //xreiazetai gia na arxikopoiei thn imeromhnia sthn shmerinh
+        var date = new Date();
+        this.updateDailyCalories(date)
         
     }
 
-    getCalories(){
-        // Ajax calls here
+    //allazei thn timh tou pickedDate me autin pou epele3e o xrhsths apo to hmerologio
+    updateDailyCalories = (val) =>{
+        //kathe fore pou epilegetai allh hmeromhnia mhdenizw ta calories
+        this.setState({calories:" "})
+
+        //briskei thn akribh wra sthn ellada
+        var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
+        this.setState({pickedDate: isoDateTime})
+
         var token = localStorage.getItem("login");
-        axios.get("http://localhost:8080/api/meals/getDailyCalories", { headers: { Authorization: `${token}`}}) 
-    
+        //enhmerwnei thn selida se kathe allagh hmeromhnias
+        axios.get(`http://localhost:8080/api/meals/getDailyCalories/${isoDateTime}`)
+        //epistrefei tis 8ermides ts hmeras kai tis apo8ukeuei sto calories
         .then( res => 
             this.setState({ 
             calories: res.data 
         }) )
             console.log(this.state.calories);
-        }
-    
+        
+    }; 
+
+        
+     //prosarmozei to hmerologio sto megethos ths othonis
     resize() {
         if(window.innerWidth > 590){
             this.setState({calendarVal:7})        
@@ -87,7 +113,7 @@ render() {
             <div className="row">
             <div className="calendar col-md-12 col-xl-8">
                 <DatePicker 
-                    getSelectedDay={this.selectedDay}
+                    getSelectedDay={this.updateDailyCalories}
                     maxValue={this.state.calendarVal}
 
                 />            
