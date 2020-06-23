@@ -15,6 +15,7 @@ class Meals extends Component {
 
         this.state = {
             user: null,
+            calDate: null,
             pickedDate: null,
             flag: false,
             calendarVal: 7,
@@ -63,15 +64,12 @@ class Meals extends Component {
     }
     //allazei thn timh tou pickedDate me autin pou epele3e o xrhsths apo to hmerologio
     updateDailyMenu = (val) =>{
+        this.setState({calDate:val})
         //kathe fore pou epilegetai allh hmeromhnia adeiazw tous pinakes me ta shmerina geumata
         this.setState({breakfast: []})
         this.setState({lunch: []})
         this.setState({dinner: []})
         this.setState({snack: []})
-        this.setState({brNutrients: {}})
-        this.setState({lnNutrients: {}})
-        this.setState({dnNutrients: {}})
-        this.setState({snNutrients: {}})
 
         //briskei thn akribh wra sthn ellada
         var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
@@ -87,6 +85,24 @@ class Meals extends Component {
             ))
         })
 
+        this.updateDailyNutrients(isoDateTime)
+    };
+
+    updateDailyNutrients = (isoDateTime) => {
+
+        var defaultNutriJSON = {
+            Carbohydrate:0,
+            Energy: 0,
+            Fat: 0,
+            Fiber: 0,
+            Protein: 0
+        }
+        this.setState({brNutrients: defaultNutriJSON})
+        this.setState({lnNutrients: defaultNutriJSON})
+        this.setState({dnNutrients: defaultNutriJSON})
+        this.setState({snNutrients: defaultNutriJSON})
+
+
         axios.get(`http://localhost:8080/api/meals/getMealsNutri/${isoDateTime}`)
         .then(res => {
             console.log(res.data)
@@ -95,7 +111,7 @@ class Meals extends Component {
                 this.setState({[meal.mealkind]: meal.nutrients})
             ))
         })
-    };  
+    };
 
     // pairnei oti grafei o xrhsths to apothikeuei sthn timh value kai kalei apo to back to autocomplete gia na bgalei
     // protaseis poy isws psaxnei o xrhsths
@@ -234,29 +250,29 @@ class Meals extends Component {
             quantity: this.state[meal].quantity,
             serving: serv,
             calories: cal * quantity,
-            fat: fat * quantity,
-            carb: carb * quantity,
-            protein: protein * quantity,
-            fiber: fiber * quantity,
-            sodium: sodium * quantity,
-            calcium: calcium * quantity,
-            iron: iron * quantity,
-            cholesterol: cholesterol * quantity,
-            potassium: potassium * quantity,
-            sugar: sugar * quantity,
-            vitamin_a: vitamin_a * quantity,
-            vitamin_c: vitamin_c * quantity
+            fat: Math.floor((fat * quantity)*100)/100,
+            carb: Math.floor((carb * quantity)*100)/100,
+            protein: Math.floor((protein * quantity)*100)/100,
+            fiber: Math.floor((fiber * quantity)*100)/100,
+            sodium: Math.floor((sodium * quantity)*100)/100,
+            calcium: Math.floor((calcium * quantity)*100)/100,
+            iron: Math.floor((iron * quantity)*100)/100,
+            cholesterol: Math.floor((cholesterol * quantity)*100)/100,
+            potassium: Math.floor((potassium * quantity)*100)/100,
+            sugar: Math.floor((sugar * quantity)*100)/100,
+            vitamin_a: Math.floor((vitamin_a * quantity)*100)/100,
+            vitamin_c: Math.floor((vitamin_c * quantity)*100)/100
         }});
         this.setState({flag: !this.state.flag})
     };
 
     addToNutriList(mealType,mealNutrients){
         this.setState({[mealNutrients]: {
-            Energy: this.state[mealNutrients].Energy + this.state[mealType].calories ,
-            Fat: this.state[mealNutrients].Fat + this.state[mealType].fat,
-            Carbohydrate: this.state[mealNutrients].Carbohydrate + this.state[mealType].carb,
-            Protein: this.state[mealNutrients].Protein + this.state[mealType].protein,
-            Fiber: this.state[mealNutrients].Fiber + this.state[mealType].fiber
+            Energy: Math.floor((this.state[mealNutrients].Energy + this.state[mealType].calories) *100)/100 ,
+            Fat: Math.floor((this.state[mealNutrients].Fat + this.state[mealType].fat) *100)/100,
+            Carbohydrate: Math.floor((this.state[mealNutrients].Carbohydrate + this.state[mealType].carb) *100)/100,
+            Protein: Math.floor((this.state[mealNutrients].Protein + this.state[mealType].protein) *100)/100,
+            Fiber: Math.floor((this.state[mealNutrients].Fiber + this.state[mealType].fiber) *100)/100
             },
         })
         console.log(this.state.brNutrients)
@@ -264,11 +280,11 @@ class Meals extends Component {
 
     removeFromNutriList(mealType,mealNutrients,i){
         this.setState({[mealNutrients]: {
-            Energy: this.state[mealNutrients].Energy - this.state[mealType][i].calories ,
-            Fat: this.state[mealNutrients].Fat - this.state[mealType][i].fat,
-            Carbohydrate: this.state[mealNutrients].Carbohydrate - this.state[mealType][i].carb,
-            Protein: this.state[mealNutrients].Protein - this.state[mealType][i].protein,
-            Fiber: this.state[mealNutrients].Fiber - this.state[mealType][i].fiber
+            Energy: Math.floor((this.state[mealNutrients].Energy - this.state[mealType][i].calories) *100)/100 ,
+            Fat: Math.floor((this.state[mealNutrients].Fat - this.state[mealType][i].fat) *100)/100,
+            Carbohydrate: Math.floor((this.state[mealNutrients].Carbohydrate - this.state[mealType][i].carb) *100)/100,
+            Protein: Math.floor((this.state[mealNutrients].Protein - this.state[mealType][i].protein) *100)/100,
+            Fiber: Math.floor((this.state[mealNutrients].Fiber - this.state[mealType][i].fiber) *100)/100
             },
         })
         console.log(this.state.brNutrients)
@@ -309,20 +325,22 @@ class Meals extends Component {
         })
         .then(res => {
             console.log(res.data);
+            this.updateDailyMenu(this.state.calDate)
 
-            this.setState(state => {
-                const breakfast = state.breakfast.concat(state.breakfastvalue);
-                return {
-                    breakfast,
-                    breakfastvalue: {
-                        food_name: '',
-                        fatSecret_id: '',
-                        quantity: '',
-                        serving: '',
-                        calories: ''
-                    },             
-                };
-            });
+
+            // this.setState(state => {
+            //     const breakfast = state.breakfast.concat(state.breakfastvalue);
+            //     return {
+            //         breakfast,
+            //         breakfastvalue: {
+            //             food_name: '',
+            //             fatSecret_id: '',
+            //             quantity: '',
+            //             serving: '',
+            //             calories: ''
+            //         },             
+            //     };
+            // });
         });
     };
 
@@ -356,18 +374,19 @@ class Meals extends Component {
 
     //patwntas to X o xrhsths afairei to proion apo thn lista me to faghta pou exei faei
     onRemoveBreakfast = i => {
-        this.removeFromNutriList("breakfast","brNutrients",i);
+        //this.removeFromNutriList("breakfast","brNutrients",i);
         axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${this.state.breakfast[i].fatSecret_id}`)
         .then((res => {
             console.log(res.data)
+            this.updateDailyMenu(this.state.calDate)
         }))
 
-        this.setState(state => {
-          const breakfast = state.breakfast.filter((item, j) => i !== j);
-          return {
-            breakfast,
-          };
-        });
+        // this.setState(state => {
+        //   const breakfast = state.breakfast.filter((item, j) => i !== j);
+        //   return {
+        //     breakfast,
+        //   };
+        // });
     };
     onRemoveLunch = i => {
         this.setState(state => {
