@@ -28,13 +28,10 @@ class Meals extends Component {
             lunch: [],
             dinner: [],
             snack: [],
-            brNutrients:{
-                Energy: 0,
-                Fat: 0,
-                Carbohydrate: 0,
-                Protein: 0,
-                Fiber: 0
-            },
+            brNutrients:{},
+            lnNutrients:{},
+            dnNutrients:{},
+            snNutrients:{},
             selectedServ: {}
           };
     }
@@ -71,6 +68,10 @@ class Meals extends Component {
         this.setState({lunch: []})
         this.setState({dinner: []})
         this.setState({snack: []})
+        this.setState({brNutrients: {}})
+        this.setState({lnNutrients: {}})
+        this.setState({dnNutrients: {}})
+        this.setState({snNutrients: {}})
 
         //briskei thn akribh wra sthn ellada
         var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
@@ -83,6 +84,15 @@ class Meals extends Component {
             //epistrefei ola ta geumata ekeinhs ths hmeras, ta diabazei me mapping kai ta apothikeuei ston antistoixo pinaka
             res.data.map((meal, i) => (
                 this.setState({[meal.mealkind]: meal.ingredients})
+            ))
+        })
+
+        axios.get(`http://localhost:8080/api/meals/getMealsNutri/${isoDateTime}`)
+        .then(res => {
+            console.log(res.data)
+            res.data.map((meal, i) => (
+                
+                this.setState({[meal.mealkind]: meal.nutrients})
             ))
         })
     };  

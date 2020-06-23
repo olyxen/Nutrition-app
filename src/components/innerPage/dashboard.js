@@ -22,7 +22,7 @@ function Dash1() {
                   <Route exact path="/dashboard" component={Menu} />
                   <Route exact path="/dashboard/recipes" component={Recipes} />
                   <Route exact path="/dashboard/meals" component={Meals} />
-                  <Route exact path ="dashboard/charts" component={Charts} />
+                  <Route exact path ="/dashboard/charts" component={Charts} />
                   <Route exact path="/dashboard/recipes/:title" component={DetailView} />
                 </Switch>
               </div>
