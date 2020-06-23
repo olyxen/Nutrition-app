@@ -292,7 +292,7 @@ class Meals extends Component {
 
     // patwntas to + o xrhsths prosthetei to faghto pou exei epile3ei o xrhsths sthn lista me ta faghta pou exei faei
     onAddBreakfast = (e) => {
-        this.addToNutriList("breakfastvalue","brNutrients");
+        //this.addToNutriList("breakfastvalue","brNutrients");
 
         axios.put(`http://localhost:8080/api/meals/addMeal`, {
             "mealkind": "breakfast",
@@ -305,18 +305,18 @@ class Meals extends Component {
                     "serving": this.state.breakfastvalue.serving,
                     "quantity": this.state.breakfastvalue.quantity,
                     "nutrients":{
-                        "sodium": this.state.breakfastvalue.sodium,
-                        "calcium": this.state.breakfastvalue.calcium,
-                        "carbohydrate": this.state.breakfastvalue.carb,
-                        "fat": this.state.breakfastvalue.fat,
-                        "fiber": this.state.breakfastvalue.fiber,
-                        "iron": this.state.breakfastvalue.iron,
-                        "protein": this.state.breakfastvalue.protein,
-                        "cholesterol": this.state.breakfastvalue.cholesterol,
-                        "potassium": this.state.breakfastvalue.potassium,
-                        "sugar": this.state.breakfastvalue.sugar,
-                        "vitamin_a": this.state.breakfastvalue.vitamin_a,
-                        "vitamin_c": this.state.breakfastvalue.vitamin_c
+                        "sodium":  Math.floor((this.state.breakfastvalue.sodium) *100)/100,
+                        "calcium":Math.floor((this.state.breakfastvalue.calcium) *100)/100,
+                        "carbohydrate": Math.floor((this.state.breakfastvalue.carb) *100)/100,
+                        "fat": Math.floor((this.state.breakfastvalue.fat) *100)/100,
+                        "fiber": Math.floor((this.state.breakfastvalue.fiber) *100)/100,
+                        "iron": Math.floor((this.state.breakfastvalue.iron) *100)/100,
+                        "protein": Math.floor((this.state.breakfastvalue.protein) *100)/100,
+                        "cholesterol": Math.floor((this.state.breakfastvalue.cholesterol) *100)/100,
+                        "potassium": Math.floor((this.state.breakfastvalue.potassium) *100)/100,
+                        "sugar": Math.floor((this.state.breakfastvalue.sugar) *100)/100,
+                        "vitamin_a": Math.floor((this.state.breakfastvalue.vitamin_a) *100)/100,
+                        "vitamin_c": Math.floor((this.state.breakfastvalue.vitamin_c) *100)/100,
                     },
                     "calories": this.state.breakfastvalue.calories
                 }
@@ -328,19 +328,19 @@ class Meals extends Component {
             this.updateDailyMenu(this.state.calDate)
 
 
-            // this.setState(state => {
-            //     const breakfast = state.breakfast.concat(state.breakfastvalue);
-            //     return {
-            //         breakfast,
-            //         breakfastvalue: {
-            //             food_name: '',
-            //             fatSecret_id: '',
-            //             quantity: '',
-            //             serving: '',
-            //             calories: ''
-            //         },             
-            //     };
-            // });
+            this.setState(state => {
+                //const breakfast = state.breakfast.concat(state.breakfastvalue);
+                return {
+                   // breakfast,
+                    breakfastvalue: {
+                        food_name: '',
+                        fatSecret_id: '',
+                        quantity: '',
+                        serving: '',
+                        calories: ''
+                    },             
+                };
+            });
         });
     };
 
