@@ -22,9 +22,9 @@ class Meals extends Component {
             listOfFoods: [],
             listOfServings: [],
             breakfastvalue: {},
-            lunchvalue: '',
-            dinnervalue: '',
-            snackvalue: '',
+            lunchvalue: {},
+            dinnervalue: {},
+            snackvalue: {},
             breakfast: [],
             lunch: [],
             dinner: [],
@@ -63,7 +63,11 @@ class Meals extends Component {
         }
     }
     //allazei thn timh tou pickedDate me autin pou epele3e o xrhsths apo to hmerologio
+    //kaleite eite otan allazei o xrhsths hmeromhnia eite otan prosthetei h afairei ena geuma, gia na enhmerwsei tis listes
+    //twn trofwn me tis kainouries
     updateDailyMenu = (val) =>{
+        //krataw thn date apo to calendar prin thn alla3w gia na thn exw kapou wste na mporw na 3ana kalw to 
+        //updateDailyMenu xwris na allazei h hmeromhnia sto calendar
         this.setState({calDate:val})
         //kathe fore pou epilegetai allh hmeromhnia adeiazw tous pinakes me ta shmerina geumata
         this.setState({breakfast: []})
@@ -84,10 +88,11 @@ class Meals extends Component {
                 this.setState({[meal.mealkind]: meal.ingredients})
             ))
         })
-
+        
         this.updateDailyNutrients(isoDateTime)
     };
 
+    //enhmerwnei tous pinakes me ta stoixeia twn geumatwn, kaleite apo to updateDailyMenu()
     updateDailyNutrients = (isoDateTime) => {
 
         var defaultNutriJSON = {
@@ -250,89 +255,62 @@ class Meals extends Component {
             quantity: this.state[meal].quantity,
             serving: serv,
             calories: cal * quantity,
-            fat: Math.floor((fat * quantity)*100)/100,
-            carb: Math.floor((carb * quantity)*100)/100,
-            protein: Math.floor((protein * quantity)*100)/100,
-            fiber: Math.floor((fiber * quantity)*100)/100,
-            sodium: Math.floor((sodium * quantity)*100)/100,
-            calcium: Math.floor((calcium * quantity)*100)/100,
-            iron: Math.floor((iron * quantity)*100)/100,
-            cholesterol: Math.floor((cholesterol * quantity)*100)/100,
-            potassium: Math.floor((potassium * quantity)*100)/100,
-            sugar: Math.floor((sugar * quantity)*100)/100,
-            vitamin_a: Math.floor((vitamin_a * quantity)*100)/100,
-            vitamin_c: Math.floor((vitamin_c * quantity)*100)/100
+            fat: fat * quantity,
+            carb: carb * quantity,
+            protein: protein * quantity,
+            fiber: fiber * quantity,
+            sodium: sodium * quantity,
+            calcium: calcium * quantity,
+            iron: iron * quantity,
+            cholesterol: cholesterol * quantity,
+            potassium: potassium * quantity,
+            sugar: sugar * quantity,
+            vitamin_a: vitamin_a * quantity,
+            vitamin_c: vitamin_c * quantity
         }});
         this.setState({flag: !this.state.flag})
     };
 
-    addToNutriList(mealType,mealNutrients){
-        this.setState({[mealNutrients]: {
-            Energy: Math.floor((this.state[mealNutrients].Energy + this.state[mealType].calories) *100)/100 ,
-            Fat: Math.floor((this.state[mealNutrients].Fat + this.state[mealType].fat) *100)/100,
-            Carbohydrate: Math.floor((this.state[mealNutrients].Carbohydrate + this.state[mealType].carb) *100)/100,
-            Protein: Math.floor((this.state[mealNutrients].Protein + this.state[mealType].protein) *100)/100,
-            Fiber: Math.floor((this.state[mealNutrients].Fiber + this.state[mealType].fiber) *100)/100
-            },
-        })
-        console.log(this.state.brNutrients)
-    }
-
-    removeFromNutriList(mealType,mealNutrients,i){
-        this.setState({[mealNutrients]: {
-            Energy: Math.floor((this.state[mealNutrients].Energy - this.state[mealType][i].calories) *100)/100 ,
-            Fat: Math.floor((this.state[mealNutrients].Fat - this.state[mealType][i].fat) *100)/100,
-            Carbohydrate: Math.floor((this.state[mealNutrients].Carbohydrate - this.state[mealType][i].carb) *100)/100,
-            Protein: Math.floor((this.state[mealNutrients].Protein - this.state[mealType][i].protein) *100)/100,
-            Fiber: Math.floor((this.state[mealNutrients].Fiber - this.state[mealType][i].fiber) *100)/100
-            },
-        })
-        console.log(this.state.brNutrients)
-    }
-
     // patwntas to + o xrhsths prosthetei to faghto pou exei epile3ei o xrhsths sthn lista me ta faghta pou exei faei
-    onAddBreakfast = (e) => {
-        //this.addToNutriList("breakfastvalue","brNutrients");
-
+    onAddFood = (e) => {
+        console.log(e.target.name)
+        var mealValue = e.target.name + 'value'
+        console.log(mealValue)
         axios.put(`http://localhost:8080/api/meals/addMeal`, {
-            "mealkind": "breakfast",
+            "mealkind": e.target.name,
             "date": this.state.pickedDate,
             "user_id": this.state.user,
             "ingredients": [
                 {
-                    "fatSecret_id": this.state.breakfastvalue.fatSecret_id,
-                    "food_name": this.state.breakfastvalue.food_name,
-                    "serving": this.state.breakfastvalue.serving,
-                    "quantity": this.state.breakfastvalue.quantity,
+                    "fatSecret_id": this.state[mealValue].fatSecret_id,
+                    "food_name": this.state[mealValue].food_name,
+                    "serving": this.state[mealValue].serving,
+                    "quantity": this.state[mealValue].quantity,
                     "nutrients":{
-                        "sodium":  Math.floor((this.state.breakfastvalue.sodium) *100)/100,
-                        "calcium":Math.floor((this.state.breakfastvalue.calcium) *100)/100,
-                        "carbohydrate": Math.floor((this.state.breakfastvalue.carb) *100)/100,
-                        "fat": Math.floor((this.state.breakfastvalue.fat) *100)/100,
-                        "fiber": Math.floor((this.state.breakfastvalue.fiber) *100)/100,
-                        "iron": Math.floor((this.state.breakfastvalue.iron) *100)/100,
-                        "protein": Math.floor((this.state.breakfastvalue.protein) *100)/100,
-                        "cholesterol": Math.floor((this.state.breakfastvalue.cholesterol) *100)/100,
-                        "potassium": Math.floor((this.state.breakfastvalue.potassium) *100)/100,
-                        "sugar": Math.floor((this.state.breakfastvalue.sugar) *100)/100,
-                        "vitamin_a": Math.floor((this.state.breakfastvalue.vitamin_a) *100)/100,
-                        "vitamin_c": Math.floor((this.state.breakfastvalue.vitamin_c) *100)/100,
+                        "sodium":  (this.state[mealValue].sodium),
+                        "calcium": (this.state[mealValue].calcium),
+                        "carbohydrate": (this.state[mealValue].carb),
+                        "fat": (this.state[mealValue].fat),
+                        "fiber": (this.state[mealValue].fiber),
+                        "iron": (this.state[mealValue].iron),
+                        "protein": (this.state[mealValue].protein),
+                        "cholesterol": (this.state[mealValue].cholesterol),
+                        "potassium": (this.state[mealValue].potassium),
+                        "sugar": (this.state[mealValue].sugar),
+                        "vitamin_a": (this.state[mealValue].vitamin_a),
+                        "vitamin_c": (this.state[mealValue].vitamin_c),
                     },
-                    "calories": this.state.breakfastvalue.calories
+                    "calories": this.state[mealValue].calories
                 }
             ],
-            "calories": Number(this.state.breakfastvalue.calories)
+            "calories": Number(this.state[mealValue].calories)
         })
         .then(res => {
             console.log(res.data);
             this.updateDailyMenu(this.state.calDate)
-
-
             this.setState(state => {
-                //const breakfast = state.breakfast.concat(state.breakfastvalue);
                 return {
-                   // breakfast,
-                    breakfastvalue: {
+                    [mealValue]: {
                         food_name: '',
                         fatSecret_id: '',
                         quantity: '',
@@ -344,73 +322,34 @@ class Meals extends Component {
         });
     };
 
-    onAddLunch = (e) => {
-        this.setState(state => {
-            const lunch = state.lunch.concat(state.lunchvalue);
-            return {
-                lunch,
-                lunchvalue: '',
-            };
-        });
-    };
-    onAddDinner = (e) => {
-        this.setState(state => {
-            const dinner = state.dinner.concat(state.dinnervalue);
-            return {
-                dinner,
-                dinnervalue: '',
-            };
-        });
-    };
-    onAddSnack = (e) => {
-        this.setState(state => {
-            const snack = state.snack.concat(state.snackvalue);
-            return {
-                snack,
-                snackvalue: '',
-            };
-        });
-    };
-
     //patwntas to X o xrhsths afairei to proion apo thn lista me to faghta pou exei faei
     onRemoveBreakfast = i => {
-        //this.removeFromNutriList("breakfast","brNutrients",i);
         axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${this.state.breakfast[i].fatSecret_id}`)
         .then((res => {
             console.log(res.data)
             this.updateDailyMenu(this.state.calDate)
         }))
-
-        // this.setState(state => {
-        //   const breakfast = state.breakfast.filter((item, j) => i !== j);
-        //   return {
-        //     breakfast,
-        //   };
-        // });
     };
     onRemoveLunch = i => {
-        this.setState(state => {
-          const lunch = state.lunch.filter((item, j) => i !== j);
-          return {
-            lunch,
-          };
-        });
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'lunch'}/${this.state.lunch[i].fatSecret_id}`)
+        .then((res => {
+            console.log(res.data)
+            this.updateDailyMenu(this.state.calDate)
+        }))
     };
     onRemoveDinner = i => {
-        this.setState(state => {
-          const dinner = state.dinner.filter((item, j) => i !== j);
-          return {
-            dinner,
-          };
-        });
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'dinner'}/${this.state.dinner[i].fatSecret_id}`)
+        .then((res => {
+            console.log(res.data)
+            this.updateDailyMenu(this.state.calDate)
+        }))
     };
     onRemoveSnack = i => {
-        this.setState(state => {
-          const snack = state.snack.filter((item, j) => i !== j);
-          return {
-            snack,
-          };
-        });
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'snack'}/${this.state.snack[i].fatSecret_id}`)
+        .then((res => {
+            console.log(res.data)
+            this.updateDailyMenu(this.state.calDate)
+        }))
     };
 
 
@@ -470,7 +409,7 @@ render() {
                                     <input  type="text" className="form-control quantity-input" list="servings" name="breakfastvalue" maxLength="4" value={this.state.breakfastvalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.breakfastvalue.serving}/>                                   
                                     <label className="form-control calories-field">{this.state.breakfastvalue.calories}</label>
                                     <div className="input-group-append"> 
-                                        <button className="btn btn-primary addfoodBtn" id="basic-addon2" onClick={this.onAddBreakfast} disabled={!this.state.breakfastvalue.quantity} >+</button>                                       
+                                        <button className="btn btn-primary addfoodBtn" name="breakfast" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.breakfastvalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
                                 {/* EDW FAINONTAI TA STATISTIKA */}
@@ -499,29 +438,47 @@ render() {
                         </div>
                         <div className="lunchbox lunch" id="lunch">
                             <div className="mealform">
-                                <div className="d-flex p-2 bd-highlight">Lunch</div>                              
+                                <div className="d-flex p-2 bd-highlight">Lunch</div>
+                                {/* EDW EMFANIZONTAI OI KATAXWRISEIS */}                              
                                 {this.state.lunch.map((addedFoods, index) => (
-                                    <div key={addedFoods} className="input-group mb-1">
-                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods}>
-                                        </input>
-                                        
+                                    <div key={addedFoods.fatSecret_id} className="input-group mb-1">
+                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food_name}></input>
+                                        <div className="input-group-append">
+                                            <input  disabled type="text" className="form-control" value={addedFoods.quantity + ' ' + addedFoods.serving}/>
+                                        </div>
+                                        <label className="form-control">{addedFoods.calories} kcal</label>
                                         <div className="input-group-append">
                                             <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveLunch(index)}>×</button>
                                         </div>
                                     </div>
                                 ))}
-                                                                             
+                                {/* EDW PROSTHETW TROFIMA    */}
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" list = "foods" name="lunchvalue" placeholder="Add new food" aria-describedby="basic-addon2" value={this.state.lunchvalue} onChange={this.onChangeValue} onInput={this.onInput}/>
+                                    <input type="text" className="form-control food-input" list="foods" id="data2" name="lunchvalue" placeholder="Add new food"  value={this.state.lunchvalue.food_name} onChange={this.onChangeValue} onInput={this.onInput}/>
                                     <datalist id="foods">
                                         {this.state.listOfFoods.map(food => (
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                   <div className="input-group-append">
-                                        <button className="btn btn-primary" id="basic-addon2" onClick={this.onAddLunch} disabled={!this.state.lunchvalue} >+</button>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.lunchvalue.food_name}>
+                                        { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.lunchvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    </button>
+                                    {this.state.flag && (
+                                        <div className="dropdown"> 
+                                            {this.state.listOfServings.map((serving, index) => (
+                                                <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("lunchvalue",index)}>
+                                                    {serving.measurement_description + " " + serving.calories +"cal / " + serving.metric_serving_amount + "g"}
+                                                </label>
+                                            ))}
+                                        </div> 
+                                    )}
+                                    <input  type="text" className="form-control quantity-input" list="servings" name="lunchvalue" maxLength="4" value={this.state.lunchvalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.lunchvalue.serving}/>                                   
+                                    <label className="form-control calories-field">{this.state.lunchvalue.calories}</label>
+                                    <div className="input-group-append"> 
+                                        <button className="btn btn-primary addfoodBtn" name="lunch" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.lunchvalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
+                                {/* EDW FAINONTAI TA STATISTIKA */}
                                 <div className="table-responsive">
                                     <table className="table">
                                     
@@ -534,11 +491,11 @@ render() {
                                         <td>Fiber</td>
                                     </tr>
                                     <tr>
-                                        <td>0 kcal</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
+                                        <td>{this.state.lnNutrients.Energy}kcal</td>
+                                        <td>{this.state.lnNutrients.Fat}g</td>
+                                        <td>{this.state.lnNutrients.Carbohydrate}g</td>
+                                        <td>{this.state.lnNutrients.Protein}g</td>
+                                        <td>{this.state.lnNutrients.Fiber}g</td>
                                     </tr>
                                     </tbody>
                                     </table>
@@ -549,27 +506,44 @@ render() {
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Dinner</div>                              
                                 {this.state.dinner.map((addedFoods, index) => (
-                                    <div key={addedFoods} className="input-group mb-1">
-                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods}>
-                                        </input>
-                                        
-                                        <div className="input-group-append">
-                                            <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveDinner(index)}>×</button>
-                                        </div>
+                                    <div key={addedFoods.fatSecret_id} className="input-group mb-1">
+                                    <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food_name}></input>
+                                    <div className="input-group-append">
+                                        <input  disabled type="text" className="form-control" value={addedFoods.quantity + ' ' + addedFoods.serving}/>
                                     </div>
+                                    <label className="form-control">{addedFoods.calories} kcal</label>
+                                    <div className="input-group-append">
+                                        <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveDinner(index)}>×</button>
+                                    </div>
+                                </div>
                                 ))}
-                                                                             
+                                {/* EDW PROSTHETW TROFIMA    */}
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" list = "foods" name="dinnervalue" placeholder="Add new food" aria-describedby="basic-addon2" value={this.state.dinnervalue} onChange={this.onChangeValue} onInput={this.onInput}/>
+                                    <input type="text" className="form-control food-input" list="foods" id="data3" name="dinnervalue" placeholder="Add new food"  value={this.state.dinnervalue.food_name} onChange={this.onChangeValue} onInput={this.onInput}/>
                                     <datalist id="foods">
                                         {this.state.listOfFoods.map(food => (
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                   <div className="input-group-append">
-                                        <button className="btn btn-primary" id="basic-addon2" onClick={this.onAddDinner} disabled={!this.state.dinnervalue} >+</button>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.dinnervalue.food_name}>
+                                        { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.dinnervalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    </button>
+                                    {this.state.flag && (
+                                        <div className="dropdown"> 
+                                            {this.state.listOfServings.map((serving, index) => (
+                                                <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("dinnervalue",index)}>
+                                                    {serving.measurement_description + " " + serving.calories +"cal / " + serving.metric_serving_amount + "g"}
+                                                </label>
+                                            ))}
+                                        </div> 
+                                    )}
+                                    <input  type="text" className="form-control quantity-input" list="servings" name="dinnervalue" maxLength="4" value={this.state.dinnervalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.dinnervalue.serving}/>                                   
+                                    <label className="form-control calories-field">{this.state.dinnervalue.calories}</label>
+                                    <div className="input-group-append"> 
+                                        <button className="btn btn-primary addfoodBtn" name="dinner" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.dinnervalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
+                                {/* EDW FAINONTAI TA STATISTIKA */}
                                 <div className="table-responsive">
                                     <table className="table">
                                     
@@ -582,11 +556,11 @@ render() {
                                         <td>Fiber</td>
                                     </tr>
                                     <tr>
-                                        <td>0 kcal</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
+                                        <td>{this.state.dnNutrients.Energy}kcal</td>
+                                        <td>{this.state.dnNutrients.Fat}g</td>
+                                        <td>{this.state.dnNutrients.Carbohydrate}g</td>
+                                        <td>{this.state.dnNutrients.Protein}g</td>
+                                        <td>{this.state.dnNutrients.Fiber}g</td>
                                     </tr>
                                     </tbody>
                                     </table>
@@ -597,27 +571,44 @@ render() {
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Snack</div>                              
                                 {this.state.snack.map((addedFoods, index) => (
-                                    <div key={addedFoods} className="input-group mb-1">
-                                        <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods}>
-                                        </input>
-                                        
-                                        <div className="input-group-append">
-                                            <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveSnack(index)}>×</button>
-                                        </div>
+                                    <div key={addedFoods.fatSecret_id} className="input-group mb-1">
+                                    <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food_name}></input>
+                                    <div className="input-group-append">
+                                        <input  disabled type="text" className="form-control" value={addedFoods.quantity + ' ' + addedFoods.serving}/>
                                     </div>
+                                    <label className="form-control">{addedFoods.calories} kcal</label>
+                                    <div className="input-group-append">
+                                        <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveSnack(index)}>×</button>
+                                    </div>
+                                </div>
                                 ))}
-                                                                             
+                                {/* EDW PROSTHETW TROFIMA    */}
                                 <div className="input-group mb-3">
-                                    <input type="text" className="form-control" list = "foods" name="snackvalue" placeholder="Add new food" aria-describedby="basic-addon2" value={this.state.snackvalue} onChange={this.onChangeValue} onInput={this.onInput}/>
+                                    <input type="text" className="form-control food-input" list="foods" id="data4" name="snackvalue" placeholder="Add new food"  value={this.state.snackvalue.food_name} onChange={this.onChangeValue} onInput={this.onInput}/>
                                     <datalist id="foods">
                                         {this.state.listOfFoods.map(food => (
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                   <div className="input-group-append">
-                                        <button className="btn btn-primary" id="basic-addon2" onClick={this.onAddSnack} disabled={!this.state.snackvalue} >+</button>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.snackvalue.food_name}>
+                                        { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.snackvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    </button>
+                                    {this.state.flag && (
+                                        <div className="dropdown"> 
+                                            {this.state.listOfServings.map((serving, index) => (
+                                                <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("snackvalue",index)}>
+                                                    {serving.measurement_description + " " + serving.calories +"cal / " + serving.metric_serving_amount + "g"}
+                                                </label>
+                                            ))}
+                                        </div> 
+                                    )}
+                                    <input  type="text" className="form-control quantity-input" list="servings" name="snackvalue" maxLength="4" value={this.state.snackvalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.snackvalue.serving}/>                                   
+                                    <label className="form-control calories-field">{this.state.snackvalue.calories}</label>
+                                    <div className="input-group-append"> 
+                                        <button className="btn btn-primary addfoodBtn" name="snack" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.snackvalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
+                                {/* EDW FAINONTAI TA STATISTIKA */}
                                 <div className="table-responsive">
                                     <table className="table">
                                     
@@ -630,11 +621,11 @@ render() {
                                         <td>Fiber</td>
                                     </tr>
                                     <tr>
-                                        <td>0 kcal</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
-                                        <td>0g</td>
+                                        <td>{this.state.snNutrients.Energy}kcal</td>
+                                        <td>{this.state.snNutrients.Fat}g</td>
+                                        <td>{this.state.snNutrients.Carbohydrate}g</td>
+                                        <td>{this.state.snNutrients.Protein}g</td>
+                                        <td>{this.state.snNutrients.Fiber}g</td>
                                     </tr>
                                     </tbody>
                                     </table>
