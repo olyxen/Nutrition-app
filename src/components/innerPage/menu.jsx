@@ -20,7 +20,7 @@ class Menu extends Component {
         calendarVal: 7,
         bmi: '',
         bmr:'',
-        calories:'',
+        calories: null,
         flag: false
     };
 
@@ -45,8 +45,8 @@ class Menu extends Component {
         this.setState({bmi: decoded.bmi});
         console.log(decoded.bmi);
         this.setState({bmr: decoded.bmr});
-        this.setState({cal: decoded.cal});
-        console.log(decoded.cal);
+        //this.setState({cal: decoded.cal});
+        //console.log(decoded.cal);
 
          
         axios.defaults.headers.common['Authorization'] = `${token}`
@@ -68,7 +68,7 @@ class Menu extends Component {
         var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
         this.setState({pickedDate: isoDateTime})
 
-        var token = localStorage.getItem("login");
+        
         //enhmerwnei thn selida se kathe allagh hmeromhnias
         axios.get(`http://localhost:8080/api/meals/getDailyCalories/${isoDateTime}`)
         //epistrefei tis 8ermides ts hmeras kai tis apo8ukeuei sto calories
