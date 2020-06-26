@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import Chart from './chart';
 import axios from "axios";
-import ChartSP from './chartSP';
+
 
 
 
@@ -22,7 +22,7 @@ render() {
                 <span>Toggle Sidebar</span>
             </button> 
             <Chart/>
-            <ChartSP/>
+            
         </div>
 
         </>  

@@ -1,46 +1,23 @@
 import React, { Component} from 'react';
-import axios from "axios";
 import { Bar } from 'react-chartjs-2';
 
 class Chart extends Component {
-    
-    state ={
-        chartData:{},
-    }
 
-    componentDidMount(){
-        this.getChartData();       
-    }
 
-    getChartData(){
-        // Ajax calls here
-        var token = localStorage.getItem("login");
-        axios.get("http://localhost:8080/api/meals/getDailyStats", { headers: { Authorization: `${token}`}}) 
-    
-        .then(res => {
-            var nutrients = res.data;                    
-            this.setState({
-                chartData: {
-                    labels: ['Protein', 'Calcium', 'Cholesterol', 'Carbohydrate', 'Iron', 'Fat'],
-                    datasets: [
-                        {
-                            label: 'g',
-                            data: nutrients,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(255, 206, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(153, 102, 255, 0.6)',
-                                'rgba(255, 159, 64, 0.6)',
-                                'rgba(255, 99, 132, 0.6)'
-                            ]
-                        }
-                    ]
-                }
-            })
-        })
+    constructor(props){
+        super(props);
+            this.state={
+                chartData: props.chartData
+            }
     }
+    
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.chartData !== prevProps.chartData) {
+          this.setState({ chartData: this.props.chartData });
+        }
+         
+      }
 
     render(){
         return(
