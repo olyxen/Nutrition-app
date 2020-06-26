@@ -17,7 +17,10 @@ class Meals extends Component {
             user: null,
             calDate: null,
             pickedDate: null,
-            flag: false,
+            breakfastvalueflag: false,
+            lunchvalueflag: false,
+            dinnervalueflag: false,
+            snackvalueflag: false,
             calendarVal: 7,
             listOfFoods: [],
             listOfServings: [],
@@ -156,6 +159,7 @@ class Meals extends Component {
         var val = e.target.value;
         var opts = document.getElementById('foods').childNodes;
         var meal = e.target.name;
+        var flag = meal + "flag"
         
         for (var i = 0; i < opts.length; i++) {
             if (opts[i].value === val) {
@@ -173,9 +177,9 @@ class Meals extends Component {
                         //to if xreiazetai gt sthn periptwsh pou kapoio faghto exei mono ena serving tote to fatSecretServings den einai 
                         //array alla object kai xtupaei to mapping pio katw otan paei na to diabase
                         if(Array.isArray(fatSecretServings)){
-                            this.createServList(fatSecretServings);
+                            this.createServList(fatSecretServings,flag);
                         }else{
-                            this.createServList([fatSecretServings]);
+                            this.createServList([fatSecretServings],flag);
                         }
                     }
                 })
@@ -184,9 +188,9 @@ class Meals extends Component {
         }
     }
     
-    createServList(fatSecretServings){
+    createServList(fatSecretServings,flagtype){
         this.setState({listOfServings: fatSecretServings});
-        this.setState({flag: true})
+        this.setState({[flagtype]: true})
     };
 
     onChangeQuantity = e => {
@@ -226,6 +230,7 @@ class Meals extends Component {
     //xreiazetai gt apothikeuei to serving pou diale3e o xrhsths, to apothikeuoume gia na 
     // dei3oume sto dropdown ti epele3e o xrhsths opws kai gia na apothikeusoyme me setGR tin kataxwrish faghtou
     onChangeServing = (meal,i) => {
+        var flag = meal + "flag"
         this.setState({selectedServ: this.state.listOfServings[i]})
         var serv = this.state.listOfServings[i].measurement_description;
         var cal  = this.state.listOfServings[i].calories;
@@ -268,7 +273,7 @@ class Meals extends Component {
             vitamin_a: vitamin_a * quantity,
             vitamin_c: vitamin_c * quantity
         }});
-        this.setState({flag: !this.state.flag})
+        this.setState({[flag]: !this.state[flag]})
     };
 
     // patwntas to + o xrhsths prosthetei to faghto pou exei epile3ei o xrhsths sthn lista me ta faghta pou exei faei
@@ -394,10 +399,10 @@ render() {
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.breakfastvalue.food_name}>
-                                        { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.breakfastvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({breakfastvalueflag: !this.state.breakfastvalueflag})} disabled={!this.state.breakfastvalue.food_name}>
+                                        { !this.state.breakfastvalueflag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.breakfastvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
                                     </button>
-                                    {this.state.flag && (
+                                    {this.state.breakfastvalueflag && (
                                         <div className="dropdown"> 
                                             {this.state.listOfServings.map((serving, index) => (
                                                 <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("breakfastvalue",index)}>
@@ -460,10 +465,10 @@ render() {
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.lunchvalue.food_name}>
-                                        { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.lunchvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({lunchvalueflag: !this.state.lunchvalueflag})} disabled={!this.state.lunchvalue.food_name}>
+                                        { !this.state.lunchvalueflag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.lunchvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
                                     </button>
-                                    {this.state.flag && (
+                                    {this.state.lunchvalueflag && (
                                         <div className="dropdown"> 
                                             {this.state.listOfServings.map((serving, index) => (
                                                 <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("lunchvalue",index)}>
@@ -525,10 +530,10 @@ render() {
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.dinnervalue.food_name}>
-                                        { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.dinnervalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({dinnervalueflag: !this.state.dinnervalueflag})} disabled={!this.state.dinnervalue.food_name}>
+                                        { !this.state.dinnervalueflag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.dinnervalue.serving : <i/> } <i className="fas fa-caret-down"></i>
                                     </button>
-                                    {this.state.flag && (
+                                    {this.state.dinnervalueflag && (
                                         <div className="dropdown"> 
                                             {this.state.listOfServings.map((serving, index) => (
                                                 <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("dinnervalue",index)}>
@@ -590,10 +595,10 @@ render() {
                                             <option value = {food} key = {food}/>
                                         ))}
                                     </datalist>
-                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({flag: !this.state.flag})} disabled={!this.state.snackvalue.food_name}>
-                                        { !this.state.flag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.snackvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
+                                    <button className="btn serv-dropdown" type="button" onClick={() => this.setState({snackvalueflag: !this.state.snackvalueflag})} disabled={!this.state.snackvalue.food_name}>
+                                        { !this.state.snackvalueflag && (window.innerWidth > 1280 || (window.innerWidth > 720 && window.innerWidth < 842))? this.state.snackvalue.serving : <i/> } <i className="fas fa-caret-down"></i>
                                     </button>
-                                    {this.state.flag && (
+                                    {this.state.snackvalueflag && (
                                         <div className="dropdown"> 
                                             {this.state.listOfServings.map((serving, index) => (
                                                 <label className="dropdown-item" key = {serving.measurement_description} onClick={(e) => this.onChangeServing("snackvalue",index)}>
