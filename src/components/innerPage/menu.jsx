@@ -148,22 +148,20 @@ render() {
                 <span>Toggle Sidebar</span>
             </button>
             <div className="row">
-            <div className="calendar col-md-12 col-xl-8">
+            <div className="calendar col-md-12 col-xl-10">
                 <DatePicker 
                     getSelectedDay={this.updateDailyCalories}
                     maxValue={this.state.calendarVal}
 
                 />            
             </div>
-            <div className="col-md-12 col-xl-2"></div>
             <div className="bmibox col-md-12 col-xl-2">
                 <h5>What is Your Body Mass Index ? <a href="http://localhost:3000/dashboard#bmi"  onClick={(e) => this.ChangeFlag()}>Check it.</a></h5>
             </div>
             </div>
             <hr/>
             <div className="row">
-                <div className="col-md-12 col-xl-2" ></div>
-                <div className="col-md-12 col-xl-8" >
+                <div className="col-md-12 col-xl-8 offset-xl-2" >
                     <div className="box1">
                         <div className="row">
                             <div className="col-md-12 col-xl-4" >

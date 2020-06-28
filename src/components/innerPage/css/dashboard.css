@@ -44,6 +44,18 @@
       /* margin-left: 25px; */
       }
 
+@media (max-width: 1610px){
+  .offset-xl-2 {
+    margin-left: 8.3333333% !important; 
+  };
+}
+@media (max-width: 1610px){
+  .col-xl-8 {
+    flex: 0 0 83.33333% !important;
+    min-width: 83.3333% !important;
+  };
+}
+
 .box3{
   padding: 20px;
   margin-top: 3px;
