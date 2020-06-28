@@ -71,7 +71,7 @@ class Menu extends Component {
         
     
         .then(res => {
-            var nutrients = res.data;                    
+            var nutrients = [res.data[0],res.data[1],res.data[2],res.data[3],res.data[4],res.data[5]]                   
             this.setState({
                 chartData: {
                     labels: ['Protein', 'Calcium', 'Cholesterol', 'Carbohydrate', 'Iron', 'Fat'],
