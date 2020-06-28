@@ -4,6 +4,7 @@ import './css/dashboard.css';
 import DatePicker from './calendar'
 import axios from "axios";
 import jwt from 'jwt-decode';
+import MealPie from './mealPie'
 
 class Meals extends Component {
     constructor(props) {
@@ -36,9 +37,15 @@ class Meals extends Component {
             lnNutrients:{},
             dnNutrients:{},
             snNutrients:{},
-            selectedServ: {}
+            selectedServ: {},
+            bmr: null,
+            totalDailyCalories: null,
+            dailyMealCalories: props.dailyMealCalories,
+            totalDailyNutrients: [],
+            nutrientsName: ["Protein","Calcium", "Cholesterol","carbohydrate","Iron","Fat","Sodium","Fiber","Potassium","Sugar","Vitamin A","Vitamin C"],
+            nutrientsDataType: ["g","mg","mg","g","mg","g","mg","g","mg","g","mg","mg"]
           };
-    }
+        }
     
 
     componentDidMount() {
@@ -47,6 +54,7 @@ class Meals extends Component {
 
         var token = localStorage.getItem("login");
         var decoded = jwt(token);
+        this.setState({bmr: decoded.bmr});
         axios.defaults.headers.common['Authorization'] = `${token}`
         this.setState({user: decoded._id})
 
@@ -93,6 +101,7 @@ class Meals extends Component {
         })
         
         this.updateDailyNutrients(isoDateTime)
+        this.getChartData(isoDateTime)
     };
 
     //enhmerwnei tous pinakes me ta stoixeia twn geumatwn, kaleite apo to updateDailyMenu()
@@ -109,17 +118,28 @@ class Meals extends Component {
         this.setState({lnNutrients: defaultNutriJSON})
         this.setState({dnNutrients: defaultNutriJSON})
         this.setState({snNutrients: defaultNutriJSON})
+        this.setState({totalDailyCalories: 0})
 
 
         axios.get(`http://localhost:8080/api/meals/getMealsNutri/${isoDateTime}`)
         .then(res => {
             console.log(res.data)
             res.data.map((meal, i) => (
-                
-                this.setState({[meal.mealkind]: meal.nutrients})
+                this.setState({[meal.mealkind]: meal.nutrients}) + this.setState({totalDailyCalories: this.state.totalDailyCalories + meal.nutrients.Energy})
             ))
+            this.setState({dailyMealCalories: [this.state.brNutrients.Energy, this.state.lnNutrients.Energy, this.state.dnNutrients.Energy, this.state.snNutrients.Energy]})
         })
     };
+
+    
+    getChartData = (isoDateTime) =>{    
+        axios.get(`http://localhost:8080/api/meals/getDailyStats/${isoDateTime}`) 
+        .then(res => {
+            var nutrients = res.data 
+            console.log(nutrients)     
+            this.setState({totalDailyNutrients: nutrients})
+        })
+    }
 
     // pairnei oti grafei o xrhsths to apothikeuei sthn timh value kai kalei apo to back to autocomplete gia na bgalei
     // protaseis poy isws psaxnei o xrhsths
@@ -305,7 +325,7 @@ class Meals extends Component {
                         "vitamin_a": (this.state[mealValue].vitamin_a),
                         "vitamin_c": (this.state[mealValue].vitamin_c),
                     },
-                    "calories": this.state[mealValue].calories
+                    "calories": (Math.floor((this.state[mealValue].calories)*100)/100)
                 }
             ],
             "calories": Number(this.state[mealValue].calories)
@@ -374,7 +394,7 @@ render() {
             </div>
             <hr/>
                 <div className="row">
-                    <div className="col-xs-12 col-lg-8 col-lg-pull-4">
+                    <div className="col-xs-12 col-lg-8 col-lg-pull-4 order-lg-1 order-2">
                         <div className="lunchbox breakfast" id="breakfast">
                             <div className="mealform">
                                 <div className="d-flex p-2 bd-highlight">Breakfast</div>
@@ -639,10 +659,65 @@ render() {
                         </div>
                         
                     </div>
-                    <div className="col-xs-12 col-lg-4 col-lg-push-8">
-                        <div className="lunchbox stats-analysis"></div>
-                        <div className="lunchbox macronutrients"></div>
-                        <div className="lunchbox micronutrients"></div>
+                    <div className="col-xs-12 col-lg-4 col-lg-push-8 order-lg-2 order-1">
+                        <div className="lunchbox table-responsive">
+                                <table className="table table-sm">
+                                    <tbody>
+                                        <tr className="table-success">
+                                            <td colSpan="2">Energy</td>
+                                        </tr>
+                                    
+                                        <tr>
+                                            <td>Planned</td>
+                                            <td>{this.state.bmr + " kcal"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eaten</td>
+                                            <td>{this.state.totalDailyCalories + " kcal"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Left</td>
+                                            {(this.state.bmr - this.state.totalDailyCalories)>=0?
+                                                <td style={{color: "green", fontWeight: "550"}}>{this.state.bmr - this.state.totalDailyCalories + " kcal"}</td>
+                                            :
+                                                <td style={{color: "red", fontWeight: "550"}}>{this.state.bmr - this.state.totalDailyCalories + " kcal"}</td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                        <div className="lunchbox macronutrients">
+                            <MealPie dailyMealCalories={{
+                                labels: ['Breakfast', 'Lunch', 'Dinner', 'Snack'],
+                                datasets: [
+                                    {
+                                        label: 'kcal',
+                                        data: this.state.dailyMealCalories,
+                                        backgroundColor: [
+                                            'rgb(127, 88, 175)',
+                                            'rgb(100, 197, 235)',
+                                            'rgb(232, 77, 138)',
+                                            'rgb(254, 179, 38)'
+                                        ]
+                                    }
+                                ]
+                            }} />
+                        </div>
+                        <div className="lunchbox table-responsive">
+                                <table className="table table-sm">
+                                    <tbody>
+                                        <tr className="table-success">
+                                            <td colSpan="2" >Your Daily Nutrients:</td>
+                                        </tr>
+                                        {this.state.totalDailyNutrients.map((nutrient, index) => (
+                                            <tr>
+                                                <td>{this.state.nutrientsName[index]}</td>
+                                                <td>{nutrient + " " + this.state.nutrientsDataType[index]}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                        </div>
                     </div>
                 </div>
             
