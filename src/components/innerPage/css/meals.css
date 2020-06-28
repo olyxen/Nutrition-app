@@ -27,3 +27,8 @@
     text-align: center;
     border: none;
 }
+
+.table-success td{
+    font-weight: 600;
+    font-size: larger;
+}

@@ -63,19 +63,11 @@ render() {
                 </li>
             </ul>
 
-            {/* <section>
+            <section>
                 <a href="/signout" className="signout-link" title="Sign out">
                     <i className="fas fa-sign-out-alt"></i><span> Sign out</span>
                 </a>
-            </section> */}
-            <div className="profile-options">
-                <a href="/settings" style={{pointerEvents: "none", cursor: "default"}} className="signout-link">
-                    <i className="fas fa-cog"></i><span> Settings </span>
-                </a>
-                <a href="/signout" className="signout-link">
-                    <i className="fas fa-sign-out-alt"></i><span> Sign out</span>
-                </a>
-            </div>
+            </section>
         </>
     )
 }

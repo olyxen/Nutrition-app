@@ -106,11 +106,6 @@ a:focus {
     margin-bottom: 12px;
 }
 
-.profile-options{
-    display: flex;
-    justify-content: space-around;
-}
-
 /* MEDIAQUERIES */
 
 @media (max-width: 842px) {
