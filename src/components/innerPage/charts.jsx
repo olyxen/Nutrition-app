@@ -24,18 +24,27 @@ class Charts extends Component {
               
     }
 
+    removeDays(dateObj, numDays) {
+        dateObj.setDate(dateObj.getDate() - numDays);
+        return dateObj;
+     }
+     
+
+
     getChartData= (val) =>{
         
         //briskei thn akribh wra sthn ellada
         var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
         this.setState({pickedDate: isoDateTime})
 
-        //mpakalistika pros to paron gia n ypologizw mia mera prin
-        var dayVal = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).getDate()-1;
-        var monthVal = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).getMonth()+1;
-        var yearVal = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).getFullYear();
-        var theVal = dayVal +"-" + monthVal+ "-" + yearVal;
-        var today = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toDateString()
+        var today = new Date().toDateString()      
+        var yesterday = this.removeDays(new Date(), 1).toDateString()
+        var twodayb = this.removeDays(new Date(), 2).toDateString()
+        var threedayb = this.removeDays(new Date(), 3).toDateString()
+        var fourdayb = this.removeDays(new Date(), 4).toDateString()
+        var fivedayb = this.removeDays(new Date(), 5).toDateString()
+        var sixdayb = this.removeDays(new Date(), 6).toDateString()
+        
 
         axios.get(`http://localhost:8080/api/meals/getWeeklyCalories/${isoDateTime}`) 
         
@@ -44,10 +53,10 @@ class Charts extends Component {
             var nutrients = res.data;                    
             this.setState({
                 chartData: {
-                    labels: ['Protein', 'Calcium', 'Cholesterol', 'lala', theVal  , today],
+                    labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
                     datasets: [
                         {
-                            label: 'g',
+                            label: 'kcal',
                             data: nutrients,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.6)',
