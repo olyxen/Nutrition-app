@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import Chart from './chart';
+import ChartLine from './chartline';
 import axios from "axios";
 
 
@@ -10,7 +10,7 @@ class Charts extends Component {
     constructor(props){
         super(props);
         this.state = {
-            chartData: props.chartData
+            chartDataLine: props.chartDataLine
         }
     }
 
@@ -20,7 +20,7 @@ class Charts extends Component {
         
         //xreiazetai gia na arxikopoiei thn imeromhnia sthn shmerinh
         var date = new Date();
-        this.getChartData(date);
+        this.getChartDataLine(date);
               
     }
 
@@ -31,7 +31,7 @@ class Charts extends Component {
      
 
 
-    getChartData= (val) =>{
+    getChartDataLine= (val) =>{
         
         //briskei thn akribh wra sthn ellada
         var isoDateTime = new Date(val.getTime() - (val.getTimezoneOffset() * 60000)).toISOString()
@@ -52,20 +52,14 @@ class Charts extends Component {
         .then(res => {
             var nutrients = res.data;                    
             this.setState({
-                chartData: {
+                chartDataLine: {
                     labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
                     datasets: [
                         {
                             label: 'kcal',
                             data: nutrients,
                             backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(255, 206, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(153, 102, 255, 0.6)',
-                                'rgba(255, 159, 64, 0.6)',
-                                'rgba(255, 99, 132, 0.6)'
+                                'rgb(148,227,38)'
                             ]
                         }
                     ]
@@ -73,6 +67,8 @@ class Charts extends Component {
             })
         })
     }
+
+    
  
 render() { 
 
@@ -83,7 +79,7 @@ render() {
                 <i className="fas fa-align-left"></i>
                 <span>Toggle Sidebar</span>
             </button> 
-            <Chart chartData={this.state.chartData}/>
+            <ChartLine chartDataLine={this.state.chartDataLine}/>
             
         </div>
 
