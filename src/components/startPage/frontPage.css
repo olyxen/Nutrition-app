@@ -37,6 +37,7 @@
     background-size: cover;
     min-width: 100%;
     height:100vh;
+    background-position: center;
  }
  #bannerphoto1{
     margin-bottom: 62px;

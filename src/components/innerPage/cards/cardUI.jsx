@@ -17,7 +17,7 @@ const Card = props => {
   return(
     <div className="card text-center shadow col-centered">
       <div className="overflow">
-          <img src={props.imgsrc} alt={props.alt} className="card-img-top"></img>    
+          <img src={props.imgsrc} alt={props.alt} className="card-img-top" onClick={viewRecipe}></img>    
       </div> 
       <div className="card-body text-dark">
           <h4 className="card-title">{props.title}</h4>

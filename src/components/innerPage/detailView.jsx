@@ -37,7 +37,7 @@ class DetailView extends React.Component {
                             </div>
                         </div>
                         <div class="property-description">
-                            <p class="description color-text-a" style={{fontSize:"large"}}>
+                            <p class="description color-text-a" style={{fontSize:"large", textAlign: "justify"}}>
                                {this.state.recipe.description}
                             </p>
                         </div>
