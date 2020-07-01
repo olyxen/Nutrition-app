@@ -215,7 +215,7 @@ class Charts extends Component {
                     }
                 })
 
-            }   else if(nutri === 'sugar') {
+            } else if(nutri === 'sugar') {
                 this.setState({
                     chartDataLineNutri: {
                         labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
@@ -231,7 +231,71 @@ class Charts extends Component {
                     }
                 })
 
-            }            
+            }     else if(nutri === 'sodium') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'mg',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(208, 120, 132, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            } else if(nutri === 'potassium') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'mg',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(208, 260, 132, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            } else if(nutri === 'vitamin_a') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'mg',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(208, 52, 230, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            } else if(nutri === 'vitamin_c') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'mg',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(208, 2, 132, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            }       
 
         })
     }
@@ -260,7 +324,11 @@ render() {
             <option value="iron">Iron</option>
             <option value="fat">Fat</option>
             <option value="fiber">Fiber</option>
-            <option value="sugar">sugar</option>
+            <option value="sugar">Sugar</option>
+            <option value="sodium">Sodium</option>
+            <option value="potassium">Potassium</option>
+            <option value="vitamin_a">Vitamin A</option>
+            <option value="vitamin_c">Vitamin C</option>
           </select>
         </label>
         <ChartLine chartDataLine={this.state.chartDataLineNutri}/>
