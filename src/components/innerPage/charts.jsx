@@ -104,7 +104,7 @@ class Charts extends Component {
     
         .then(res => {
             var nutrients = res.data;   
-            if(nutri=='protein'){
+            if(nutri==='protein'){
                 this.setState({
                     chartDataLineNutri: {
                         labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
@@ -119,13 +119,13 @@ class Charts extends Component {
                         ]
                     }
                 })
-            } else if(nutri == 'calcium') {
+            } else if(nutri === 'calcium') {
                 this.setState({
                     chartDataLineNutri: {
                         labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
                         datasets: [
                             {
-                                label: 'g',
+                                label: 'mg',
                                 data: nutrients,
                                 backgroundColor: [
                                     'rgb(54, 162, 235, 0.6)'
@@ -135,13 +135,13 @@ class Charts extends Component {
                     }
                 })
 
-            } else if(nutri == 'cholesterol') {
+            } else if(nutri === 'cholesterol') {
                 this.setState({
                     chartDataLineNutri: {
                         labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
                         datasets: [
                             {
-                                label: 'g',
+                                label: 'mg',
                                 data: nutrients,
                                 backgroundColor: [
                                     'rgb(255, 206, 86, 0.6)'
@@ -151,7 +151,7 @@ class Charts extends Component {
                     }
                 })
 
-            } else if(nutri == 'carbohydrate') {
+            } else if(nutri === 'carbohydrate') {
                 this.setState({
                     chartDataLineNutri: {
                         labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
@@ -167,13 +167,13 @@ class Charts extends Component {
                     }
                 })
 
-            } else if(nutri == 'iron') {
+            } else if(nutri === 'iron') {
                 this.setState({
                     chartDataLineNutri: {
                         labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
                         datasets: [
                             {
-                                label: 'g',
+                                label: 'mg',
                                 data: nutrients,
                                 backgroundColor: [
                                     'rgb(153, 102, 255, 0.6)'
@@ -183,7 +183,7 @@ class Charts extends Component {
                     }
                 })
 
-            }  else if(nutri == 'fat') {
+            }  else if(nutri === 'fat') {
                 this.setState({
                     chartDataLineNutri: {
                         labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
@@ -199,7 +199,39 @@ class Charts extends Component {
                     }
                 })
 
-            }             
+            }  else if(nutri === 'fiber') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(30, 159, 64, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            }   else if(nutri === 'sugar') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(208, 52, 132, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            }            
 
         })
     }
@@ -220,13 +252,15 @@ render() {
         <label>
           Pick the nutrient:
           <select value={this.state.value} onChange={this.handleChange}>
-            <option value=""></option>
+            <option value="" disabled></option>
             <option value="protein">Protein</option>
             <option value="calcium">Calcium</option>
-            <option value="cholesterol">Cholesterole</option>
+            <option value="cholesterol">Cholesterol</option>
             <option value="carbohydrate">Carbohydrate</option>
             <option value="iron">Iron</option>
             <option value="fat">Fat</option>
+            <option value="fiber">Fiber</option>
+            <option value="sugar">sugar</option>
           </select>
         </label>
         <ChartLine chartDataLine={this.state.chartDataLineNutri}/>
