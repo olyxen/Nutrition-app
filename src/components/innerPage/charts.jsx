@@ -11,7 +11,7 @@ class Charts extends Component {
         super(props);
         this.state = {
             chartDataLine: props.chartDataLine,
-            value: 'calcium',
+            value: '',
             chartDataLineNutri: props.chartDataLineNutri
         };
         this.handleChange = this.handleChange.bind(this);
@@ -21,7 +21,7 @@ class Charts extends Component {
     handleChange(event) {
         var date = new Date();
         this.setState({value: event.target.value});
-        this.getWeeklyNutr(date,this.state.value);
+        this.getWeeklyNutr(date,event.target.value);
         // alert('Your favorite flavor is: ' + this.state.value);
     }
     
@@ -75,7 +75,7 @@ class Charts extends Component {
                             label: 'kcal',
                             data: nutrients,
                             backgroundColor: [
-                                'rgb(148,227,38)'
+                                'rgb(148,227,38,0.8)'
                             ]
                         }
                     ]
@@ -103,21 +103,104 @@ class Charts extends Component {
         
     
         .then(res => {
-            var nutrients = res.data;                    
-            this.setState({
-                chartDataLineNutri: {
-                    labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
-                    datasets: [
-                        {
-                            label: 'kcal',
-                            data: nutrients,
-                            backgroundColor: [
-                                'rgb(148,227,38)'
-                            ]
-                        }
-                    ]
-                }
-            })
+            var nutrients = res.data;   
+            if(nutri=='protein'){
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(255, 99, 132, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+            } else if(nutri == 'calcium') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(54, 162, 235, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            } else if(nutri == 'cholesterol') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(255, 206, 86, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            } else if(nutri == 'carbohydrate') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(75, 192, 192, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            } else if(nutri == 'iron') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(153, 102, 255, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            }  else if(nutri == 'fat') {
+                this.setState({
+                    chartDataLineNutri: {
+                        labels: [sixdayb, fivedayb, fourdayb, threedayb, twodayb, yesterday  , today],
+                        datasets: [
+                            {
+                                label: 'g',
+                                data: nutrients,
+                                backgroundColor: [
+                                    'rgb(255, 159, 64, 0.6)'
+                                ]
+                            }
+                        ]
+                    }
+                })
+
+            }             
+
         })
     }
 
@@ -137,9 +220,10 @@ render() {
         <label>
           Pick the nutrient:
           <select value={this.state.value} onChange={this.handleChange}>
+            <option value=""></option>
             <option value="protein">Protein</option>
             <option value="calcium">Calcium</option>
-            <option value="cholesterole">Cholesterole</option>
+            <option value="cholesterol">Cholesterole</option>
             <option value="carbohydrate">Carbohydrate</option>
             <option value="iron">Iron</option>
             <option value="fat">Fat</option>
