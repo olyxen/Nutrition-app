@@ -42,7 +42,7 @@ class Meals extends Component {
             totalDailyCalories: null,
             dailyMealCalories: props.dailyMealCalories,
             totalDailyNutrients: [],
-            nutrientsName: ["Protein","Calcium", "Cholesterol","carbohydrate","Iron","Fat","Sodium","Fiber","Potassium","Sugar","Vitamin A","Vitamin C"],
+            nutrientsName: ["Protein","Calcium", "Cholesterol","Carbohydrate","Iron","Fat","Sodium","Fiber","Potassium","Sugar","Vitamin A","Vitamin C"],
             nutrientsDataType: ["g","mg","mg","g","mg","g","mg","g","mg","g","mg","mg"]
           };
         }

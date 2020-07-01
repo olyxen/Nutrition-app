@@ -15,7 +15,7 @@ const Card = props => {
 
   }
   return(
-    <div className="card text-center shadow col-centered">
+    <div className="card recipe-card text-center shadow col-centered">
       <div className="overflow">
           <img src={props.imgsrc} alt={props.alt} className="card-img-top" onClick={viewRecipe}></img>    
       </div> 

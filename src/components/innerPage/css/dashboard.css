@@ -86,3 +86,22 @@
     padding-top: 25px;
   }
   
+/* for faq page */
+  #accordionExample{
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+
+  .FAQ{
+    position: center;
+    margin-top: 2%;
+    margin-left:15%;
+    margin-right:15%;
+    border-left: 10px solid #31B04B;
+    padding-left: 5px;
+  }
+
+  .btn-link{
+    color: green !important;
+    font-size: large;
+  }
