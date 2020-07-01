@@ -8,6 +8,7 @@ import jQuery from 'jquery'
 import Meals from './meals';
 import DetailView from "./detailView";
 import Charts from './charts';
+import FAQ from './faq';
 
 
 function Dash1() {
@@ -24,6 +25,7 @@ function Dash1() {
                   <Route exact path="/dashboard/meals" component={Meals} />
                   <Route exact path ="/dashboard/charts" component={Charts} />
                   <Route exact path="/dashboard/recipes/:title" component={DetailView} />
+                  <Route exact path="/dashboard/faq" component={FAQ} />
                 </Switch>
               </div>
               <div className="overlay"></div>

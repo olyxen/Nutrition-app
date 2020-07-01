@@ -56,7 +56,7 @@ render() {
                     </a>                
                 </li>
                 <li>
-                    <a href="/#" style={{pointerEvents: "none", cursor: "default"}}>
+                    <a href="http://localhost:3000/dashboard/faq">
                         <i className="fa fa-question-circle"></i>
                         <span className="menu-text"> FAQ</span>
                     </a>                
