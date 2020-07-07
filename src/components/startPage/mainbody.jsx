@@ -34,7 +34,8 @@ function MainBody() {
         <hr/>
         <div className="container">
           <h2 className="text-center">About Us</h2>
-          <p>Donec sed odio dui. Etiam sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>
+          <p>Nutri App offers comprehensive nutrition information to you easy and fast. Find facts on tens of thousands of foods and compare the facts of daily meals with the charts that are provided from us. Plus, the app lets you track your own meals, and it supplies a complete breakdown of your daily nutrition so you can make adjustments as needed.
+Tracking your nutrition has so many benefits, from helping to manage food intolerances to increasing energy, avoiding mood swings, and fueling the rhythms of your day. Whatever your reasons for logging your meals, Nutri App can help.</p>
         </div>
         <div id="bannerphoto1" >
           <div className="container">
