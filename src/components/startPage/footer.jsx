@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
   return (
       <div className="container">
-        <span className="text-muted">Place sticky footer content here. © 2020</span>
+        <span className="text-muted">Based on FatSecret Platform API © 2020</span>
       </div>
   );
 }
