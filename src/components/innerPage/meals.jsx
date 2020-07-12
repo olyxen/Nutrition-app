@@ -6,6 +6,10 @@ import axios from "axios";
 import jwt from 'jwt-decode';
 import MealPie from './mealPie'
 
+import DatePicker1 from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {UncontrolledPopover} from 'reactstrap';
+
 class Meals extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +19,7 @@ class Meals extends Component {
         // this.addToList = this.addToList.bind(this);
 
         this.state = {
+            startDate: null,
             user: null,
             calDate: null,
             pickedDate: null,
@@ -63,6 +68,13 @@ class Meals extends Component {
         this.updateDailyMenu(date)
     }
     
+    handleChange = date => {
+        console.log(date)
+        this.setState({
+          startDate: date
+        });
+      };
+
     //prosarmozei to hmerologio sto megethos ths othonis
     resize() {
         if(window.innerWidth > 590){
@@ -349,34 +361,43 @@ class Meals extends Component {
 
     //patwntas to X o xrhsths afairei to proion apo thn lista me to faghta pou exei faei
     onRemoveBreakfast = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${this.state.breakfast[i].fatSecret_id}`)
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${this.state.breakfast[i]._id}`)
         .then((res => {
             console.log(res.data)
             this.updateDailyMenu(this.state.calDate)
         }))
     };
     onRemoveLunch = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'lunch'}/${this.state.lunch[i].fatSecret_id}`)
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'lunch'}/${this.state.lunch[i]._id}`)
         .then((res => {
             console.log(res.data)
             this.updateDailyMenu(this.state.calDate)
         }))
     };
     onRemoveDinner = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'dinner'}/${this.state.dinner[i].fatSecret_id}`)
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'dinner'}/${this.state.dinner[i]._id}`)
         .then((res => {
             console.log(res.data)
             this.updateDailyMenu(this.state.calDate)
         }))
     };
     onRemoveSnack = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'snack'}/${this.state.snack[i].fatSecret_id}`)
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'snack'}/${this.state.snack[i]._id}`)
         .then((res => {
             console.log(res.data)
             this.updateDailyMenu(this.state.calDate)
         }))
     };
 
+    copyMeal = (e) => {
+        var isoDate = new Date((this.state.startDate).getTime() - ((this.state.startDate).getTimezoneOffset() * 60000)).toISOString()
+        axios.post(`http://localhost:8080/api/meals/copyMeal/${this.state.pickedDate}/${e.target.name}/${isoDate}`)
+        .then((res => {
+            if(res.status === 200){
+                alert(`Meal copied successfully to ${this.state.startDate} `)
+            }
+        }))
+    }
 
 render() { 
 
@@ -397,7 +418,20 @@ render() {
                     <div className="col-xs-12 col-lg-8 col-lg-pull-4 order-lg-1 order-2">
                         <div className="lunchbox breakfast" id="breakfast">
                             <div className="mealform">
-                                <div className="d-flex p-2 bd-highlight">Breakfast</div>
+                                <div className="d-flex justify-content-between">
+                                    <div className="d-flex p-2 bd-highlight">Breakfast</div>
+                                    <button id="ScheduleUpdateButton1" data-toggle="tooltip" data-placement="top" title="Copy this meal in another day!" className="addfoodBtn" disabled={!this.state.breakfast[0]}>🡽</button>   
+                                </div>     
+                                <UncontrolledPopover trigger="legacy" placement="top" target="ScheduleUpdateButton1">
+                                { () => (
+                                    <div className="copyMealPopUp">
+                                        <h6>Please chooce the day to copy the meal</h6>
+                                        <DatePicker1 selected={this.state.startDate} onChange={this.handleChange} dateFormat="dd/MM/yyyy" excludeDates={[this.state.calDate]}placeholderText="Pick a day!" isClearable/>
+                                        <button type="button" className="btn btn-sm btn-success" name="breakfast" disabled={!this.state.startDate} onClick={this.copyMeal}> Copy it </button>
+                                    </div>          
+                                )}
+                                </UncontrolledPopover>
+                                
                                 {/* EDW EMFANIZONTAI OI KATAXWRISEIS */}
                                 {this.state.breakfast.map((addedFoods, index) => (
                                     <div key={addedFoods.fatSecret_id} className="input-group mb-1">
@@ -407,7 +441,7 @@ render() {
                                         </div>
                                         <label className="form-control">{addedFoods.calories} kcal</label>
                                         <div className="input-group-append">
-                                            <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveBreakfast(index)}>×</button>
+                                            <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveBreakfast(index)}>×</button>
                                         </div>
                                     </div>
                                 ))}
@@ -434,7 +468,7 @@ render() {
                                     <input  type="text" className="form-control quantity-input" list="servings" name="breakfastvalue" maxLength="4" value={this.state.breakfastvalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.breakfastvalue.serving}/>                                   
                                     <label className="form-control calories-field">{this.state.breakfastvalue.calories}</label>
                                     <div className="input-group-append"> 
-                                        <button className="btn btn-primary addfoodBtn" name="breakfast" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.breakfastvalue.quantity} >+</button>                                       
+                                        <button className="btn btn-success" name="breakfast" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.breakfastvalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
                                 {/* EDW FAINONTAI TA STATISTIKA */}
@@ -463,7 +497,19 @@ render() {
                         </div>
                         <div className="lunchbox lunch" id="lunch">
                             <div className="mealform">
-                                <div className="d-flex p-2 bd-highlight">Lunch</div>
+                                <div className="d-flex justify-content-between">
+                                    <div className="d-flex p-2 bd-highlight">Lunch</div>
+                                    <button id="ScheduleUpdateButton2" data-toggle="tooltip" data-placement="top" title="Copy this meal in another day!" className="addfoodBtn" disabled={!this.state.lunch[0]}>🡽</button>   
+                                </div>     
+                                <UncontrolledPopover trigger="legacy" placement="top" target="ScheduleUpdateButton2">
+                                { () => (
+                                    <div className="copyMealPopUp">
+                                        <h6>Please chooce the day to copy the meal</h6>
+                                        <DatePicker1 selected={this.state.startDate} onChange={this.handleChange} dateFormat="dd/MM/yyyy" excludeDates={[this.state.calDate]}placeholderText="Pick a day!" isClearable/>
+                                        <button type="button" className="btn btn-sm btn-success" name="lunch" disabled={!this.state.startDate} onClick={this.copyMeal}> Copy it </button>
+                                    </div>          
+                                )}
+                                </UncontrolledPopover>
                                 {/* EDW EMFANIZONTAI OI KATAXWRISEIS */}                              
                                 {this.state.lunch.map((addedFoods, index) => (
                                     <div key={addedFoods.fatSecret_id} className="input-group mb-1">
@@ -473,7 +519,7 @@ render() {
                                         </div>
                                         <label className="form-control">{addedFoods.calories} kcal</label>
                                         <div className="input-group-append">
-                                            <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveLunch(index)}>×</button>
+                                            <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveLunch(index)}>×</button>
                                         </div>
                                     </div>
                                 ))}
@@ -500,7 +546,7 @@ render() {
                                     <input  type="text" className="form-control quantity-input" list="servings" name="lunchvalue" maxLength="4" value={this.state.lunchvalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.lunchvalue.serving}/>                                   
                                     <label className="form-control calories-field">{this.state.lunchvalue.calories}</label>
                                     <div className="input-group-append"> 
-                                        <button className="btn btn-primary addfoodBtn" name="lunch" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.lunchvalue.quantity} >+</button>                                       
+                                        <button className="btn btn-success" name="lunch" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.lunchvalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
                                 {/* EDW FAINONTAI TA STATISTIKA */}
@@ -529,7 +575,19 @@ render() {
                         </div>
                         <div className="lunchbox dinner" id="dinner">
                             <div className="mealform">
-                                <div className="d-flex p-2 bd-highlight">Dinner</div>                              
+                                <div className="d-flex justify-content-between">
+                                    <div className="d-flex p-2 bd-highlight">Dinner</div>
+                                    <button id="ScheduleUpdateButton3" data-toggle="tooltip" data-placement="top" title="Copy this meal in another day!" className="addfoodBtn" disabled={!this.state.dinner[0]}>🡽</button>   
+                                </div>     
+                                <UncontrolledPopover trigger="legacy" placement="top" target="ScheduleUpdateButton3">
+                                { () => (
+                                    <div className="copyMealPopUp">
+                                        <h6>Please chooce the day to copy the meal</h6>
+                                        <DatePicker1 selected={this.state.startDate} onChange={this.handleChange} dateFormat="dd/MM/yyyy" excludeDates={[this.state.calDate]}placeholderText="Pick a day!" isClearable/>
+                                        <button type="button" className="btn btn-sm btn-success" name="dinner" disabled={!this.state.startDate} onClick={this.copyMeal}> Copy it </button>
+                                    </div>          
+                                )}
+                                </UncontrolledPopover>                              
                                 {this.state.dinner.map((addedFoods, index) => (
                                     <div key={addedFoods.fatSecret_id} className="input-group mb-1">
                                     <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food_name}></input>
@@ -538,7 +596,7 @@ render() {
                                     </div>
                                     <label className="form-control">{addedFoods.calories} kcal</label>
                                     <div className="input-group-append">
-                                        <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveDinner(index)}>×</button>
+                                        <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveDinner(index)}>×</button>
                                     </div>
                                 </div>
                                 ))}
@@ -565,7 +623,7 @@ render() {
                                     <input  type="text" className="form-control quantity-input" list="servings" name="dinnervalue" maxLength="4" value={this.state.dinnervalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.dinnervalue.serving}/>                                   
                                     <label className="form-control calories-field">{this.state.dinnervalue.calories}</label>
                                     <div className="input-group-append"> 
-                                        <button className="btn btn-primary addfoodBtn" name="dinner" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.dinnervalue.quantity} >+</button>                                       
+                                        <button className="btn btn-success" name="dinner" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.dinnervalue.quantity} >+</button>                                       
                                     </div>
                                 </div>
                                 {/* EDW FAINONTAI TA STATISTIKA */}
@@ -594,7 +652,19 @@ render() {
                         </div>
                         <div className="lunchbox snack" id="snack1">
                             <div className="mealform">
-                                <div className="d-flex p-2 bd-highlight">Snack</div>                              
+                                <div className="d-flex justify-content-between">
+                                    <div className="d-flex p-2 bd-highlight">Snack</div>
+                                    <button id="ScheduleUpdateButton4" data-toggle="tooltip" data-placement="top" title="Copy this meal in another day!" className="addfoodBtn" disabled={!this.state.snack[0]}>🡽</button>   
+                                </div>     
+                                <UncontrolledPopover trigger="legacy" placement="top" target="ScheduleUpdateButton4">
+                                { () => (
+                                    <div className="copyMealPopUp">
+                                        <h6>Please chooce the day to copy the meal</h6>
+                                        <DatePicker1 selected={this.state.startDate} onChange={this.handleChange} dateFormat="dd/MM/yyyy" excludeDates={[this.state.calDate]}placeholderText="Pick a day!" isClearable/>
+                                        <button type="button" className="btn btn-sm btn-success" name="snack" disabled={!this.state.startDate} onClick={this.copyMeal}> Copy it </button>
+                                    </div>          
+                                )}
+                                </UncontrolledPopover>                              
                                 {this.state.snack.map((addedFoods, index) => (
                                     <div key={addedFoods.fatSecret_id} className="input-group mb-1">
                                     <input disabled type="text" key={addedFoods} className="form-control"  aria-describedby="basic-addon2" value={addedFoods.food_name}></input>
@@ -603,7 +673,7 @@ render() {
                                     </div>
                                     <label className="form-control">{addedFoods.calories} kcal</label>
                                     <div className="input-group-append">
-                                        <button className="btn btn-primary" id="basic-addon2" onClick={() => this.onRemoveSnack(index)}>×</button>
+                                        <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveSnack(index)}>×</button>
                                     </div>
                                 </div>
                                 ))}
@@ -630,7 +700,7 @@ render() {
                                     <input  type="text" className="form-control quantity-input" list="servings" name="snackvalue" maxLength="4" value={this.state.snackvalue.quantity} placeholder="Enter eaten amount like 1.5 or 2 or select another serving" onChange={this.onChangeQuantity} disabled={!this.state.snackvalue.serving}/>                                   
                                     <label className="form-control calories-field">{this.state.snackvalue.calories}</label>
                                     <div className="input-group-append"> 
-                                        <button className="btn btn-primary addfoodBtn" name="snack" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.snackvalue.quantity} >+</button>                                       
+                                        <button className="btn btn-success" name="snack" id="basic-addon2" onClick={this.onAddFood} disabled={!this.state.snackvalue.quantity}>+</button>                                       
                                     </div>
                                 </div>
                                 {/* EDW FAINONTAI TA STATISTIKA */}
@@ -710,7 +780,7 @@ render() {
                                             <td colSpan="2" >Your Daily Nutrients:</td>
                                         </tr>
                                         {this.state.totalDailyNutrients.map((nutrient, index) => (
-                                            <tr>
+                                            <tr key={index}>
                                                 <td>{this.state.nutrientsName[index]}</td>
                                                 <td>{nutrient + " " + this.state.nutrientsDataType[index]}</td>
                                             </tr>

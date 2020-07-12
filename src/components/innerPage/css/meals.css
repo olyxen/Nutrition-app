@@ -32,3 +32,25 @@
     font-weight: 600;
     font-size: larger;
 }
+
+#ScheduleUpdateButton{
+    border: none !important;
+    background-color: transparent;
+}
+
+.copyMealPopUp{
+    margin: 10px;
+    text-align: center;
+}
+
+.addfoodBtn{
+    color: #28a745;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0px 5px 0px 4px !important;
+    font-size: x-large;
+}
+
+.addfoodBtn:disabled{
+    opacity: 0.6;
+}
