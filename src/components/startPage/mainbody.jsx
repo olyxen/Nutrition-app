@@ -38,9 +38,6 @@ function MainBody() {
 Tracking your nutrition has so many benefits, from helping to manage food intolerances to increasing energy, avoiding mood swings, and fueling the rhythms of your day. Whatever your reasons for logging your meals, Nutri App can help.</p>
         </div>
         <div id="bannerphoto1" >
-          <div className="container">
-              <div className="float-right">Float right on all viewport sizes</div>
-          </div>
         </div>
       </div>
     );
