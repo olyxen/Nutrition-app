@@ -360,29 +360,9 @@ class Meals extends Component {
     };
 
     //patwntas to X o xrhsths afairei to proion apo thn lista me to faghta pou exei faei
-    onRemoveBreakfast = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'breakfast'}/${this.state.breakfast[i]._id}`)
-        .then((res => {
-            console.log(res.data)
-            this.updateDailyMenu(this.state.calDate)
-        }))
-    };
-    onRemoveLunch = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'lunch'}/${this.state.lunch[i]._id}`)
-        .then((res => {
-            console.log(res.data)
-            this.updateDailyMenu(this.state.calDate)
-        }))
-    };
-    onRemoveDinner = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'dinner'}/${this.state.dinner[i]._id}`)
-        .then((res => {
-            console.log(res.data)
-            this.updateDailyMenu(this.state.calDate)
-        }))
-    };
-    onRemoveSnack = i => {
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${'snack'}/${this.state.snack[i]._id}`)
+    onRemoveFood = i => e => {
+        var meal = e.target.name;
+        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${meal}/${this.state.breakfast[i]._id}`)
         .then((res => {
             console.log(res.data)
             this.updateDailyMenu(this.state.calDate)
@@ -441,7 +421,7 @@ render() {
                                         </div>
                                         <label className="form-control">{addedFoods.calories} kcal</label>
                                         <div className="input-group-append">
-                                            <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveBreakfast(index)}>×</button>
+                                            <button className="btn btn-success" id="basic-addon2" name="breakfast" onClick={this.onRemoveFood(index)}>×</button>
                                         </div>
                                     </div>
                                 ))}
@@ -519,7 +499,7 @@ render() {
                                         </div>
                                         <label className="form-control">{addedFoods.calories} kcal</label>
                                         <div className="input-group-append">
-                                            <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveLunch(index)}>×</button>
+                                            <button className="btn btn-success" id="basic-addon2" name="lunch" onClick={this.onRemoveFood(index)}>×</button>
                                         </div>
                                     </div>
                                 ))}
@@ -596,7 +576,7 @@ render() {
                                     </div>
                                     <label className="form-control">{addedFoods.calories} kcal</label>
                                     <div className="input-group-append">
-                                        <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveDinner(index)}>×</button>
+                                        <button className="btn btn-success" id="basic-addon2" name="dinner" onClick={this.onRemoveFood(index)}>×</button>
                                     </div>
                                 </div>
                                 ))}
@@ -673,7 +653,7 @@ render() {
                                     </div>
                                     <label className="form-control">{addedFoods.calories} kcal</label>
                                     <div className="input-group-append">
-                                        <button className="btn btn-success" id="basic-addon2" onClick={() => this.onRemoveSnack(index)}>×</button>
+                                        <button className="btn btn-success" id="basic-addon2" name="snack" onClick={this.onRemoveFood(index)}>×</button>
                                     </div>
                                 </div>
                                 ))}
