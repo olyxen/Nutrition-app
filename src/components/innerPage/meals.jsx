@@ -14,9 +14,6 @@ class Meals extends Component {
     constructor(props) {
         super(props);
     
-        // this.onChangeValue = this.onChangeValue.bind(this);
-        // this.onInput = this.onInput.bind(this);
-        // this.addToList = this.addToList.bind(this);
 
         this.state = {
             startDate: null,
@@ -103,7 +100,7 @@ class Meals extends Component {
         this.setState({pickedDate: isoDateTime})
 
         //enhmerwnei thn selida se kathe allagh hmeromhnias
-        axios.get(`http://localhost:8080/api/meals/getMeal/${isoDateTime}`)
+        axios.get(`https://nutrition-app-api.herokuapp.com/api/meals/getMeal/${isoDateTime}`)
         .then( res => {
             console.log(res.data)
             //epistrefei ola ta geumata ekeinhs ths hmeras, ta diabazei me mapping kai ta apothikeuei ston antistoixo pinaka
@@ -133,7 +130,7 @@ class Meals extends Component {
         this.setState({totalDailyCalories: 0})
 
 
-        axios.get(`http://localhost:8080/api/meals/getMealsNutri/${isoDateTime}`)
+        axios.get(`https://nutrition-app-api.herokuapp.com/api/meals/getMealsNutri/${isoDateTime}`)
         .then(res => {
             console.log(res.data)
             res.data.map((meal, i) => (
@@ -145,7 +142,7 @@ class Meals extends Component {
 
     
     getChartData = (isoDateTime) =>{    
-        axios.get(`http://localhost:8080/api/meals/getDailyStats/${isoDateTime}`) 
+        axios.get(`https://nutrition-app-api.herokuapp.com/api/meals/getDailyStats/${isoDateTime}`) 
         .then(res => {
             var nutrients = res.data 
             console.log(nutrients)     
@@ -167,7 +164,7 @@ class Meals extends Component {
         this.setState({ [meal]: {food_name: typingFood} });
         console.log(this.state[meal]);
         if(typingFood.length>0){
-            axios.get(`http://localhost:8080/api/food/search/${typingFood}`,{})
+            axios.get(`https://nutrition-app-api.herokuapp.com/api/food/autocomplete/${typingFood}`,{})
             .then(res => {
                 //elegxos gia na mhn xtupaei to front an den epistrafei kati swsta apo to back
                 //na to dei3ei an den uparxei error
@@ -196,7 +193,7 @@ class Meals extends Component {
         for (var i = 0; i < opts.length; i++) {
             if (opts[i].value === val) {
                 // An item was selected from the list!
-                axios.get(`http://localhost:8080/api/food/foodsearchTest/${val}`,{})
+                axios.get(`https://nutrition-app-api.herokuapp.com/api/food/foodsearch/${val}`,{})
                 .then(res => {
                     //elegxos gia na mhn xtupaei to front an den epistrafei kati swsta apo to back
                     //na to dei3ei an den uparxei error
@@ -313,7 +310,7 @@ class Meals extends Component {
         console.log(e.target.name)
         var mealValue = e.target.name + 'value'
         console.log(mealValue)
-        axios.put(`http://localhost:8080/api/meals/addMeal`, {
+        axios.put(`https://nutrition-app-api.herokuapp.com/api/meals/addMeal`, {
             "mealkind": e.target.name,
             "date": this.state.pickedDate,
             "user_id": this.state.user,
@@ -362,7 +359,7 @@ class Meals extends Component {
     //patwntas to X o xrhsths afairei to proion apo thn lista me to faghta pou exei faei
     onRemoveFood = i => e => {
         var meal = e.target.name;
-        axios.delete(`http://localhost:8080/api/meals/deleteMeal/${this.state.pickedDate}/${meal}/${this.state.breakfast[i]._id}`)
+        axios.delete(`https://nutrition-app-api.herokuapp.com/api/meals/deleteMeal/${this.state.pickedDate}/${meal}/${this.state[meal][i]._id}`)
         .then((res => {
             console.log(res.data)
             this.updateDailyMenu(this.state.calDate)
@@ -371,7 +368,7 @@ class Meals extends Component {
 
     copyMeal = (e) => {
         var isoDate = new Date((this.state.startDate).getTime() - ((this.state.startDate).getTimezoneOffset() * 60000)).toISOString()
-        axios.post(`http://localhost:8080/api/meals/copyMeal/${this.state.pickedDate}/${e.target.name}/${isoDate}`)
+        axios.post(`https://nutrition-app-api.herokuapp.com/api/meals/copyMeal/${this.state.pickedDate}/${e.target.name}/${isoDate}`)
         .then((res => {
             if(res.status === 200){
                 alert(`Meal copied successfully to ${this.state.startDate} `)

@@ -19,7 +19,7 @@ class Singup extends Component{
     };
 
     becomeTrue(){
-        axios.post("http://localhost:8080/api/user/validateSignup",{
+        axios.post("https://nutrition-app-api.herokuapp.com/api/user/validateSignup",{
             email: this.state.email,
             username: this.state.username,
             password: this.state.password
@@ -36,7 +36,7 @@ class Singup extends Component{
     }
     signup(){
 
-        axios.post("http://localhost:8080/api/user/register/",{
+        axios.post("https://nutrition-app-api.herokuapp.com/api/user/register/",{
             email: this.state.email,
             username: this.state.username,
             password: this.state.password,

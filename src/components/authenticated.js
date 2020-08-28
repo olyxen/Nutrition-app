@@ -17,12 +17,11 @@ class AuthenticatedComponent extends Component {
             this.props.history.push('/');
         }
         
-        axios.get('http://localhost:8080/api/user/getUser', { headers: { Authorization: `${jwt}`}})
+        axios.get('https://nutrition-app-api.herokuapp.com/api/user/getUser', { headers: { Authorization: `${jwt}`}})
         .then( res => 
             this.setState({ 
             user: res.data 
-        })
-        ).catch(err => {
+        })).catch(err => {
             localStorage.removeItem('login');
             this.props.history.push('/');
         })

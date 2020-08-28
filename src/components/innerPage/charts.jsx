@@ -62,7 +62,7 @@ class Charts extends Component {
         var sixdayb = this.removeDays(new Date(), 6).toDateString()
         
 
-        axios.get(`http://localhost:8080/api/meals/getWeeklyCalories/${isoDateTime}`) 
+        axios.get(`https://nutrition-app-api.herokuapp.com/api/meals/getWeeklyCalories/${isoDateTime}`) 
         
     
         .then(res => {
@@ -99,7 +99,7 @@ class Charts extends Component {
         var sixdayb = this.removeDays(new Date(), 6).toDateString()
         
 
-        axios.get(`http://localhost:8080/api/meals/getWeeklynutri/${isoDateTime}/${nutri}`) 
+        axios.get(`https://nutrition-app-api.herokuapp.com/api/meals/getWeeklynutri/${isoDateTime}/${nutri}`) 
         
     
         .then(res => {

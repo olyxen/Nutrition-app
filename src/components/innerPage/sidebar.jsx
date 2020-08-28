@@ -68,6 +68,13 @@ render() {
                     <i className="fas fa-sign-out-alt"></i><span> Sign out</span>
                 </a>
             </section>
+
+            
+            <section className = "fatSecretRef">
+                <a href="https://platform.fatsecret.com">
+                    <img src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.png" srcset="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_2x.png 2x, https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_3x.png 3x" border="0"/>
+                </a>
+            </section>
         </>
     )
 }

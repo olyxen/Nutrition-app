@@ -14,7 +14,7 @@ class Login extends Component {
 
 
     login(){       
-        axios.post("http://localhost:8080/api/user/login/",{
+        axios.post("https://nutrition-app-api.herokuapp.com/api/user/login/",{
             username: this.state.username,
             password: this.state.password
         })

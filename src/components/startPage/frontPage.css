@@ -62,3 +62,14 @@
    width: 100%; /* Full width */
    padding: 20px; /* Some padding */
  }
+
+ .footerText{
+    color: #6c757d
+ }
+ .footerText a{
+    color: #28a745;
+ }
+ .footerText a:hover{
+    font-weight: 700;
+    color: #28a745;
+ }

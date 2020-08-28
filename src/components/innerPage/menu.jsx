@@ -67,7 +67,7 @@ class Menu extends Component {
         this.setState({pickedDate: isoDateTime})
 
         
-        axios.get(`http://localhost:8080/api/meals/getDailyStats/${isoDateTime}`) 
+        axios.get(`https://nutrition-app-api.herokuapp.com/api/meals/getDailyStats/${isoDateTime}`) 
         
     
         .then(res => {
@@ -107,7 +107,7 @@ class Menu extends Component {
 
         
         //enhmerwnei thn selida se kathe allagh hmeromhnias
-        axios.get(`http://localhost:8080/api/meals/getDailyCalories/${isoDateTime}`)
+        axios.get(`https://nutrition-app-api.herokuapp.com/api/meals/getDailyCalories/${isoDateTime}`)
         //epistrefei tis 8ermides ts hmeras kai tis apo8ukeuei sto calories
         .then( res => 
             this.setState({ 

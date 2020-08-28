@@ -25,6 +25,7 @@ body{
 
 .card-img-top:hover{
     transform: scale(1.5);
+    cursor: pointer;
 }
 
 .overflow{
