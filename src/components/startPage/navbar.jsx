@@ -22,7 +22,7 @@ class Navbar extends Component {
     onOpenModalLogin = () => {
       const login_token = localStorage.getItem('login')
         if (login_token){
-            window.open("http://localhost:3000/dashboard", "_self"); //to open new page
+            window.open("https://nutrition-app-pamak.herokuapp.com/dashboard", "_self"); //to open new page
         }else{
           this.setState({ login: true});
         }

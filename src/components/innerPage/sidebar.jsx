@@ -33,30 +33,30 @@ render() {
 
             <ul className="list-unstyled components">
                 <li>
-                    <a href="http://localhost:3000/dashboard">
+                    <a href="https://nutrition-app-pamak.herokuapp.com/dashboard">
                         <i className="fa fa-tachometer-alt"></i>
                         <span className="menu-text"> Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:3000/dashboard/meals">
+                    <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/meals">
                         <i className="fas fa-seedling"></i>
                         <span className="menu-text"> Meals</span>
                     </a>                </li>
                 <li>
-                <a href="http://localhost:3000/dashboard/charts">
+                <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/charts">
                         <i className="fa fa-chart-line"></i>
                         <span className="menu-text"> Charts</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:3000/dashboard/recipes">
+                    <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/recipes">
                         <i className="fas fa-book-open"></i>
                         <span className="menu-text"> Recipes</span>
                     </a>                
                 </li>
                 <li>
-                    <a href="http://localhost:3000/dashboard/faq">
+                    <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/faq">
                         <i className="fa fa-question-circle"></i>
                         <span className="menu-text"> FAQ</span>
                     </a>                

@@ -156,7 +156,7 @@ render() {
                 />            
             </div>
             <div className="bmibox col-md-12 col-xl-2">
-                <h5>What is Your Body Mass Index ? <a href="http://localhost:3000/dashboard#bmi"  onClick={(e) => this.ChangeFlag()}>Check it.</a></h5>
+                <h5>What is Your Body Mass Index ? <a href="https://nutrition-app-pamak.herokuapp.com/dashboard#bmi"  onClick={(e) => this.ChangeFlag()}>Check it.</a></h5>
             </div>
             </div>
             <hr/>
@@ -165,11 +165,11 @@ render() {
                     <div className="box1">
                         <div className="row">
                             <div className="col-md-12 col-xl-4" >
-                                <a href="http://localhost:3000/dashboard/meals#breakfast"><button className="mealbtn" id="brbtn"></button></a>
+                                <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/meals#breakfast"><button className="mealbtn" id="brbtn"></button></a>
                                 <br/>
                                 <br/>
                                 <br/>
-                                <a href="http://localhost:3000/dashboard/meals#lunch"><button className="mealbtn" id="lnchbtn"></button></a>
+                                <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/meals#lunch"><button className="mealbtn" id="lnchbtn"></button></a>
                             </div>
                             <div className="col-md-12 col-xl-4" >
                                 
@@ -214,11 +214,11 @@ render() {
                             </div>
                             
                             <div className="col-md-12 col-xl-4" >
-                                <a href="http://localhost:3000/dashboard/meals/#snack1"><button className="mealbtn" id="snckbtn"></button></a>
+                                <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/meals/#snack1"><button className="mealbtn" id="snckbtn"></button></a>
                                 <br/>
                                 <br/>
                                 <br/>
-                                <a href="http://localhost:3000/dashboard/meals#dinner"><button className="mealbtn"id="dnnrbtn"></button></a>
+                                <a href="https://nutrition-app-pamak.herokuapp.com/dashboard/meals#dinner"><button className="mealbtn"id="dnnrbtn"></button></a>
                             </div>
                         </div>    
                     </div>
